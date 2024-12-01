@@ -1,0 +1,106 @@
+<div id="login-page-section" data-section-id="login-page" data-section-type="login-page" class="non-section">
+  <div class="login-page-inner">
+    <div class="main-container col1-layout">
+      <div class="main">
+        <div class="content-breadcrums">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                {% include 'breadcrumbs' %}
+              </div>
+            </div>
+          </div>    
+        </div>
+        <div class="container col-main-containter">
+          <div class="row">
+            <div class="col-main col-sm-12">
+              <div class="col-wrapper-main">
+                <div class="account-login">
+                  <div class="page-title">
+                    <h2><span class="brackets skeleton-loading" data-trans-key="customer.login.title">{{ 'customer.login.title' | t }}</span></h2>
+                  </div>
+                  <div id="login-form">
+                    <div class="login_form_wrap">
+                      {% form 'customer_login' %}
+                      {{ form.errors | default_errors }}
+                      <div class="field note"><span class="brackets skeleton-loading" data-trans-key="customer.login.desc">{{ 'customer.login.desc' | t }}</span></div>
+                      <div class="col2-set">
+                        <div class="col-2 registered-users">
+                          <div class="content">
+                            <ul class="form-list">
+                              <li class="fields">
+                                <div class="field label-effect">
+                                  <label for="CustomerEmail" class="required"><em>*</em><span class="brackets skeleton-loading" data-trans-key="customer.login.email">{{ 'customer.login.email' | t }}</span></label>
+                                  <div class="input-box">
+                                    <input type="email" name="customer[email]" id="CustomerEmail" class="input-text required-entry validate-email{% if form.errors contains 'email' %} input--error{% endif %}" autocorrect="off" autocapitalize="off">
+                                  </div>
+                                </div>
+                              </li>
+                              {% if form.password_needed %}
+                              <li class="fields">
+                                <div class="field label-effect">
+                                  <label for="CustomerPassword" class="required"><em>*</em><span class="brackets skeleton-loading" data-trans-key="customer.login.password">{{ 'customer.login.password' | t }}</span></label>
+                                  <div class="input-box">
+                                    <input type="password" value="" name="customer[password]" id="CustomerPassword" class="input-text required-entry form-control password{% if form.errors contains 'password' %} input--error{% endif %}">
+                                  </div>
+                                </div>
+                              </li>
+                              {% endif %}
+                            </ul>
+                            <div class="buttons-set">
+                              <button type="submit" class="button" title="{{ 'customer.login.title'|t }}" data-title-trans="customer.login.title" data-title-default="{{ 'customer.login.title' | t }}" name="send" id="send2"><span><span class="brackets skeleton-loading" data-trans-key="customer.login.title">{{ 'customer.login.title' | t }}</span></span></button>
+                            </div>
+                            <div class="forgot-password-link">
+                              <a href="#recover" class="forgot-password"><span class="brackets skeleton-loading" data-trans-key="customer.login.forgot_password">{{ 'customer.login.forgot_password' | t }}</span></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endform %}
+                    </div>
+                  </div>
+                </div>
+                <div class="forgot_form" id="form-validate" style="display: none;">
+                  <div class="page-title">
+                    <h2><span class="brackets skeleton-loading" data-trans-key="customer.recover_password.title">{{ 'customer.recover_password.title' | t }}</span></h2>
+                  </div>
+                  <div id="forgot-form">
+                    <div class="forgot_form_wrap">
+                      {% form 'recover_customer_password' %}
+                      {{ form.errors | default_errors }}
+                      {% if form.posted_successfully? %}
+                      <span class="hide reset-password-success"></span>
+                      {% endif %}
+                      <div class="field note">
+                        <span class="brackets skeleton-loading" data-trans-key="customer.recover_password.subtext">{{ 'customer.recover_password.subtext' | t }}</span>
+                      </div>
+                      <div class="col2-set">
+                        <div class="fieldset">
+                          <ul class="form-list">
+                            <li>
+                              <div class="field label-effect">
+                                <label for="RecoverEmail" class="required"><em>*</em><span class="brackets skeleton-loading" data-trans-key="customer.recover_password.email">{{ 'customer.recover_password.email' | t }}</span></label>
+                                <div class="input-box">
+                                  <input type="email" value="" name="email" id="RecoverEmail" class="input-full input-text required-entry"autocorrect="off" autocapitalize="off">
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="buttons-set">
+                          <p class="back-link"><a href="javascript:void(0);"><small>« </small>Back to Login</a></p>
+                          <button type="submit" title="Submit" class="button"><span><span><span class="brackets skeleton-loading" data-trans-key="customer.recover_password.submit">{{ 'customer.recover_password.submit' | t }}</span></span></span></button>
+                        </div>
+                      </div>
+                      {% endform %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

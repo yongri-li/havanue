@@ -1,0 +1,29 @@
+{%- assign data_group = '' -%}
+{%- assign data_variant_id = '' -%}
+{%- if image.variants.size > 0 -%}
+{%- for img_variant in image.variants -%}
+  {%- assign filter_code = img_variant.options[opt_index] | handle -%}
+  {%- if data_group == '' -%}
+    {%- assign data_group = 'group-' | append: filter_code -%}
+    {%- assign data_variant_id = img_variant.id -%}
+  {%- else -%}
+    {%- unless data_group contains filter_code -%}
+    {%- assign data_group = data_group | append: ' group-' | append: filter_code -%}
+    {%- assign data_variant_id = data_variant_id | append: ',' | append: img_variant.id -%}
+    {%- endunless -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- else -%}
+{%- assign data_group = 'group-all' -%}
+{%- assign data_variant_id = '' -%}
+{%- endif -%}
+{%- capture img_alt -%}{%- include 'shortcode-video-ignore', str: image.alt -%}{%- endcapture -%}
+<div class="{% unless is_active %}hide {% endunless %}image-item item{% if image.alt contains 'group-' %} {{ img_alt | handle | escape }}{% else %} {{ data_group }}{% endif %}"{% if data_variant_id != '' %} data-variant-id="{{ data_variant_id }}"{% endif %}>
+  {%- unless image.alt contains '{{video' or image.alt contains '{{youtube' or image.alt contains '{{vimeo' -%}
+    <a href="{{ image.src | img_url: 'master' }}" data-src="{{ image.src | img_url: 'master' }}" class="light-gallery-item">
+  	 <img data-image-id="{{ image.id }}" src="{{ image.src | img_url: product_image_size }}"{% if is_active %} itemprop="image"{% endif %} class="img-responsive cloudzoom{% if is_active %} first{% endif %}" alt="{{ image.alt | escape }}" data-cloudzoom="zoomImage: '{{ image.src | img_url: 'master' }}'"/>
+    </a>
+  {%- else -%}
+    {%- include 'shortcode-video-render', image: image -%}  
+  {%- endunless -%}  
+</div>

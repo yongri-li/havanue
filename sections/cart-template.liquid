@@ -1,0 +1,73 @@
+<div class="cart_wrapper" id="{{ section.id }}_section" data-section-id="{{ section.id }}" data-section-type="cart-template">
+  <div class="cart_template_wrapper">
+    {% include 'cart-template-content' %}
+  </div>
+  {% if settings.upsell_show_cart_page %}
+  <div class="upsell-cart collection-widget">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="section-inner">
+          <div class="block-title">
+            <strong><span><span class="brackets" data-trans-key="products.product.upsell_product_page_title">{{ 'products.product.upsell_product_page_title' | t }}</span></span></strong>
+          </div>
+          <div class="block-content product-list-wrapper">
+            <div class="product-list owl-carousel use-slider-custom" data-slider-ele="#upsell_products_slider_data">
+            </div>
+            <span id="upsell_products_slider_data" class="hide">
+              {
+                "nav": true,
+                "dots": false,
+                "responsive": {
+                "0": { "items": 1},
+                  "768": { "items": 4}
+                } 
+              }
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% unless settings.shipping_calculator == 'Disabled' or cart.item_count == 0 %}
+<script>
+  theme.strings.shippingCalcSubmitButton = {{ settings.shipping_calculator_submit_button_label | default: 'Calculate shipping' | json }};
+  theme.strings.shippingCalcSubmitButtonDisabled = {{ settings.shipping_calculator_submit_button_label_disabled | default: 'Calculating...' | json }};
+  {% if customer %}theme.strings.shippingCalcCustomerIsLoggedIn = true;{% endif %}
+  theme.strings.shippingCalcMoneyFormat = {{ shop.money_with_currency_format | json }};
+</script>
+{% endunless %}
+<div id="shopping-cart-table-app" class="hide"></div>
+{% schema %}
+{
+  "name": "Cart page",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "cart_notes_enable",
+      "label": "Enable cart notes",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Cart Reassurance",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "textarea",
+          "id": "reassurance",
+          "label": "Reassurance Item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

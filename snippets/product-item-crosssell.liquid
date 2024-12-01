@@ -1,0 +1,32 @@
+<div class="product-item item item--size-large" data-product-id="{{ product.id }}">
+  <div class="product-item-wrapper">
+    <div class="product-item-top">
+      <div class="product-item-media">
+        {% include 'product-wishlist' with tooltip_pos: 'right', force_display: settings.enable_wishlist %}
+        <a href="{{ product.url | within: collection }}" class="product-image" title="{{ product.title }}">
+          <img {% if lazy %}class="lozad" data-{% endif %}src="{{ product.featured_image | product_img_url: image_size , crop: 'top' }}" alt="{{ product.featured_image.alt | escape }}" id="crosssell_{{ product.id }}_main1_img"/>
+        </a>
+      </div>
+      {% include 'product-item-more-views-slider', ulId: 'crosssell' %}
+      <div class="product-item-hover product-qs-wrapper">
+        {% include 'product-qs-btn', force_display: true %}  
+      </div>
+      {% include 'product-labels' %}
+    </div>
+    <div class="product-item-bottom">
+      <div class="product-details">
+        <div class="product-name">
+          <a href="{{ product.url | within: collection }}" title="{{ product.title }}">{{ product.title }}</a>
+        </div>
+        <div class="list-mode-description">
+          {{ product.description | strip_html | truncatewords: 3 }}
+        </div>
+        {% include 'product-price' %}  
+      </div>
+      <div class="actions product-item-hover{% unless settings.enable_compare %} no-compare{% endunless %}">
+        {% include 'product-cart-btn', force_display: true %}
+        {% include 'product-compare-btn', force_display: settings.enable_compare %}
+      </div>
+    </div>
+  </div>
+</div>

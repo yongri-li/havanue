@@ -1,0 +1,54 @@
+<div class="footer-cart" v-cloak>
+  <div class="cart-footer-inner">
+    <a href="javascript:void(0)" class="cart-trigger" v-bind:class="[cartProcessing > 0 ? 'cart-processing' : '']" title="{{ 'cart.general.title' | t | escape }}">
+      <span class="loading-cart hidden-xs" v-if="cartProcessing > 0">
+        <span class="brackets" v-html="getTextTransByKey('cart.general.processing')"></span>
+      </span>
+      <span class="amount loaded" v-if="cartProcessing === 0">
+        <span class="brackets" v-html="cartFooterMsg">
+        </span>
+      </span>
+    </a>
+    <div class="cart-content" :class="[cart.items.length == 0 ? 'no-items' : '']">
+      <div class="cart-icon"></div>
+      <div class="cart-items">
+        <ul class="cart-products-list">
+          <li v-for="(item, index) in cart.items" class="cart-item" :data-variant-id="item.variant_id" v-bind:class="[cartHolderImg == item.variant_id ? 'hide-item-image' : '']">
+            <div class="product">
+              <strong>{{ "{{ item.quantity " }}}}</strong>
+              <span class="product-image"><img v-bind:src="resizeImage(item.image, '50x62')"/></span>
+            </div>
+            <div class="product-details">
+              <div class="product-hover-container">
+                <div class="product-hover-inner">
+                  <input type="number" class="item-qty cart-item-qty" name="qty" v-model="item.quantity">
+                  <button type="button" title="{{ 'cart.general.ok'|t }}" data-title-trans="cart.general.ok" data-title-default="{{ 'cart.general.ok' | t }}" class="btn-edit" v-on:click="requestUpdateCart(index+1, item.quantity)">
+                    <span class="brackets skeleton-loading" data-trans-key="cart.general.ok">{{ 'cart.general.ok' | t }}</span>
+                  </button>
+                  <a href="javascript:void(0);" title="Remove This Item" class="btn-remove" v-on:click="requestUpdateCart(index+1, 0)"><span class="brackets skeleton-loading" data-trans-key="general.item.remove">{{ 'general.item.remove' | t }}</span></a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="check-out">
+        <div class="summary">
+          <div class="cart-total-title">
+            <h4>
+              <span class="brackets skeleton-loading" data-trans-key="cart.label.total_item">{{ 'cart.label.total_item' | t }}</span>
+            </h4>
+            <p class="amount"><a href="/cart">{{ "{{ cart.item_count " }}}}</a></p>
+          </div>
+          <div class="subtotal">
+            <div class="sub-total-label"><span class="brackets" v-html="getTextTransByKey('cart.general.subtotal')"></span></div>
+            <money :price="cart.total_price | displayPrice(currentCurrency)"></money>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" title="{{ 'cart.general.checkout'|t }}" data-title-trans="cart.general.checkout" data-title-default="{{ 'cart.general.checkout' | t }}" class="button checkout-btn trigger-checkout" onclick="window.location.href = '/checkout'"><span><span><span class="brackets skeleton-loading" data-trans-key="cart.general.checkout">{{ 'cart.general.checkout' | t }}</span></span></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

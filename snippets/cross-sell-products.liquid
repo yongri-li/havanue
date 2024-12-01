@@ -1,0 +1,23 @@
+{%- if settings.crosssell_enable -%}
+<div class="crosssell-product-page collection-widget block block-related" data-product-id="{{ product.id }}">
+  <div class="section-inner">
+    <div class="block-title">
+      <strong><span><span class="brackets" data-trans-key="products.product.crosssell_product_page_title">{{ 'products.product.crosssell_product_page_title' | t }}</span></span></strong>
+    </div>
+    <div class="block-content product-list-wrapper">
+      <div class="product-list" data-slider-ele="#crosssell_products_slider_data">
+      </div>
+    </div>
+  </div>
+</div>
+<span id="crosssell_products_slider_data" class="hide">
+  {
+    "nav": true,
+    "dots": false,
+    "responsive": {
+    "0": { "items": 1},
+    "768": { "items": 4}
+  } 
+}
+</span>
+{%- endif -%}

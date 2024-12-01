@@ -1,0 +1,15 @@
+{% assign deal = false %}
+{% if product.metafields.cdz.deal %}
+{% assign deal = product.metafields.cdz.deal %}
+{% elsif settings.enable_countdown_all and settings.countdown_expression %}
+{% assign deal = settings.countdown_expression %}
+{% endif %}
+{% if deal %}
+{% if wrap_deal %}
+<div class="product-shop-wrap product-deal-wrap">
+{% endif %}
+	<div class="product-deal" data-product-id="{{ product.id }}" data-deal="{{ deal }}"></div>
+{% if wrap_deal %}
+</div>
+{% endif %}
+{% endif %}

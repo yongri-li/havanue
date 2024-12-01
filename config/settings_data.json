@@ -1,0 +1,1525 @@
+{
+  "current": {
+    "upsell_show_popup": true,
+    "upsell_show_product_page": true,
+    "upsell_show_cart_page": true,
+    "color_text_promotion": "#fff",
+    "border_button_promotion": "#0180eb",
+    "bkg_button_promotion": "#0180eb",
+    "color_text_header": "#ffffff",
+    "border_header": "#ffffff",
+    "bkg_top_header": "#f1f1f1",
+    "bkg_main_header": "#fafafa",
+    "color_main_header": "#ffffff",
+    "color_text_menu": "#282828",
+    "border_submenu": "#000000",
+    "bkg_nav_header": "#ffffff",
+    "color_text_menu_mobile": "#282828",
+    "color_text_menu_ver": "#282828",
+    "border_submenu_ver": "#e9e9e9",
+    "bkg_nav_header_ver": "#35c2ea",
+    "color_text_menu_mobile_ver": "#6e6e6e",
+    "color_text_general": "rgba(0,0,0,0)",
+    "color_hover_general": "rgba(0,0,0,0)",
+    "color_hover": "#cc2426",
+    "color_text_heading": "#282828",
+    "color_text_title": "#282828",
+    "color_text_banner": "#5bd68e",
+    "border_general": "#f1f1f1",
+    "border_title": "#282828",
+    "use_bg_image": false,
+    "shop_bg_color": "#fafafa",
+    "bkg_breadcrumb": "rgba(0,0,0,0)",
+    "bkg_title": "#ffffff",
+    "bkg_block_product": "#ffffff",
+    "color_text_button": "#282828",
+    "color_border_button": "#282828",
+    "bkg_button": "#ffffff",
+    "color_text_button_hover": "#ffffff",
+    "bkg_button_hover": "#282828",
+    "color_border_button_hover": "#282828",
+    "color_text_button1": "#282828",
+    "color_border_button1": "#ffffff",
+    "bkg_button1": "#ffffff",
+    "color_text_button1_hover": "#ffffff",
+    "bkg_button1_hover": "#282828",
+    "color_border_button1_hover": "#282828",
+    "color_text_button2": "#ffffff",
+    "color_border_button2": "#282828",
+    "bkg_button2": "#282828",
+    "color_text_button2_hover": "#282828",
+    "bkg_button2_hover": "#ffffff",
+    "color_border_button2_hover": "#282828",
+    "color_text_button3": "#ffffff",
+    "color_border_button3": "#cc2426",
+    "bkg_button3": "#cc2426",
+    "color_text_button3_hover": "#ffffff",
+    "bkg_button3_hover": "#434343",
+    "color_border_button3_hover": "#434343",
+    "color_heading_footer": "#282828",
+    "color_text_footer": "#282828",
+    "color_link_footer": "#282828",
+    "bkg_newsletter": "#fab4b5",
+    "bkg_footer": "#ffffff",
+    "bkg_footer_bottom": "#ffffff",
+    "border_footer": "#282828",
+    "color_style_4": "#e042fb",
+    "color_style_5": "#2962ff",
+    "color_style_7": "#cc2426",
+    "base_font": "Google_Lato",
+    "base_font_weight": "300,300i,400,400i,500,500i,600,600i,700",
+    "header_font": "Google_Montserrat",
+    "header_font_weight": "400,500,600,700,800,900",
+    "misc_font": "Google_Lato",
+    "misc_font_weight": "300,300i,400,400i,500,500i,600,600i,700",
+    "enale_rtl": false,
+    "general_gototop": true,
+    "addthis_url": "http:\/\/s7.addthis.com\/js\/250\/addthis_widget.js#pubid=ra-4def63cd3cf37569",
+    "aftership_url": "",
+    "search_auto": false,
+    "enable_review": true,
+    "review_app": "other",
+    "upsell_active": true,
+    "upsell": "frontpage",
+    "limit": "10",
+    "upsell_image_size": "70x",
+    "upsell_minute_from": "20",
+    "upsell_minute_to": "30",
+    "upsell_interval": "5",
+    "upsell_closing_interval": "5",
+    "upsell_hidden_mobile": false,
+    "show_multiple_currencies": false,
+    "currency_format": "money_format",
+    "supported_currencies": "EUR USD",
+    "default_currency": "USD",
+    "group_option": "color",
+    "show_variant_labels": false,
+    "thumbnail_slider_type": "vertical",
+    "use_size_chart_all": false,
+    "color_swatch_type": "var_img",
+    "qv_main_image_size": "395x",
+    "qv_small_image_size": "98x",
+    "qv_dropdown_option": "size",
+    "qv_show_qty": true,
+    "qv_show_sku": true,
+    "so_show_qty": true,
+    "co_show_qty": true,
+    "wl_show_qty": true,
+    "enable_countdown_all": true,
+    "countdown_expression": "00:00:59:54",
+    "enable_wishlist": false,
+    "enable_compare": false,
+    "label_active": true,
+    "new_active": true,
+    "new_type": "text",
+    "new_text": "New",
+    "new_text_trans": "",
+    "new_color": "#ffffff",
+    "new_bkgcolor": "#c97178",
+    "best_active": true,
+    "best_type": "text",
+    "best_text": "Best Selling",
+    "best_text_trans": "",
+    "best_color": "#ffffff",
+    "best_bkgcolor": "#c97178",
+    "trend_active": true,
+    "trend_type": "text",
+    "trend_text": "Trending",
+    "trend_text_trans": "",
+    "trend_color": "#ffffff",
+    "trend_bkgcolor": "#c97178",
+    "sale_active": true,
+    "sale_type": "percent",
+    "sale_text": "Deal",
+    "sale_text_trans": "",
+    "sale_color": "#ffffff",
+    "sale_bkgcolor": "#c97178",
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "favicon_apple": "",
+    "icon_add": "cdz-mi-map-with-position-marker",
+    "icon_arrow_left": "cdz-mi-left-arrow",
+    "icon_arrow_right": "cdz-mi-right-arrow",
+    "icon_arrow": "cdz-mi-down-arrow",
+    "icon_arrow_right_double": "icon-cdz-double-angle-pointing-to-right",
+    "icon_arrow_up": "cdz-mi-right-arrow",
+    "icon_calendar": "cdz-mi-agenda",
+    "icon_cart_header": "cdz-mi-commerce-10",
+    "icon_cart_style4": "cdz-mi-shopping-bag",
+    "icon_cart": "cdz-mi-shopping-bag",
+    "icon_close": "cdz-mi-close",
+    "icon_compare": "cdz-mi-bars",
+    "icon_diamond": "cdz-mi-diamond",
+    "icon_email": "cdz-mi-open-envelope",
+    "icon_expand": "cdz-mi-resize-option",
+    "icon_facebook": "",
+    "icon_google": "",
+    "icon_instagram": "cdz-mi-instagram-logo",
+    "icon_pinterest": "",
+    "icon_twitter": "",
+    "icon_hamburger": "cdz-mi-bars-1",
+    "icon_heart_hover": "cdz-mi-favorite-heart-button",
+    "icon_heart": "cdz-mi-heart",
+    "icon_home": "cdz-mi-home",
+    "icon_list_menu": "cdz-mi-bars-1",
+    "icon_login": "cdz-mi-user",
+    "icon_logout": "cdz-mi-logout",
+    "icon_minus": "cdz-mi-substract",
+    "icon_next": "cdz-mi-arrows-12",
+    "icon_phone": "cdz-mi-24-hours",
+    "icon_plus": "cdz-mi-add",
+    "icon_prev": "cdz-mi-back",
+    "icon_qs": "cdz-mi-eye",
+    "icon_register": "cdz-mi-key",
+    "icon_search": "cdz-mi-search-1",
+    "icon_select_option": "cdz-mi-shopping-bag",
+    "icon_time": "cdz-mi-time",
+    "icon_user": "cdz-mi-user",
+    "icon_wishlist": "cdz-mi-heart",
+    "icon_share": "cdz-mi-shapes",
+    "newsletter_popup_active": false,
+    "use_mail_chimp": false,
+    "mail_chimp_url": "",
+    "newsletter_popup_title": "SIGN UP NEWSLETTER",
+    "newsletter_popup_ads_title": "JOIN YOURSTORE'S SQUAD FOR 20% OFF",
+    "newsletter_popup_ads_desc": "and get all the latest news, trends and offs and offers straight to your inbox. Or get 15% off using code SQUAD15",
+    "newsletter_popup_bottom_content": "1 UK only; 2. Offar expiras 23:59(GMT) 10\/02\/16; 3.",
+    "enable_translate": false,
+    "languages_support": "",
+    "default_language_code": "en",
+    "use_image_flag": false,
+    "promo_active": false,
+    "promo_style": "promo1",
+    "promo_image": "",
+    "promo_bkg_color": "#fc7071",
+    "promo_text1_style1": "Promotion Sale - Up To 50% Off",
+    "promo_text2_style1": "Limited time only, Guaranteed safe checkout",
+    "promo_button_text_style1": "Shopping Now",
+    "promo_link_style1": "#",
+    "promo_text_style2": "Follow us on facebook and get all news",
+    "promo_text_style3": "Join our mailing list and get all the latest news",
+    "shipping_calculator": "Enabled",
+    "shipping_calculator_heading": "Get shipping estimates",
+    "shipping_calculator_default_country": "United States",
+    "shipping_calculator_submit_button_label": "Calculate shipping",
+    "shipping_calculator_submit_button_label_disabled": "Calculating...",
+    "prod_mode": true,
+    "enale_theme_panel": false,
+    "load_menu_ajax": true,
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Havanue_NewLogoBLACK_831f2288-b5c9-44c6-97ef-6e7a24e4dd51.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "small",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Helvetica Neue",
+    "checkout_body_font": "Helvetica Neue",
+    "checkout_accent_color": "#cc2426",
+    "checkout_button_color": "#cc2426",
+    "checkout_error_color": "#e8991d",
+    "use_shopify_review_app": true,
+    "use_preloader": true,
+    "search_title": "Search something",
+    "show_language_picker": true,
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "social_twitter_link": "#",
+    "social_facebook_link": "#",
+    "social_pinterest_link": "#",
+    "social_instagram_link": "#",
+    "social_tumblr_link": "#",
+    "social_snapchat_link": "",
+    "social_youtube_link": "#",
+    "social_vimeo_link": "#",
+    "vue_mode": true,
+    "newsletter_popup_banner": "shopify:\/\/shop_images\/banner-newsletter.jpg",
+    "appear_duration": "0.5s",
+    "deal_active": true,
+    "deal_type": "text",
+    "deal_text": "Deal",
+    "deal_color": "#ffffff",
+    "deal_bkgcolor": "#c97178",
+    "show_vendor": false,
+    "product_hover_effect": true,
+    "enable_product_image_zoom": true,
+    "ajax_active": true,
+    "ajax_timeout": "5000",
+    "use_effect_appear": true,
+    "text_hover": "",
+    "mailing_list_active": false,
+    "news_title": "",
+    "news_sub": "",
+    "news_input": "",
+    "mailchimp_form_action": "",
+    "news_ignore": "",
+    "news_time": "10",
+    "general_loadingscreen": true,
+    "bkg_block": "#ffffff",
+    "bkg_logo_brand": "#ffffff",
+    "color_text": "#3d4246",
+    "color_body_text": "#788188",
+    "color_sale_text": "#7796A8",
+    "color_borders": "#e8e9eb",
+    "color_button": "#7796A8",
+    "color_button_text": "#fff",
+    "color_small_button": "#fff",
+    "color_small_button_text": "#3d4246",
+    "color_text_field": "#fff",
+    "color_text_field_text": "#000",
+    "color_image_overlay_text": "#fff",
+    "color_image_overlay": "#3d4246",
+    "image_overlay_opacity": "0.25",
+    "color_body_bg": "#fff",
+    "type_header_family": "Google_Work+Sans_600_sans",
+    "type_header_base_size": "26px",
+    "type_base_family": "Google_Work+Sans_400_sans",
+    "type_base_size": "16px",
+    "type_bold_product_titles": false,
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "header_style": "header-style9",
+          "logo": "shopify:\/\/shop_images\/Havanue_NewLogoBLACK_831f2288-b5c9-44c6-97ef-6e7a24e4dd51.png",
+          "logo_size": "100x",
+          "logo_mobile": "shopify:\/\/shop_images\/Havanue_NewLogoBLACK_831f2288-b5c9-44c6-97ef-6e7a24e4dd51.png",
+          "logo_size_mobile": "100x",
+          "search_type": "product",
+          "use_linklist_main_menu": true,
+          "main_menu_linklist": "ansel-menu",
+          "nav_sticky": false
+        }
+      },
+      "slideshow": {
+        "type": "slideshow",
+        "blocks": {
+          "slideshow-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/DSC_6714.jpg",
+              "title": "This is it",
+              "link": "",
+              "video_enable": false,
+              "video_source": "youtuble",
+              "video_id": ""
+            }
+          }
+        },
+        "block_order": [
+          "slideshow-0"
+        ],
+        "settings": {
+          "width": "1900",
+          "height": "800",
+          "animateIn": "fadeIn",
+          "animateOut": "fadeOut",
+          "startPosition": "0",
+          "autoplay": true,
+          "autoplayHoverPause": true,
+          "autoplaySpeed": false,
+          "smartSpeed": "250",
+          "lazyLoad": true,
+          "loop": true,
+          "nav": true,
+          "dots": true,
+          "controlNavThumbs": false,
+          "fullWidth": true,
+          "thumbWidth": "100",
+          "thumbHeight": "100"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_style": "footer-style2",
+          "full_width": false,
+          "address": "Salt Lake City, Utah, USA",
+          "telephone": "+1-301-466-5990",
+          "email": "hello@havanue.com",
+          "footer_newsletter_enable": false,
+          "title": "The Only Newsletter Packed With Value For Feeling Safer, More Secure And Empowered In Their Youthful Age.",
+          "title_trans": "{\"en\":\"The Only Newsletter Packed With Value For Feeling Safer, More Secure And Empowered In Their Youthful Age.\",\"fr\":\"Rejoignez-nous. Abonnez-vous à notre liste de diffusion\"}",
+          "subtitle": "Join our newsletter, get all the latest news, free tips and even get 15% off your first purchase using the code in the email!",
+          "subtitle_trans": "{\"en\":\"Join our newsletter, get all the latest news, free tips and even get 15% off your first purchase using the code in the email!\",\"fr\":\"Inscrivez-vous à notre newsletter, recevez toutes les dernières nouvelles, des conseils gratuits et obtenez même 15% de réduction sur votre premier achat en utilisant le code dans l'e-mail !\"}",
+          "social_title": "",
+          "social_title_trans": "",
+          "twitter_link": "",
+          "facebook_link": "",
+          "google_link": "",
+          "vimeo_link": "",
+          "pinterest_link": "",
+          "tumblr_link": "",
+          "atom_link": "",
+          "instagram_link": "",
+          "enable_column1": true,
+          "column1_title": "Built For The Ones You Love",
+          "column1_title_trans": "{\"en\":\"Built For The Ones You Love\",\"fr\":\"Conçu pour ceux que vous aimez\"}",
+          "column1_text": "Havanue was built to make life easier for those loved ones in wheelchairs or using walkers. Creating more security, better stability, and more self-confidence in everyday life.",
+          "column1_text_trans": "{\"en\":\"Havanue was built to make life easier for those loved ones in wheelchairs or using walkers. Creating more security, better stability, and more self-confidence in everyday life. \", \"fr\": \"Havanue a été construit pour faciliter la vie des proches en fauteuil roulant ou utilisant des marchettes. Créer plus de sécurité, une meilleure stabilité et plus de confiance en soi au quotidien.\"}",
+          "footer_linklist_column1": "",
+          "enable_column2": false,
+          "column2_title": "",
+          "column2_title_trans": "{\"en\":\"Corporate\",\"fr\":\"Vos liens\"}",
+          "footer_linklist_column2": "",
+          "enable_column3": true,
+          "column3_title": "Quick Links",
+          "column3_title_trans": "",
+          "footer_linklist_column3": "footer",
+          "footer_blog": "news",
+          "enable_column4": true,
+          "column4_title": "Contact",
+          "column4_title_trans": "{\"en\":\"Item Tags\",\"fr\":\"Tags de l'article\"}",
+          "working_hour": "9.00AM - 6.00PM",
+          "footer_tags_limit": "15",
+          "copyright": "© 2020 WeAreAnsel. All Rights Reserved.",
+          "show_payment_icons": true
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "blocks": {
+          "1532005062585": {
+            "type": "filter_item",
+            "disabled": true,
+            "settings": {
+              "title": "Size",
+              "group_tag": "S,M,L,XL",
+              "enable": true
+            }
+          },
+          "1532005087379": {
+            "type": "filter_item",
+            "disabled": true,
+            "settings": {
+              "title": "Color",
+              "group_tag": "Green, Black, Blue, Red, Yellow, White, Brown, Silver, Gray, Pink, Orange",
+              "enable": true
+            }
+          },
+          "1532005107191": {
+            "type": "filter_item",
+            "disabled": true,
+            "settings": {
+              "title": "Brand",
+              "group_tag": "Dolce & Gabbana, Christian Dior, versace, Missoni, Hermes, Cividini, Bally, Celine",
+              "enable": true
+            }
+          },
+          "1532005124925": {
+            "type": "filter_item",
+            "disabled": true,
+            "settings": {
+              "title": "Price",
+              "group_tag": "Under $100, $100 - $200, $200 - $300, $300 - $400, $400 - $500, Above $500",
+              "enable": true
+            }
+          }
+        },
+        "block_order": [
+          "1532005062585",
+          "1532005087379",
+          "1532005107191",
+          "1532005124925"
+        ],
+        "settings": {
+          "limit": "8",
+          "layout": "grid",
+          "collection_banner": true,
+          "collection_banner_size": "1170x",
+          "collection_desc": true,
+          "collection_grid_list": true,
+          "collection_sort": true,
+          "show_label": true,
+          "show_wishlist": true,
+          "show_cart_btn": true,
+          "show_qs_btn": true,
+          "show_compare_btn": true,
+          "show_more_view": true,
+          "show_social_share": true,
+          "use_effect_appear": true,
+          "image_size": "300x",
+          "more_view_size": "50x60",
+          "enable_tagsfilter": true,
+          "display_tagsfilter": false,
+          "filter_title": "Filter",
+          "sidebarproduct_title": "FEATURED PRODUCT",
+          "sidebarproduct_limit": "3"
+        }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "settings": {
+          "blog_show_author": true,
+          "blog_show_date": true,
+          "show_recent": true,
+          "blog_recent_blog": "news",
+          "recent_title": "Recent Posts",
+          "recent_limit": "5",
+          "show_tags": true,
+          "tag_title": "Blog Tags",
+          "show_banner": true,
+          "banner": ""
+        }
+      },
+      "cart-template": {
+        "type": "cart-template",
+        "blocks": {
+          "1496813435244": {
+            "type": "image",
+            "settings": {
+              "reassurance": "Security policy (edit with module Customer reassurance)"
+            }
+          },
+          "1496813502477": {
+            "type": "image",
+            "settings": {
+              "reassurance": "Delivery policy (edit with module Customer reassurance)"
+            }
+          },
+          "1496813512179": {
+            "type": "image",
+            "settings": {
+              "reassurance": "Return policy (edit with module Customer reassurance)"
+            }
+          }
+        },
+        "block_order": [
+          "1496813435244",
+          "1496813502477",
+          "1496813512179"
+        ],
+        "settings": {
+          "cart_notes_enable": true
+        }
+      },
+      "article-template": {
+        "type": "article-template",
+        "settings": {
+          "blog_show_author": true,
+          "blog_show_date": true,
+          "show_recent": true,
+          "blog_recent_blog": "news",
+          "recent_title": "Recent Posts",
+          "recent_limit": "5",
+          "show_tags": true,
+          "tag_title": "Blog Tags",
+          "show_banner": true,
+          "banner": ""
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "blocks": {
+          "c242d55f-0f02-43fd-9c50-d2bc71ef2775": {
+            "type": "additional_tab",
+            "settings": {
+              "title": "",
+              "title_trans": "",
+              "content": ""
+            }
+          },
+          "cbf64d23-8411-471a-b96f-b304af189c60": {
+            "type": "additional_tab",
+            "settings": {
+              "title": "Testing",
+              "title_trans": "",
+              "content": "<div><h1>Testing<\/h1><\/div>"
+            }
+          }
+        },
+        "block_order": [
+          "c242d55f-0f02-43fd-9c50-d2bc71ef2775",
+          "cbf64d23-8411-471a-b96f-b304af189c60"
+        ],
+        "settings": {
+          "main_image_size": "637x",
+          "small_image_size": "98x",
+          "option_dropdown": "size",
+          "show_quantity_selector": true,
+          "show_share_buttons": false,
+          "show_share_facebook": false,
+          "show_share_twitter": false,
+          "show_share_linkedin": false,
+          "show_share_google_plus": false,
+          "show_share_pinterest": false,
+          "enable_size_chart": false,
+          "show_sku": false,
+          "show_secure_checkout": true,
+          "show_dynamic_checkout_button": true,
+          "show_details_tab": true,
+          "show_review_tab": true,
+          "show_tags_tab": false,
+          "show_related_products": true,
+          "rel_limit": "3",
+          "show_label": false,
+          "show_wishlist": false,
+          "show_cart_btn": true,
+          "show_qs_btn": false,
+          "show_compare_btn": false,
+          "free_shipping_img": "shopify:\/\/shop_images\/Rectangle_4.png"
+        }
+      },
+      "contacts": {
+        "type": "contacts",
+        "settings": {
+          "gm_key": "AIzaSyByF5Th99QzkJtIhod9awRaDK2CGSNB43o",
+          "map_address": "80 Spadina Ave, Toronto",
+          "telephone": "(514) 955-9337"
+        }
+      },
+      "162677603628b0678b": {
+        "type": "custom-html",
+        "disabled": true,
+        "settings": {
+          "content": "<style>\n.group-header.group-header-style8 .cart-target>a .num-items-in-cart .block-cart {\nheight: 29px;\n}\n.group-header.group-header-style8 .search_form {\ndisplay: none;\n}\n.group-header.group-header-style8 .cart-target>a .num-items-in-cart .block-cart .icon-cdz {\n    color: #fff !important;\n}\n.group-header.group-header-style8 .cart-target>a .num-items-in-cart {\nbackground: #282828 !important;\n}\n.group-header.group-header-style2 .main-header {\npadding-bottom: 20px !important}\n.top-header { display: none }\n.nav-header {\n            background-color: transparent !important;\n    }\n    .cdz-horizontal-menu .groupmenu {\n        text-align: right !important;\n    }\n    .cdz-horizontal-menu .groupmenu li.level0>a.menu-link {\n        font-size: 14px !important;\n    font-family: 'Montserrat' !important;\n    }\n    .ansel-hero {\n        background-image: url('https:\/\/cdn.shopify.com\/s\/files\/1\/0122\/2901\/7696\/files\/DSC_6717_73308a94-a9dc-432f-b50b-c0afff57665c.jpg?v=1626776935');\n        background-position: bottom center;\n        background-repeat: no-repeat;\n        background-size: cover;\n            padding-top: 100px;\n    padding-bottom: 600px;\n    }\n    .ansel-hero img {\n        display: none;\n    }\n    .ansel-hero h2 {\n        font-weight: 400;\n        font-size: 24px;\n    text-transform: none;\n    letter-spacing: 0;\n            font-family: 'Montserrat' !important;\n    }\n    .ansel-hero h1 {\n        font-weight: 800;\n        font-size: 54px;\n    text-transform: none;\n    letter-spacing: 0;\n            font-family: 'Montserrat' !important;\n    }\n    .ansel-hero p {\n        font-size: 20px;\n        font-weight: 500;\n    text-transform: none;\n    letter-spacing: 0;\n        color: #000;\n    }\n    .ansel-hero .btn {\n        background-color: #f12020;\n    border-color: #f12020;\n    font-size: 21px;\n    letter-spacing: 0;\n    font-weight: 900;\n    padding: 10px 50px;\n    height: auto;\n    margin-top: 40px;\n            font-family: 'Montserrat' !important;\n    }\n    \n    h1, h2, h3 {\n        font-family: 'Montserrat' !important;\n         text-transform: none !important;\n        letter-spacing: 0 !important;\n    }\n    p {\n        font-size: 20px;\n        font-weight: 500;\n    text-transform: none;\n    letter-spacing: 0;\n        color: #000;\n    }\n\n<\/style>\n<div class=\"ansel-hero container-fluid\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-xs-12 text-center\">\n                <h2>Need a simple and safe solution to carrying your items with a mobility device?<\/h2>\n                <h1>The New Smart Simple Assist Bag For Your Walker Or Wheelchair. <\/h1>\n                <p>Gain Back Your Confidence In Day To Day Mobility. \nIndependence, Safety, And Security … Guaranteed!<\/p>\n                <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0122\/2901\/7696\/files\/banner-image_1.png?v=1627043011\">\n                <a class=\"btn btn-primary\" href=\"https:\/\/havanue.myshopify.com\/products\/executive-assist-bag\" role=\"button\">Learn More<\/a>\n                \n            <\/div>\n        <\/div>\n    <\/div>\n<\/div>",
+          "full_width": true
+        }
+      },
+      "16364810879dc2904c": {
+        "type": "custom-hero",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/DSC_6717_73308a94-a9dc-432f-b50b-c0afff57665c.jpg",
+          "mob_image": "shopify:\/\/shop_images\/Untitled_c8a6632c-c4c8-4334-94b5-af68f26c3370.png",
+          "alignment": "top center",
+          "hero_layout": "full_width",
+          "hero_size": "large",
+          "subtitle": "Need more stability and safety while using your mobility device?",
+          "title": "LIMITED TIME - Over 40% OFF Your New Smart Simple Bag For Your Walker Or Wheelchair",
+          "text": "<p>Gain Back Your Confidence. Independence, Safety, And Security … <strong>GUARANTEED<\/strong>!<\/p>",
+          "button_text": "Shop Now",
+          "button_url": "https:\/\/havanue.com\/collections\/bags\/products\/executive-assist-bag"
+        }
+      },
+      "16364839968a554d9a": {
+        "type": "icon-blocks",
+        "blocks": {
+          "1657550a-6f7a-4f0d-b942-d9a3bfa44caa": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-lock\" viewbox=\"0 0 16 16\">\n                    <path d=\"M8 5a1 1 0 0 1 1 1v1H7V6a1 1 0 0 1 1-1zm2 2.076V6a2 2 0 1 0-4 0v1.076c-.54.166-1 .597-1 1.224v2.4c0 .816.781 1.3 1.5 1.3h3c.719 0 1.5-.484 1.5-1.3V8.3c0-.627-.46-1.058-1-1.224zM6.105 8.125A.637.637 0 0 1 6.5 8h3a.64.64 0 0 1 .395.125c.085.068.105.133.105.175v2.4c0 .042-.02.107-.105.175A.637.637 0 0 1 9.5 11h-3a.637.637 0 0 1-.395-.125C6.02 10.807 6 10.742 6 10.7V8.3c0-.042.02-.107.105-.175z\"><\/path>\n                    <path d=\"M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"><\/path>\n                <\/svg>",
+              "item_text": "Secure + Non-Slip"
+            }
+          },
+          "40fc7e31-b29b-405d-bc15-508273b954b6": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-aspect-ratio\" viewbox=\"0 0 16 16\">\n                    <path d=\"M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5v-9zM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z\"><\/path>\n                    <path d=\"M2 4.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H3v2.5a.5.5 0 0 1-1 0v-3zm12 7a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H13V8.5a.5.5 0 0 1 1 0v3z\"><\/path>\n                <\/svg>",
+              "item_text": "One Size Fits All Devices"
+            }
+          },
+          "41c6a956-4e0c-4351-9e4d-1e7e807d6eb3": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-clock-history\" viewbox=\"0 0 16 16\">\n  <path d=\"M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z\"><\/path>\n  <path d=\"M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z\"><\/path>\n  <path d=\"M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z\"><\/path>\n<\/svg>",
+              "item_text": "Timeless Style + Multi-Purpose"
+            }
+          }
+        },
+        "block_order": [
+          "1657550a-6f7a-4f0d-b942-d9a3bfa44caa",
+          "40fc7e31-b29b-405d-bc15-508273b954b6",
+          "41c6a956-4e0c-4351-9e4d-1e7e807d6eb3"
+        ],
+        "settings": {
+          "is_desktop": true,
+          "is_mobile": false
+        }
+      },
+      "1636506785c82842a9": {
+        "type": "logo-list",
+        "blocks": {
+          "90750b63-d632-4ae4-916d-ab350a2ccb94": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "",
+              "item_img": "shopify:\/\/shop_images\/retirement_living_black.png"
+            }
+          },
+          "d9754dc1-e306-449b-ab10-45e2983c34b2": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "",
+              "item_img": "shopify:\/\/shop_images\/positive_aging_logo.png"
+            }
+          },
+          "d6963aec-b80d-4831-b580-eb0e3246453a": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "",
+              "item_img": "shopify:\/\/shop_images\/Medtrade-East-black.png"
+            }
+          },
+          "976700a0-77e3-4827-b441-bac52c95992e": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "",
+              "item_img": "shopify:\/\/shop_images\/homecare_sharp_black.png"
+            }
+          },
+          "2f7a4b51-5b94-44d9-8cae-1a161479cb7f": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "",
+              "item_img": "shopify:\/\/shop_images\/Gleauty_black.png"
+            }
+          }
+        },
+        "block_order": [
+          "90750b63-d632-4ae4-916d-ab350a2ccb94",
+          "d9754dc1-e306-449b-ab10-45e2983c34b2",
+          "d6963aec-b80d-4831-b580-eb0e3246453a",
+          "976700a0-77e3-4827-b441-bac52c95992e",
+          "2f7a4b51-5b94-44d9-8cae-1a161479cb7f"
+        ],
+        "settings": {
+          "title": "As Seen In:"
+        }
+      },
+      "1636509775716a6949": {
+        "type": "image-with-text_blocks",
+        "blocks": {
+          "6c572910-575d-4ee0-85da-3cd7668675bf": {
+            "type": "icon",
+            "settings": {
+              "text_first": true,
+              "item_img": "shopify:\/\/shop_images\/ezgif.com-gif-maker_1.gif",
+              "item_title": "Independence While On The Go",
+              "item_text": "<p>Feel more confident and stress-less knowing you'll have everything you need right by your side, without sacrificing safety and security. It's the perfect assistant that helps you speed up recovery times, improve mobility and regain your feeling of independence and renewed dignity.<\/p>"
+            }
+          },
+          "320c7b79-ad36-4fe9-8fef-67c88153224e": {
+            "type": "icon",
+            "settings": {
+              "text_first": false,
+              "item_img": "shopify:\/\/shop_images\/Rectangle_2.png",
+              "item_title": "Everything You Need, Right By Your Side",
+              "item_text": "<p>Ever struggle to keep all your essentials next to you on the go? Feeling unprepared stops here. Easily and safely carry around all of your daily essentials, from your phone, magazine, and tablets to any other necessities. Walk outside, to the grocery store or even around the house with more confidence and control.<\/p>"
+            }
+          },
+          "cc2636e5-475b-4a63-b7e3-f830ed141dc9": {
+            "type": "icon",
+            "settings": {
+              "text_first": true,
+              "item_img": "shopify:\/\/shop_images\/Rectangle_3.png",
+              "item_title": "One Size Fits All",
+              "item_text": "<p>The Assist Bag can be used on any size walker or wheelchair, ensuring stability and clears all doorways with ease. Designed to be simple and easy to move from one mobility device to the other. It can even be transformed into a shoulder bag for those who use a cane or need their assistant to carry their bag. We focus on functionality first.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "6c572910-575d-4ee0-85da-3cd7668675bf",
+          "320c7b79-ad36-4fe9-8fef-67c88153224e",
+          "cc2636e5-475b-4a63-b7e3-f830ed141dc9"
+        ],
+        "settings": {
+          "title": "Why The Assist Bag Is Your New Best Assistant.",
+          "button_text": "Learn More",
+          "button_url": "#"
+        }
+      },
+      "1636513163db309681": {
+        "type": "icon-with-text",
+        "settings": {
+          "bg_color": "#51a3a3",
+          "img_icon": "shopify:\/\/shop_images\/Rectangle_4.png",
+          "title": "ZERO RISK! In-Home FREE 100 Day Trial",
+          "text": "<p>Take our bag home today. Try it for 100 days, and in the extremely unlikely event you can't pack everything you need for your daily requirements, or you’re completely unhappy with the bag, send it right back, no questions asked. <br\/>We will even cover the return shipping. <br\/>This is our way of helping keep you safe and mobile while on the go.<\/p>",
+          "button_text": "Try it now",
+          "button_url": "#"
+        }
+      },
+      "1636516237a3ef7065": {
+        "type": "award-with-text",
+        "settings": {
+          "img_icon": "shopify:\/\/shop_images\/Rectangle_5.png",
+          "title": "100% Lifetime Secure Guarantee",
+          "text": "<p>When you join us at Havanue, you can invest with confidence because you’ll always be covered by our unbelievable lifetime guarantee. <br\/>If our bag doesn't hold up through the years, we will give you a completely free replacement bag - no charges and no questions asked.<\/p>",
+          "button_text": "ShOP RISK-FREE",
+          "button_url": "#"
+        }
+      },
+      "1636526030e5538181": {
+        "type": "icons-texts",
+        "blocks": {
+          "d3c2e4d5-d105-40e5-8491-44ffe57bf1ce": {
+            "type": "icons",
+            "settings": {
+              "item_img": "shopify:\/\/shop_images\/2688237-200_b64518aa-0cf8-4436-9d16-daee4d7469ae.png",
+              "item_icon": "<svg width=\"36\" height=\"36\" viewbox=\"0 0 36 36\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M12 5.625H24V1.5H12V5.625Z\" fill=\"white\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M24 3.56201H30V34.5H6V3.56201H12\" fill=\"white\"><\/path>\n<path d=\"M24 3.56201H30V34.5H6V3.56201H12\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M14.05 11.3052L11.07 14.3812L9.952 13.2272L14.05 11.3052ZM14.05 18.5252L11.07 21.6002L9.952 20.4452L14.05 18.5252ZM14.05 25.7432L11.069 28.8182L9.951 27.6642L14.05 25.7432ZM17.001 12.8442H26.001H17.001ZM17.001 20.0632H26.001H17.001ZM17.001 27.2822H26.001H17.001Z\" fill=\"white\"><\/path>\n<path d=\"M17.001 27.2822H26.001M14.05 11.3052L11.07 14.3812L9.952 13.2272L14.05 11.3052ZM14.05 18.5252L11.07 21.6002L9.952 20.4452L14.05 18.5252ZM14.05 25.7432L11.069 28.8182L9.951 27.6642L14.05 25.7432ZM17.001 12.8442H26.001H17.001ZM17.001 20.0632H26.001H17.001Z\" stroke=\"#51A3A3\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+              "item_title": "More Stability",
+              "item_text": "<p>Replacing swinging plastic bags and other items with one secured and stable bag helps prevent falls and injuries.<\/p>"
+            }
+          },
+          "b3a138fc-5f43-4c37-8170-22f6ae06fc4f": {
+            "type": "icons",
+            "settings": {
+              "item_img": "shopify:\/\/shop_images\/Screenshot_1_1.png",
+              "item_icon": "<svg width=\"36\" height=\"36\" viewbox=\"0 0 36 36\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M33 19.393C33 27.736 26.283 34.5 18 34.5C9.717 34.5 3 27.736 3 19.393C3 11.05 9.717 4.285 18 4.285C26.283 4.285 33 11.05 33 19.393ZM19.922 4.144V1.5H16.171V4.144\" fill=\"white\"><\/path>\n<path d=\"M19.922 4.144V1.5H16.171V4.144M33 19.393C33 27.736 26.283 34.5 18 34.5C9.717 34.5 3 27.736 3 19.393C3 11.05 9.717 4.285 18 4.285C26.283 4.285 33 11.05 33 19.393Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M8.67599 7.33189L6.81999 5.46289L4.16699 8.13289L6.02299 10.0029L8.67599 7.33189ZM29.297 19.4399C29.297 25.7499 24.217 30.8659 17.953 30.8659C11.688 30.8659 6.60899 25.7499 6.60899 19.4399C6.60899 13.1299 11.688 8.01389 17.953 8.01389C24.217 8.01389 29.297 13.1299 29.297 19.4399ZM17.953 19.4399L23.625 13.7279L17.953 19.4399Z\" fill=\"white\"><\/path>\n<path d=\"M17.953 19.4399L23.625 13.7279M8.67599 7.33189L6.81999 5.46289L4.16699 8.13289L6.02299 10.0029L8.67599 7.33189ZM29.297 19.4399C29.297 25.7499 24.217 30.8659 17.953 30.8659C11.688 30.8659 6.60899 25.7499 6.60899 19.4399C6.60899 13.1299 11.688 8.01389 17.953 8.01389C24.217 8.01389 29.297 13.1299 29.297 19.4399Z\" stroke=\"#51A3A3\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+              "item_title": "Better Security",
+              "item_text": "<p>Comes with zipper pockets integrated. We even have zippers within zippers for the special items you need to keeo safe.<\/p>"
+            }
+          },
+          "114f5b58-6bab-4a24-921d-779f5fff52b1": {
+            "type": "icons",
+            "settings": {
+              "item_img": "shopify:\/\/shop_images\/Rectangle_4.png",
+              "item_icon": "<svg width=\"36\" height=\"36\" viewbox=\"0 0 36 36\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M21.055 25.1702C21.055 27.1042 16.677 28.6712 11.277 28.6712C5.877 28.6712 1.5 27.1042 1.5 25.1702M21.055 13.5102C21.055 15.4432 16.677 17.0102 11.277 17.0102C5.877 17.0102 1.5 15.4432 1.5 13.5102C1.5 11.5782 5.877 10.0132 11.277 10.0132C16.677 10.0132 21.055 11.5782 21.055 13.5102ZM21.055 19.3412C21.055 21.2732 16.677 22.8392 11.277 22.8392C5.877 22.8392 1.5 21.2732 1.5 19.3412H21.055Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M14.945 9.75V4.998M21.055 13.51V31.001C21.055 32.934 16.677 34.5 11.277 34.5C5.877 34.5 1.5 32.934 1.5 31.002V13.51H21.055ZM34.5 4.998C34.5 6.93 30.123 8.498 24.72 8.498C19.323 8.498 14.945 6.93 14.945 4.998C14.945 3.066 19.323 1.5 24.72 1.5C30.12 1.5 34.5 3.066 34.5 4.998ZM34.5 10.83C34.5 12.76 30.123 14.327 24.72 14.327C23.603 14.329 22.486 14.259 21.378 14.117L34.5 10.83ZM34.5 16.659C34.5 18.591 30.123 20.157 24.72 20.157C23.579 20.157 22.481 20.087 21.462 19.958L34.5 16.659Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M34.5 4.99805V22.489C34.5 24.421 30.123 25.987 24.72 25.987C23.547 25.987 22.422 25.914 21.38 25.777\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+              "item_title": "Risk-Free In-Home Trial",
+              "item_text": "<p>Try it at home and feel it for yourself. Love it? Keep it. Don’t love it? We’ll cover the return shipping and 100% money-back.<\/p>"
+            }
+          },
+          "a236fb6c-804f-461c-8734-0405e0dc733a": {
+            "type": "icons",
+            "settings": {
+              "item_img": "shopify:\/\/shop_images\/img_490759.png",
+              "item_icon": "<svg width=\"36\" height=\"36\" viewbox=\"0 0 36 36\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M6.747 5.97021L8.623 34.5002H27.376L29.253 5.97021\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M14.813 5.304H20.438V1.5H14.813V5.304Z\" stroke=\"white\" stroke-width=\"2\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M3 5.64893H33\" stroke=\"white\" stroke-width=\"2\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"><\/path>\n<path d=\"M14.249 28.7938L13.311 13.5298M18 28.7938V13.5298V28.7938ZM21.752 28.7938L22.689 13.5298L21.752 28.7938Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+              "item_title": "Fits Any Mobility Device",
+              "item_text": "<p>Fits perfectly on walkers, wheelchairs, mobility scooters, and bedside racks.<\/p>"
+            }
+          },
+          "7aba8208-a940-42df-a26b-c6285026a1ad": {
+            "type": "icons",
+            "settings": {
+              "item_icon": "<svg width=\"36\" height=\"36\" viewbox=\"0 0 36 36\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M34.5 18C34.5 27.113 27.113 34.5 18 34.5C8.887 34.5 1.5 27.113 1.5 18C1.5 8.888 8.887 1.5 18 1.5C27.113 1.5 34.5 8.888 34.5 18Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M18.053 18.0521L23.41 21.147M13.928 11.8801C13.928 14.2401 15.485 16.3921 18.053 18.0351C20.619 16.3921 22.178 14.2401 22.178 11.8801C22.178 9.52205 20.619 7.37005 18.053 5.72705C15.485 7.37005 13.928 9.52205 13.928 11.8801ZM18.053 18.0521V11.8651V18.0521ZM14.771 24.71C16.814 23.531 17.899 21.1041 18.036 18.0611C15.333 16.6581 12.689 16.386 10.646 17.567C8.603 18.7441 7.517 21.1711 7.38 24.2131C10.083 25.6151 12.728 25.889 14.771 24.71ZM18.053 18.0521L12.693 21.147L18.053 18.0521ZM25.46 17.5651C23.417 16.3861 20.772 16.6591 18.069 18.0611C18.204 21.1031 19.291 23.53 21.335 24.71C23.378 25.889 26.022 25.6171 28.725 24.2141C28.588 21.1711 27.502 18.7461 25.46 17.5651Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+              "item_title": "Every Bag Gives Back",
+              "item_text": "<p>Everything Assist Bag helps bring more assist bags to those in need but cannot afford. <\/p>"
+            }
+          },
+          "42ac095b-6a1e-47e7-a97f-e4db3ce3c409": {
+            "type": "icons",
+            "settings": {
+              "item_icon": "<svg width=\"33\" height=\"30\" viewbox=\"0 0 33 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<g clip-path=\"url(#clip0_9_37)\">\n<path d=\"M28.8 25.7998C30 25.7998 30.9 26.6998 30.9 27.8998C30.9 29.0998 30 29.9998 28.8 29.9998H16.5L8.25 27.8998\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M30.9 21.75C32.1 21.75 33 22.65 33 23.85C33 25.05 32.1 25.95 30.9 25.95H25.8\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M30.9 17.5498C32.1 17.5498 33 18.4498 33 19.6498C33 20.8498 32.1 21.7498 30.9 21.7498H25.8\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M25.8 17.55H30.9C32.1 17.55 33 16.65 33 15.45C33 14.4 32.1 13.5 30.9 13.5H18.6\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M0 29.9999H6.15C6.15 29.9999 8.25 29.9999 8.25 27.8999V13.4999C8.25 13.4999 8.25 11.3999 6.15 11.3999H0V29.9999Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M8.25 13.5C8.25 13.5 16.5 9.9 16.5 2.1C16.5 0.9 17.4 0 18.6 0C19.2 0 19.65 0.3 20.1 0.6C20.1 0.6 21.75 1.95 21.75 9.3C21.75 10.8 21.6 12.15 21.15 13.35\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/g>\n<defs>\n<clippath id=\"clip0_9_37\">\n<rect width=\"33\" height=\"30\" fill=\"white\"><\/rect>\n<\/clippath>\n<\/defs>\n<\/svg>",
+              "item_title": "Guaranteed For Life",
+              "item_text": "<p>We back up our products. If they don’t stand the test of time, then we’ll replace it free of charge.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "d3c2e4d5-d105-40e5-8491-44ffe57bf1ce",
+          "b3a138fc-5f43-4c37-8170-22f6ae06fc4f",
+          "114f5b58-6bab-4a24-921d-779f5fff52b1",
+          "a236fb6c-804f-461c-8734-0405e0dc733a",
+          "7aba8208-a940-42df-a26b-c6285026a1ad",
+          "42ac095b-6a1e-47e7-a97f-e4db3ce3c409"
+        ],
+        "settings": {
+          "title": "Benefits of Havanue Bags",
+          "bg_color": "#51a3a3"
+        }
+      },
+      "1636542365ffa15263": {
+        "type": "products-list",
+        "blocks": {
+          "1f5c21fd-028d-438d-94f2-131163176cc0": {
+            "type": "product",
+            "settings": {
+              "text_first": false,
+              "product_item": "executive-assist-bag",
+              "item_title": "Assist Bag",
+              "item_text": "<p>Your premium go-to bag for daily living.<\/p>",
+              "button_text": "Learn More",
+              "button_url": ""
+            }
+          },
+          "2c6e8b0e-e5ad-42a5-9cc9-746ef3730420": {
+            "type": "product",
+            "settings": {
+              "text_first": true,
+              "product_item": "quilted-assist-bag",
+              "item_title": "Quilted Assist Bag",
+              "item_text": "<p>This bag is made of a polyester material. Fully lined with a light tan soft polyester.<\/p>",
+              "button_text": "Learn More",
+              "button_url": ""
+            }
+          }
+        },
+        "block_order": [
+          "1f5c21fd-028d-438d-94f2-131163176cc0",
+          "2c6e8b0e-e5ad-42a5-9cc9-746ef3730420"
+        ],
+        "settings": {}
+      },
+      "1636563988235125d7": {
+        "type": "images-text",
+        "blocks": {
+          "f4402ed2-394a-45dc-907d-8ad6c88e652d": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_1.png"
+            }
+          },
+          "d9133e01-a11e-44f4-88d1-06fe7c7d220c": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_4.png"
+            }
+          },
+          "84b9ec47-c7d6-429d-8dce-ac707829777b": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_3.png"
+            }
+          }
+        },
+        "block_order": [
+          "f4402ed2-394a-45dc-907d-8ad6c88e652d",
+          "d9133e01-a11e-44f4-88d1-06fe7c7d220c",
+          "84b9ec47-c7d6-429d-8dce-ac707829777b"
+        ],
+        "settings": {
+          "is_desktop": true,
+          "is_mobile": false,
+          "title": "Over 35 years and 1,000s of bags later...The Assist Bag was born.",
+          "text": "<p>Designed to help mobility device users that needed something more, and carry less.<br\/> <br\/>My goal when I started Havanue was to bring a stylish, simple, and functional bag to these wonderful humans and to create as much positive impact as possible. <br\/>Impacting not just the user’s lives, but their loved ones as well.<\/p>",
+          "text_bg_color": "#f7f7f3"
+        }
+      },
+      "1636566392f37c21fb": {
+        "type": "help-images_text",
+        "blocks": {
+          "dab0fa93-f3bc-4a54-a183-21c928a6c409": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_3_8dc7f35a-abfb-4e76-9edb-838afb89e46c.png"
+            }
+          },
+          "e7c864a5-478d-4a96-84bc-bebb875452d1": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_3_8dc7f35a-abfb-4e76-9edb-838afb89e46c.png"
+            }
+          },
+          "e4cd18eb-2a7a-4950-a2ae-02f103b9d87b": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_3_8dc7f35a-abfb-4e76-9edb-838afb89e46c.png"
+            }
+          }
+        },
+        "block_order": [
+          "dab0fa93-f3bc-4a54-a183-21c928a6c409",
+          "e7c864a5-478d-4a96-84bc-bebb875452d1",
+          "e4cd18eb-2a7a-4950-a2ae-02f103b9d87b"
+        ],
+        "settings": {
+          "is_desktop": true,
+          "is_mobile": false,
+          "title": "Our mission is to help enable over 100,000 people in 10 years",
+          "text": "<p>I built a program to ensure more people in need receive an Assist Bag. Even those who could not afford it. <br\/>That’s why at Havanue a portion of each bag sold goes towards donating a bag to a person in need within the mobility community. <br\/><\/p>",
+          "text_bg_color": "#f6eac8",
+          "button_text": "Join And Make An Impact",
+          "button_url": "#"
+        }
+      },
+      "16365723479cff1d26": {
+        "type": "image-list",
+        "blocks": {
+          "f1dc5911-7e5f-40b9-bc8c-8155d8651c4d": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/Rectangle_1_60f7637e-efd9-4645-9ebf-ce917fc87086.png"
+            }
+          },
+          "01d0e0aa-5e9a-4409-a4ba-7b17e9fb25cb": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/Rectangle_2_0df38261-849e-4fd9-a5a6-49df35c7e44a.png"
+            }
+          },
+          "e6c3b11f-f160-418a-a338-8597f3cbf0bd": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/Screen_Shot_2021-11-05_at_11.24_1.png"
+            }
+          },
+          "08edd78f-04a9-407a-b63d-598a9360be1e": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/Screen_Shot_2021-11-05_at_11.40_1.png"
+            }
+          }
+        },
+        "block_order": [
+          "f1dc5911-7e5f-40b9-bc8c-8155d8651c4d",
+          "01d0e0aa-5e9a-4409-a4ba-7b17e9fb25cb",
+          "e6c3b11f-f160-418a-a338-8597f3cbf0bd",
+          "08edd78f-04a9-407a-b63d-598a9360be1e"
+        ],
+        "settings": {
+          "title": "See Over 2,000 Loved Ones Use Their Bags All Over The Country",
+          "main_image": "shopify:\/\/shop_images\/Rectangle_e062f1b4-4cb7-4409-a91d-6be08e12ef2f.png"
+        }
+      },
+      "1636580916ecdc18d6": {
+        "type": "review-slider",
+        "disabled": true,
+        "blocks": {
+          "b623285b-adaa-47f8-b33e-7fe65a254715": {
+            "type": "text",
+            "settings": {
+              "authur_img": "shopify:\/\/shop_images\/Rectangle_6592d4c4-abfe-4fb4-9deb-1783690c0129.png",
+              "authur_name": "Kate Booth",
+              "authur_review": 5,
+              "authur_text": "<p>“I love that it tastes nice, it is cruelty free, vegan and healthy. I save a fortune on vitamins buying Huel.”<\/p>"
+            }
+          },
+          "296685e2-e7e1-4bc4-b208-5ba167526e80": {
+            "type": "text",
+            "settings": {
+              "authur_img": "shopify:\/\/shop_images\/Rectangle_6592d4c4-abfe-4fb4-9deb-1783690c0129.png",
+              "authur_name": "Charlotte S",
+              "authur_review": 5,
+              "authur_text": "<p>“I’ve dropped 2 sizes and I look and feel so healthy”<\/p>"
+            }
+          },
+          "29b62d2f-6a52-4fac-9bf1-2f09b790edc7": {
+            "type": "text",
+            "settings": {
+              "authur_img": "shopify:\/\/shop_images\/Rectangle_6592d4c4-abfe-4fb4-9deb-1783690c0129.png",
+              "authur_name": "Charlotte S",
+              "authur_review": 5,
+              "authur_text": "<p>“Great go-to for an MRP! Healthy, filling, plant-based and saves a lot of hassle and time.”<\/p>"
+            }
+          },
+          "ae34d09c-c917-4c9a-850c-c617f2e312c2": {
+            "type": "text",
+            "settings": {
+              "authur_img": "shopify:\/\/shop_images\/Rectangle_6592d4c4-abfe-4fb4-9deb-1783690c0129.png",
+              "authur_name": "Authur",
+              "authur_review": 5,
+              "authur_text": "<p>“Great go-to for an MRP! Healthy, filling, plant-based and saves a lot of hassle and time.”<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "b623285b-adaa-47f8-b33e-7fe65a254715",
+          "296685e2-e7e1-4bc4-b208-5ba167526e80",
+          "29b62d2f-6a52-4fac-9bf1-2f09b790edc7",
+          "ae34d09c-c917-4c9a-850c-c617f2e312c2"
+        ],
+        "settings": {
+          "title": "Listen to 100s of 5 Star Reviews",
+          "subtitle": "Don’t take our word for it. Here’s what a few of them had to say",
+          "review_img": "shopify:\/\/shop_images\/free-5-star-rating-png-download-free-clip-art-free-clip-art-on-stars-rating-png-2983_553-300x56-1_66a6106e-d5fe-4622-bb17-d453896ff725.png",
+          "review_link_text": "See more reviews",
+          "review_link": "#"
+        }
+      },
+      "1636604893d78f78bc": {
+        "type": "review-app",
+        "disabled": true,
+        "settings": {
+          "custom_code": "<div id=\"stamped-reviews-widget\" data-widget-type=\"full-page\" data-title=\"Listen to 100s of 5 Star Reviews\" data-auto-play=\"false\" data-auto-play-speed=\"3000\" data-random=\"true\" data-take=\"30\"><\/div>"
+        }
+      },
+      "1636615514b0506c85": {
+        "type": "icon-blocks",
+        "blocks": {
+          "b9a9c891-2b70-48ee-99d9-3b8827f7edd7": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-lock\" viewbox=\"0 0 16 16\">\n                    <path d=\"M8 5a1 1 0 0 1 1 1v1H7V6a1 1 0 0 1 1-1zm2 2.076V6a2 2 0 1 0-4 0v1.076c-.54.166-1 .597-1 1.224v2.4c0 .816.781 1.3 1.5 1.3h3c.719 0 1.5-.484 1.5-1.3V8.3c0-.627-.46-1.058-1-1.224zM6.105 8.125A.637.637 0 0 1 6.5 8h3a.64.64 0 0 1 .395.125c.085.068.105.133.105.175v2.4c0 .042-.02.107-.105.175A.637.637 0 0 1 9.5 11h-3a.637.637 0 0 1-.395-.125C6.02 10.807 6 10.742 6 10.7V8.3c0-.042.02-.107.105-.175z\"><\/path>\n                    <path d=\"M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"><\/path>\n                <\/svg>",
+              "item_text": "Secure + Non-Slip"
+            }
+          },
+          "ca79da83-8e5f-46aa-88cd-b749195d28f9": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-aspect-ratio\" viewbox=\"0 0 16 16\">\n                    <path d=\"M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5v-9zM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z\"><\/path>\n                    <path d=\"M2 4.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H3v2.5a.5.5 0 0 1-1 0v-3zm12 7a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H13V8.5a.5.5 0 0 1 1 0v3z\"><\/path>\n                <\/svg>",
+              "item_text": "One Size Fits All Devices"
+            }
+          },
+          "d1b72c02-a7f3-413d-b0c9-d2d759816314": {
+            "type": "icon",
+            "settings": {
+              "item_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-clock-history\" viewbox=\"0 0 16 16\">\n  <path d=\"M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z\"><\/path>\n  <path d=\"M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z\"><\/path>\n  <path d=\"M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z\"><\/path>\n<\/svg>",
+              "item_text": "Timeless Style + Multi-Purpose"
+            }
+          }
+        },
+        "block_order": [
+          "b9a9c891-2b70-48ee-99d9-3b8827f7edd7",
+          "ca79da83-8e5f-46aa-88cd-b749195d28f9",
+          "d1b72c02-a7f3-413d-b0c9-d2d759816314"
+        ],
+        "settings": {
+          "is_desktop": false,
+          "is_mobile": true
+        }
+      },
+      "16366476135b0aad2f": {
+        "type": "images-text",
+        "blocks": {
+          "236ff5c9-0241-4d7d-9858-b88c8f7369cc": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_1.png"
+            }
+          },
+          "3a973761-ac05-43d5-986a-d358770cdb7b": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_4.png"
+            }
+          },
+          "6c07f84b-a5f4-40cb-ac9c-534aed591465": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_3.png"
+            }
+          }
+        },
+        "block_order": [
+          "236ff5c9-0241-4d7d-9858-b88c8f7369cc",
+          "3a973761-ac05-43d5-986a-d358770cdb7b",
+          "6c07f84b-a5f4-40cb-ac9c-534aed591465"
+        ],
+        "settings": {
+          "is_desktop": false,
+          "is_mobile": true,
+          "title": "Over 35 years and 1,000s of bags later...The Assist Bag was born.",
+          "text": "<p>Designed to help mobility device users that needed something more, and carry less.<br\/> <br\/>My goal when I started Havanue was to bring a stylish, simple, and functional bag to these wonderful humans and to create as much positive impact as possible. <br\/>Impacting not just the user’s lives, but their loved ones as well.<\/p>",
+          "text_bg_color": "#f7f7f3"
+        }
+      },
+      "1636647823deec92d0": {
+        "type": "help-images_text",
+        "blocks": {
+          "dbebe3e7-2cd7-4afe-b94a-41203e3ced00": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_3_8dc7f35a-abfb-4e76-9edb-838afb89e46c.png"
+            }
+          },
+          "20f542e9-f1d8-4d85-a3c6-5315a1610cd7": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_3_8dc7f35a-abfb-4e76-9edb-838afb89e46c.png"
+            }
+          },
+          "a3e1b095-57c2-4098-ae7c-38b83a1e6d4b": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/image_3_8dc7f35a-abfb-4e76-9edb-838afb89e46c.png"
+            }
+          }
+        },
+        "block_order": [
+          "dbebe3e7-2cd7-4afe-b94a-41203e3ced00",
+          "20f542e9-f1d8-4d85-a3c6-5315a1610cd7",
+          "a3e1b095-57c2-4098-ae7c-38b83a1e6d4b"
+        ],
+        "settings": {
+          "is_desktop": false,
+          "is_mobile": true,
+          "title": "Our mission is to help enable over 100,000 people in 10 years",
+          "text": "<p>I built a program to ensure more people in need receive an Assist Bag. Even those who could not afford it. <br\/>That’s why at Havanue a portion of each bag sold goes towards donating a bag to a person in need within the mobility community. <\/p>",
+          "text_bg_color": "#f6eac8",
+          "button_text": "Join And Make An Impact",
+          "button_url": "#"
+        }
+      },
+      "1636650810ed4c5601": {
+        "type": "reason-section",
+        "blocks": {
+          "502e1981-3d43-466c-b59b-355ebe3558c5": {
+            "type": "icon",
+            "settings": {
+              "text_first": false,
+              "item_img": "shopify:\/\/shop_images\/DSC_6488.jpg",
+              "item_title": "Opportunity + Security",
+              "item_text": "<p>Carry things day-to-day? Our bags are built to stand the test of time, while providing opportunity for you to carry any daily essentials.<br\/><br\/>Plenty of pockets with plenty of space for things like; tissues, phones, papers, mail, dog leashes, keys, purses and anything you need on your journey. We even included a zipper pocket to keep those valuables safe and secure.<\/p>",
+              "button_text": "Learn More",
+              "button_url": "#"
+            }
+          },
+          "49d78c49-def1-45f6-928e-19920526452b": {
+            "type": "icon",
+            "settings": {
+              "text_first": false,
+              "item_img": "shopify:\/\/shop_images\/old_man_happy.jpg",
+              "item_title": "Timeless Style",
+              "item_text": "<p>Who says using a walker can't be functional AND stylish... Break the stigma of using a walker and show off your independence with a classy and clean design for men and women.<br\/><br\/>No more cheesy or cheap bag patterns that scream \"hospital gown\" from across the room. Get something more sophisticated and timeless instead.<\/p>",
+              "button_text": "Learn More",
+              "button_url": "#"
+            }
+          }
+        },
+        "block_order": [
+          "502e1981-3d43-466c-b59b-355ebe3558c5",
+          "49d78c49-def1-45f6-928e-19920526452b"
+        ],
+        "settings": {
+          "is_desktop": false,
+          "is_mobile": true,
+          "title": "Even More Reasons",
+          "text": "<p>We understand the importance of functionality but also the need for fashion. We've crafted the assist bag to not only look stunning but to work seamlessly in the life of anyone who uses it.<\/p>"
+        }
+      },
+      "product-design": {
+        "type": "product-design",
+        "blocks": {
+          "7ed45ee3-024f-462c-8b3c-fc914792c0d3": {
+            "type": "Item",
+            "settings": {
+              "type_name": "Tropical",
+              "item_image": "shopify:\/\/shop_images\/Rectangle_1_6ff3275d-1572-4b8e-a578-0d3a0976eab6.png",
+              "item_price": "$49.95",
+              "description": "<p>On Sale for a limited time only.<\/p>",
+              "button_url": "https:\/\/havanue.com\/collections\/our-products\/products\/quilted-assist-bag?variant=40500175339677"
+            }
+          },
+          "1861be37-325e-4332-845d-20e2adcb1321": {
+            "type": "Item",
+            "settings": {
+              "type_name": "Floral",
+              "item_image": "shopify:\/\/shop_images\/image_1_2779af24-90c2-4f99-952d-3078a8543318.png",
+              "item_price": "$49.95",
+              "description": "<p>On Sale for a limited time only.<\/p>",
+              "button_url": "https:\/\/havanue.com\/collections\/our-products\/products\/quilted-assist-bag?variant=40500175372445"
+            }
+          }
+        },
+        "block_order": [
+          "7ed45ee3-024f-462c-8b3c-fc914792c0d3",
+          "1861be37-325e-4332-845d-20e2adcb1321"
+        ],
+        "settings": {
+          "title": "Prefer our Executive Design?",
+          "subtitle": "<p>Our more affordable, quilted designs offer the same functionality with softer materials for those looking for a prettier design. Choose between Tan and Floral Design<\/p>",
+          "button_text": "Shop Now"
+        }
+      },
+      "product-review-app": {
+        "type": "product-review-app",
+        "settings": {}
+      },
+      "product-icon-with-text": {
+        "type": "product-icon-with-text",
+        "settings": {
+          "bg_color": "#51a3a3",
+          "img_icon": "shopify:\/\/shop_images\/Rectangle_4.png",
+          "title": "ZERO RISK!  In-Home FREE 100 Day Trial",
+          "text": "<p>Take our bag home today. Try it for 100 days, and in the extremely unlikely event you<br\/>can t pack everything you need for your daily requirements, or you re completely<br\/>unhappy with the bag, send it right back, no questions asked. <br\/><br\/>We will even cover the return shipping. <br\/><br\/>This is our way of helping keep you safe and mobile while on the go.<\/p>",
+          "button_text": "Try it now",
+          "button_url": "#"
+        }
+      },
+      "product-image-with-text": {
+        "type": "product-image-with-text",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Screenshot_2.png",
+          "title": "The Perfect Gift For Your Loved One.",
+          "text": "<p>Unsure if your partner, mother, grandfather, or any loved one<br\/>will like our bag? <br\/>Buy as a gift with our In Home Free Trial completely risk-free!<br\/>Not only is it a gift for your loved one, but also we gift a bag to<br\/>someone in need. It s a win for everyone. <\/p>",
+          "button_text": "Gift A Bag Now",
+          "button_url": "#",
+          "txt_bg_color": "#f7eac8"
+        }
+      },
+      "product-award-with_text": {
+        "type": "product-award-with_text",
+        "settings": {
+          "img_icon": "shopify:\/\/shop_images\/Rectangle_5.png",
+          "title": "Lifetime Secure 100% Money-Back Guarantee",
+          "text": "<p>When you join us at Havanue, you can invest with confidence because you ll always be<br\/>covered by our money back guarantee. In the extremely unlikely event you can t pack<br\/>everything you need for your daily requirements, or our bag doesn t hold up over the<br\/>next 10 years, we will refund you 100% and even give you a completely free<br\/>replacement bag - no charges and no questions asked. This is our way of helping keep<br\/>you safe and mobile while on the go<\/p>",
+          "button_text": "",
+          "button_url": "#"
+        }
+      },
+      "product-icons-texts": {
+        "type": "product-icons-texts",
+        "blocks": {
+          "abeabd93-c801-4b4f-9fec-629d69172796": {
+            "type": "icons",
+            "settings": {
+              "item_img": "shopify:\/\/shop_images\/2688237-200_b64518aa-0cf8-4436-9d16-daee4d7469ae.png",
+              "item_icon": "",
+              "item_title": "More Stability",
+              "item_text": "<p>Replacing swinging plastic bags and other items with one secured and stable bag helps prevent falls and injuries.<\/p>"
+            }
+          },
+          "c06d63b4-812b-4b84-b9e4-d7a450abfff8": {
+            "type": "icons",
+            "settings": {
+              "item_img": "shopify:\/\/shop_images\/Screenshot_1.png",
+              "item_icon": "",
+              "item_title": "Better Security",
+              "item_text": "<p>Comes with zipper pockets integrated. We even have zippers within zippers for the special items you need to keeo safe.<\/p>"
+            }
+          },
+          "42bb0577-91a3-4255-9955-2c10ff245015": {
+            "type": "icons",
+            "settings": {
+              "item_img": "shopify:\/\/shop_images\/Rectangle_4.png",
+              "item_icon": "",
+              "item_title": "Risk-Free In-Home Trial",
+              "item_text": "<p>Try it at home and feel it for yourself. Love it? Keep it. Don’t love it? We’ll cover the return shipping and 100% money-back.<\/p>"
+            }
+          },
+          "593f3b9f-f6ea-4fe4-9762-50f36fd099fc": {
+            "type": "icons",
+            "settings": {
+              "item_img": "shopify:\/\/shop_images\/img_490759.png",
+              "item_icon": "",
+              "item_title": "Fits Any Mobility Device",
+              "item_text": "<p>Fits perfectly on walkers, wheelchairs, mobility scooters, and bedside racks.<\/p>"
+            }
+          },
+          "b99b1c0d-7234-4847-9f56-d83c6c118a16": {
+            "type": "icons",
+            "settings": {
+              "item_icon": "<svg width=\"36\" height=\"36\" viewbox=\"0 0 36 36\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M34.5 18C34.5 27.113 27.113 34.5 18 34.5C8.887 34.5 1.5 27.113 1.5 18C1.5 8.888 8.887 1.5 18 1.5C27.113 1.5 34.5 8.888 34.5 18Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M18.053 18.0521L23.41 21.147M13.928 11.8801C13.928 14.2401 15.485 16.3921 18.053 18.0351C20.619 16.3921 22.178 14.2401 22.178 11.8801C22.178 9.52205 20.619 7.37005 18.053 5.72705C15.485 7.37005 13.928 9.52205 13.928 11.8801ZM18.053 18.0521V11.8651V18.0521ZM14.771 24.71C16.814 23.531 17.899 21.1041 18.036 18.0611C15.333 16.6581 12.689 16.386 10.646 17.567C8.603 18.7441 7.517 21.1711 7.38 24.2131C10.083 25.6151 12.728 25.889 14.771 24.71ZM18.053 18.0521L12.693 21.147L18.053 18.0521ZM25.46 17.5651C23.417 16.3861 20.772 16.6591 18.069 18.0611C18.204 21.1031 19.291 23.53 21.335 24.71C23.378 25.889 26.022 25.6171 28.725 24.2141C28.588 21.1711 27.502 18.7461 25.46 17.5651Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+              "item_title": "Every Bag Gives Back",
+              "item_text": "<p>Everything Assist Bag helps bring more assist bags to those in need but cannot afford. <\/p>"
+            }
+          },
+          "f6ea752f-061a-44c5-bd05-5e46884c8503": {
+            "type": "icons",
+            "settings": {
+              "item_icon": "<svg width=\"33\" height=\"30\" viewbox=\"0 0 33 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<g clip-path=\"url(#clip0_9_37)\">\n<path d=\"M28.8 25.7998C30 25.7998 30.9 26.6998 30.9 27.8998C30.9 29.0998 30 29.9998 28.8 29.9998H16.5L8.25 27.8998\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M30.9 21.75C32.1 21.75 33 22.65 33 23.85C33 25.05 32.1 25.95 30.9 25.95H25.8\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M30.9 17.5498C32.1 17.5498 33 18.4498 33 19.6498C33 20.8498 32.1 21.7498 30.9 21.7498H25.8\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M25.8 17.55H30.9C32.1 17.55 33 16.65 33 15.45C33 14.4 32.1 13.5 30.9 13.5H18.6\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M0 29.9999H6.15C6.15 29.9999 8.25 29.9999 8.25 27.8999V13.4999C8.25 13.4999 8.25 11.3999 6.15 11.3999H0V29.9999Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M8.25 13.5C8.25 13.5 16.5 9.9 16.5 2.1C16.5 0.9 17.4 0 18.6 0C19.2 0 19.65 0.3 20.1 0.6C20.1 0.6 21.75 1.95 21.75 9.3C21.75 10.8 21.6 12.15 21.15 13.35\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/g>\n<defs>\n<clippath id=\"clip0_9_37\">\n<rect width=\"33\" height=\"30\" fill=\"white\"><\/rect>\n<\/clippath>\n<\/defs>\n<\/svg>",
+              "item_title": "Guaranteed For Life",
+              "item_text": "<p>We back up our products. If they don’t stand the test of time, then we’ll replace it free of charge.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "abeabd93-c801-4b4f-9fec-629d69172796",
+          "c06d63b4-812b-4b84-b9e4-d7a450abfff8",
+          "42bb0577-91a3-4255-9955-2c10ff245015",
+          "593f3b9f-f6ea-4fe4-9762-50f36fd099fc",
+          "b99b1c0d-7234-4847-9f56-d83c6c118a16",
+          "f6ea752f-061a-44c5-bd05-5e46884c8503"
+        ],
+        "settings": {
+          "title": "Benefits of Havanue Bags",
+          "bg_color": "#51a3a3"
+        }
+      },
+      "product-image-list": {
+        "type": "product-image-list",
+        "blocks": {
+          "00ac84f2-22f4-431e-a0ee-8a61d336a8f0": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/Rectangle_1_60f7637e-efd9-4645-9ebf-ce917fc87086.png"
+            }
+          },
+          "1c5450ab-77c8-47a4-ac0e-24af9af5e3a5": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/Rectangle_2_0df38261-849e-4fd9-a5a6-49df35c7e44a.png"
+            }
+          },
+          "9f8594b3-5999-4b62-bdf5-b2191a68427b": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/Screen_Shot_2021-11-05_at_11.24_1.png"
+            }
+          },
+          "59869b4b-c7f3-406f-836a-5002b74de248": {
+            "type": "image",
+            "settings": {
+              "item_image": "shopify:\/\/shop_images\/Screen_Shot_2021-11-05_at_11.40_1.png"
+            }
+          }
+        },
+        "block_order": [
+          "00ac84f2-22f4-431e-a0ee-8a61d336a8f0",
+          "1c5450ab-77c8-47a4-ac0e-24af9af5e3a5",
+          "9f8594b3-5999-4b62-bdf5-b2191a68427b",
+          "59869b4b-c7f3-406f-836a-5002b74de248"
+        ],
+        "settings": {
+          "title": "See Over 2,000 Loved Ones Use Their Bags All Over The Country",
+          "main_image": "shopify:\/\/shop_images\/Rectangle_e062f1b4-4cb7-4409-a91d-6be08e12ef2f.png"
+        }
+      },
+      "product-image-with-text_blocks": {
+        "type": "product-image-with-text_blocks",
+        "blocks": {
+          "465a0476-4bf5-4fd6-a3d7-7e90a5cdde17": {
+            "type": "icon",
+            "settings": {
+              "text_first": true,
+              "item_img": "shopify:\/\/shop_images\/Gif-mailbox_1.gif",
+              "item_title": "Independence While On The Go",
+              "item_text": "<p>Feel more confident and stress-less knowing you'll have everything you need right by your side, without sacrificing safety and security. It's the perfect assistant that helps you speed up recovery times, improve mobility and regain your feeling of independence and renewed dignity.<\/p>"
+            }
+          },
+          "afa39c6e-d6df-4a7c-b00a-cd90daab2b22": {
+            "type": "icon",
+            "settings": {
+              "text_first": false,
+              "item_img": "shopify:\/\/shop_images\/Rectangle_2_1000x_e1ee6076-e483-4f5c-b120-f89ed8dc2c44.png",
+              "item_title": "Everything You Need, Right By Your Side",
+              "item_text": "<p>Ever struggle to keep all your essentials next to you on the go? Feeling unprepared stops here. Easily and safely carry around all of your daily essentials, from your phone, magazine, and tablets to any other necessities. Walk outside, to the grocery store or even around the house with more confidence and control.<\/p>"
+            }
+          },
+          "ee050445-8886-4941-9a88-9f5482cb640b": {
+            "type": "icon",
+            "settings": {
+              "text_first": true,
+              "item_img": "shopify:\/\/shop_images\/Rectangle_3.png",
+              "item_title": "One Size Fits All",
+              "item_text": "<p>The Assist Bag can be used on any size walker or wheelchair, ensuring stability and clears all doorways with ease. Designed to be simple and easy to move from one mobility device to the other. It can even be transformed into a shoulder bag for those who use a cane or need their assistant to carry their bag. We focus on functionality first.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "465a0476-4bf5-4fd6-a3d7-7e90a5cdde17",
+          "afa39c6e-d6df-4a7c-b00a-cd90daab2b22",
+          "ee050445-8886-4941-9a88-9f5482cb640b"
+        ],
+        "settings": {
+          "title": "Why The Assist Bag Is Your New Best Assistant.",
+          "button_text": "",
+          "button_url": "#"
+        }
+      },
+      "product-video": {
+        "type": "product-video",
+        "settings": {
+          "bg_color": "#8f857d",
+          "title": "See It On Different Mobility Devices",
+          "video_url": "https:\/\/www.youtube.com\/watch?v=PCwL3-hkKrg",
+          "video_autoplay": true
+        }
+      },
+      "recommention": {
+        "type": "recommention",
+        "blocks": {
+          "8fe21f2e-b14a-4948-a094-02d124ffcd66": {
+            "type": "product",
+            "settings": {
+              "product_item": "executive-assist-bag"
+            }
+          },
+          "d0974b78-6c83-41e6-a539-19468a5e9cac": {
+            "type": "product",
+            "settings": {
+              "product_item": "face-mask-v2"
+            }
+          },
+          "a9b11f77-fed6-4596-bf67-1d355a0fa160": {
+            "type": "product",
+            "settings": {
+              "product_item": "quilted-assist-bag",
+              "item_image": "shopify:\/\/shop_images\/Rectangle_1_6ff3275d-1572-4b8e-a578-0d3a0976eab6.png"
+            }
+          },
+          "7c65e071-85bd-44ff-aeb3-92c777f280cd": {
+            "type": "product",
+            "settings": {
+              "product_item": "face-covering"
+            }
+          }
+        },
+        "block_order": [
+          "8fe21f2e-b14a-4948-a094-02d124ffcd66",
+          "d0974b78-6c83-41e6-a539-19468a5e9cac",
+          "a9b11f77-fed6-4596-bf67-1d355a0fa160",
+          "7c65e071-85bd-44ff-aeb3-92c777f280cd"
+        ],
+        "settings": {
+          "title": "Buy Any  2 or More and get 10% Off On Top Of Our Limited Sale!"
+        }
+      },
+      "1637847957bf1e08a6": {
+        "type": "product-video",
+        "disabled": true,
+        "settings": {
+          "bg_color": "#8f857d",
+          "title": "See It On Different Mobility Devices",
+          "video_url": "https:\/\/www.youtube.com\/watch?v=PCwL3-hkKrg",
+          "video_autoplay": true
+        }
+      }
+    },
+    "content_for_index": [
+      "162677603628b0678b",
+      "16364810879dc2904c",
+      "16364839968a554d9a",
+      "1636506785c82842a9",
+      "1636615514b0506c85",
+      "1636509775716a6949",
+      "1636513163db309681",
+      "1636516237a3ef7065",
+      "1636526030e5538181",
+      "1636542365ffa15263",
+      "1637847957bf1e08a6",
+      "1636563988235125d7",
+      "1636566392f37c21fb",
+      "1636650810ed4c5601",
+      "16365723479cff1d26",
+      "1636604893d78f78bc",
+      "16366476135b0aad2f",
+      "1636647823deec92d0",
+      "1636580916ecdc18d6"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "color_text": "#3d4246",
+      "color_body_text": "#788188",
+      "color_sale_text": "#7796A8",
+      "color_borders": "#e8e9eb",
+      "color_button": "#7796A8",
+      "color_button_text": "#fff",
+      "color_small_button": "#fff",
+      "color_small_button_text": "#3d4246",
+      "color_text_field": "#fff",
+      "color_text_field_text": "#000",
+      "color_image_overlay_text": "#fff",
+      "color_image_overlay": "#3d4246",
+      "image_overlay_opacity": "0.25",
+      "color_body_bg": "#fff",
+      "type_header_family": "Google_Work+Sans_600_sans",
+      "type_header_base_size": "26px",
+      "type_base_family": "Google_Work+Sans_400_sans",
+      "type_base_size": "16px",
+      "type_bold_product_titles": false,
+      "share_facebook": true,
+      "share_twitter": true,
+      "share_pinterest": true,
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {}
+        },
+        "hero": {
+          "type": "hero",
+          "settings": {}
+        },
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "image",
+              "settings": {}
+            },
+            "slideshow-1": {
+              "type": "image",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "slideshow-1"
+          ],
+          "settings": {}
+        },
+        "footer": {
+          "type": "footer",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "hero",
+        "slideshow"
+      ]
+    }
+  }
+}

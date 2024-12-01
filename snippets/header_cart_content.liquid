@@ -1,0 +1,84 @@
+<a href="/cart" class="cart dropdown-link cdz-trigger" title="{{ 'cart.general.title'|t }}" data-title-trans="cart.general.title" data-title-default="{{ 'cart.general.title' | t }}">
+  <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+  <i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
+  <div class="num-items-in-cart">
+    <div class="block-cart">{% include 'icon-cart-header' %}</div>
+    <div class="number">{{ cart.item_count }}</div>
+    <div class="group_cart_text">
+      <span class="cart_text">
+        <span class="brackets" data-trans-key="cart.general.title">{{ 'cart.general.title' | t }}</span>
+      </span>
+      {% comment %}{% if header_style == 'header-style6' %}<span class="separate">-</span>{% endif %}{% endcomment %}
+      <span class="cart-subtotal">
+        <span class="price">{% include 'display-price' with price: cart.total_price %}</span>
+      </span>
+    </div>                                           
+  </div>
+</a>
+<div class="block-cart-overlay"></div>
+<div class="block block-cart">
+  <div class="block-title">
+    <strong><span><span class="brackets" data-trans-key="cart.general.title">{{ 'cart.general.title' | t }}</span></span></strong>
+  </div>
+  <div class="block-content" v-if="cart.item_count > 0">
+    {%- if cart.item_count > 0 -%}
+    <div class="minicart-header">
+      <span class="minicart-close">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.7266 4.24219L4.24128 12.7275" stroke="#FAADA1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M4.24219 4.24219L12.7275 12.7275" stroke="#FAADA1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+       </svg>
+      </span>
+    </div>
+    <ol class="mini-products-list">
+      {%- for item in cart.items -%}
+      <li class="item">
+        <a href="{{ item.url }}" class="product-image" alt="{{ item.title | escape }}">
+          <img data-src="{{ item.image | img_url: '50x' }}" class="lozad" alt="{{ item.title | escape }}" />
+        </a>
+        <div class="product-details">
+          <a class="cart-close btn-remove update-cart-btn" href="javascript:void(0);" title="{{ 'general.item.remove'|t|escape }}" data-title-trans="general.item.remove" data-title-default="{{ 'general.item.remove' | t | escape }}" data-update-cart-index="{{ forloop.index }}" data-update-cart-value="0"><span class="brackets" data-trans-key="general.item.remove">{{ 'general.item.remove' | t }}</span></a>
+          <div class="product-details-name">
+            <p class="product-name">
+              <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
+              {% unless item.variant.title contains 'Default' %}
+                <div class="cart__meta-text">
+                  {% for option in item.product.options %}
+                    {{ option }}: {{ item.variant.options[forloop.index0] }}<br/>
+                  {% endfor %}
+                </div>
+              {% endunless %}
+            </p>
+            <strong>{{ item.quantity }}</strong>
+            x
+            <span class="price">{% include 'display-price' with price: item.price %}</span>
+          </div>
+        </div>
+      </li>
+      {%- endfor -%}
+    </ol>
+    <div class="summary">
+      <div class="cart-total-title">
+        <h4><span class="brackets" data-trans-key="cart.label.total_item">{{ 'cart.label.total_item' | t }}</span></h4>
+        <p class="amount">
+          <a href="/cart">{{ cart.item_count }}</a>
+        </p>
+      </div>
+      <div class="subtotal">
+        <div class="sub-total-label">
+          <span class="brackets" data-trans-key="cart.general.subtotal">{{ 'cart.general.subtotal' | t }}</span>
+        </div>
+        <span class="price">{% include 'display-price' with price: cart.original_total_price %}</span>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" title="{{ 'cart.general.checkout'|t }}" data-title-trans="cart.general.checkout" data-title-default="{{ 'cart.general.checkout' | t }}" class="button checkout-btn trigger-checkout" onclick="window.location.href = '/checkout';"><span><span><span class="brackets" data-trans-key="cart.general.checkout">{{ 'cart.general.checkout' | t }}</span></span></span></button>
+    </div>
+    <p class="block-subtitle"><span class="brackets" data-trans-key="cart.general.recently_added_item">{{ 'cart.general.recently_added_item' | t }}</span></p>
+    
+    <div class="cart-viewcart"><a href="/cart" title="{{ 'cart.general.view_and_edit_cart' | t | escape }}"><span class="brackets" data-trans-key="cart.general.view_and_edit_cart">{{ 'cart.general.view_and_edit_cart' | t }}</span></a></div>
+    {%- else -%}
+    <p class="empty"><span class="brackets" data-trans-key="cart.general.empty">{{ 'cart.general.empty' | t }}</span></p>
+    {%- endif -%}
+  </div>
+</div>

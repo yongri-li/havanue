@@ -1,0 +1,26 @@
+{%- assign google_font_loaded = ',' -%}
+{%- if settings.base_font contains 'Google' -%}
+  {%- assign type_base_parts = settings.base_font | split: '_' -%}
+  {% capture baseGoogleUrl %}{{ type_base_parts[1] }}{% if settings.base_font_weight %}:{{ settings.base_font_weight }}{% endif %}{% endcapture %}
+  {%- assign google_font_loaded = google_font_loaded | append: baseGoogleUrl | append: ',' -%}
+  {{ '//fonts.googleapis.com/css?family=' | append: baseGoogleUrl | stylesheet_tag }}
+{%- endif -%}
+{%- if settings.header_font contains 'Google' -%}
+  {% unless settings.header_font contains type_base_parts[1] %}
+    {%- assign type_header_parts = settings.header_font | split: '_' -%}
+    {% capture headerGoogleUrl %}{{ type_header_parts[1] }}{% if settings.header_font_weight %}:{{ settings.header_font_weight }}{% endif %}{% endcapture %}
+    {%- unless google_font_loaded contains headerGoogleUrl -%}
+    {%- assign google_font_loaded = google_font_loaded | append: headerGoogleUrl | append: ',' -%}
+    {{ '//fonts.googleapis.com/css?family=' | append: headerGoogleUrl | stylesheet_tag }}
+    {%- endunless -%}
+  {% endunless %}
+{%- endif -%}
+{%- if settings.misc_font contains 'Google' -%}
+  {% unless settings.misc_font contains type_base_parts[1] %}
+    {%- assign type_header_parts = settings.misc_font | split: '_' -%}
+    {% capture headerGoogleUrl %}{{ type_header_parts[1] }}{% if settings.misc_font_weight %}:{{ settings.misc_font_weight }}{% endif %}{% endcapture %}
+    {%- unless google_font_loaded contains headerGoogleUrl -%}
+    {{ '//fonts.googleapis.com/css?family=' | append: headerGoogleUrl | stylesheet_tag }}
+    {%- endunless -%}
+  {% endunless %}
+{%- endif -%}

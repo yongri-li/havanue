@@ -1,0 +1,15 @@
+{% if section.settings.show_more_view or force_display %}
+<div class="more-views-slider visible-lg">
+  {% if product.images.size > 0 %}
+  <ul class="image-list">
+    {% for image in product.images %}
+    <li class="item">
+      <a href="{{ image.src | img_url: image_size, crop: 'top' }}" data-target="#{{ ulId }}_{{ product.id }}_main1_img" class="switch-img">
+        <img class="product-single__thumbnail-image lozad" style="min-height: 30px" data-src="{{ image.src | img_url: more_view_size, crop: 'top' }}" alt="{{ image.alt | escape }}" width="50" height="60"/>
+      </a>  
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+{% endif %}

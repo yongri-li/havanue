@@ -1,0 +1,27 @@
+<div class="block block-login">
+  {% form 'customer_login' %}
+    {{ form.errors | default_errors }}
+    <div class="block-content">
+      <div class="form-list">
+        <div class="field label-effect">
+          <label for="CustomerEmail"><span class="brackets skeleton-loading" data-trans-key="customer.login.email">{{ 'customer.login.email' | t }}</span></label>
+          <input type="email" name="customer[email]" id="CustomerEmail" class="{% if form.errors contains 'email' %} input--error{% endif %} input-text" autocorrect="off" autocapitalize="off" autofocus>
+        </div>
+        {% if form.password_needed %}
+        <div class="field label-effect">
+          <label for="CustomerPassword"><span class="brackets skeleton-loading" data-trans-key="customer.login.password">{{ 'customer.login.password' | t }}</span></label>
+          <input type="password" value="" name="customer[password]" id="CustomerPassword" class="{% if form.errors contains 'password' %} input--error{% endif %} input-text">
+        </div>
+        {% endif %}
+      </div>
+      <div class="actions">
+        <button type="submit" class="button"><span><span><span class="brackets skeleton-loading" data-trans-key="customer.login.sign_in">{{ 'customer.login.sign_in' | t }}</span></span></span></button>
+      </div>
+      {% if form.password_needed %}
+      <div class="forgot-password">
+        <a href="/account/login#recover" id="RecoverPassword"><span class="brackets skeleton-loading" data-trans-key="customer.login.forgot_password">{{ 'customer.login.forgot_password' | t }}</span></a>
+      </div>
+      {% endif %}
+    </div>
+  {% endform %}
+</div>

@@ -1,0 +1,31 @@
+<ul class="list--inline pagination">
+  <li>
+    {% unless paginate.previous.is_link %}
+    <div class="btn btn--secondary btn--narrow btn--disabled">
+      {% include 'icon-arrow-left' %}
+      <span class="icon__fallback-text"><span class="brackets skeleton-loading" data-trans-key="general.pagination.previous">{{ 'general.pagination.previous' | t }}</span></span>
+    </div>
+    {% else %}
+    <a href="{{ paginate.previous.url }}" class="btn btn--secondary btn--narrow">
+      {% include 'icon-arrow-left' %}
+      <span class="icon__fallback-text"><span class="brackets skeleton-loading" data-trans-key="general.pagination.previous">{{ 'general.pagination.previous' | t }}</span></span>
+    </a>
+    {% endunless %}
+  </li>
+  <li class="pagination__text">
+    <span class="brackets skeleton-loading" data-trans-key="general.pagination.current_page" data-trans-val='{"current":"{{ paginate.current_page }}","total":"{{ paginate.pages }}"}'>{{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}</span>
+  </li>
+  <li>
+    {% unless paginate.next.is_link %}
+    <div class="btn btn--secondary btn--narrow btn--disabled">
+      {% include 'icon-arrow-right' %}
+      <span class="icon__fallback-text"><span class="brackets skeleton-loading" data-trans-key="general.pagination.next">{{ 'general.pagination.next' | t }}</span></span>
+    </div>
+    {% else %}
+    <a href="{{ paginate.next.url }}" class="btn btn--secondary btn--narrow">
+      {% include 'icon-arrow-right' %}
+      <span class="icon__fallback-text"><span class="brackets skeleton-loading" data-trans-key="general.pagination.next">{{ 'general.pagination.next' | t }}</span></span>
+    </a>
+    {% endunless %}
+  </li>
+</ul>

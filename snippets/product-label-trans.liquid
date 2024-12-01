@@ -1,0 +1,10 @@
+{% assign labels = "new,best,trend,sale" | split: ',' %}
+{% for label in labels %}
+{% assign label_active = label | append : '_active' %}
+{% if settings[label_active] %}
+	{% assign text_trans = label | append : '_text_trans' %}
+	{% if settings[text_trans] != blank %}
+	<span id="label_{{ label }}_trans" class="hide">{{ settings[text_trans] }}</span>
+	{% endif %}
+{% endif %}
+{% endfor %}

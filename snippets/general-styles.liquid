@@ -1,0 +1,42 @@
+{%- unless settings.prod_mode -%}
+	{% comment %} Vendor 1 {% endcomment %}
+	{% include 'style-file', file_name: 'bootstrap.min.css' %}
+	{% include 'style-file', file_name: 'font-awesome.min.scss.css' %}
+	{% include 'style-file', file_name: 'iconcdz.scss.css' %}
+	{% include 'style-file', file_name: 'owl.carousel.min.css' %}
+	{% include 'style-file', file_name: 'prop-alert.scss.css' %}
+	{% include 'style-file', file_name: 'animate.scss.css' %}
+	{% include 'style-file', file_name: 'owl.theme.default.min.css' %}
+	{% include 'style-file', file_name: 'jquery.countdownTimer.scss.css' %}
+	{% include 'style-file', file_name: 'lightslider.min.css' %}
+	{% include 'style-file', file_name: 'cloudzoom.scss.css' %}
+	{% include 'style-file', file_name: 'lightgallery.min.css' %}
+	{% include 'style-file', file_name: 'theme.scss.css' %}
+	{% include 'style-file', file_name: 'menu.scss.css' %}
+	{% include 'style-file', file_name: 'quickview.scss.css' %}
+
+	{% comment %} Vendor 2 {% endcomment %}
+	{% include 'style-file', file_name: 'cdz-base-global.scss.css' %}
+	{% include 'style-file', file_name: 'cdz-base-styles.scss.css' %}
+	{% include 'style-file', file_name: 'slider-custom.scss.css' %}
+	{% include 'style-file', file_name: 'search-suggestion.scss.css' %}
+{%- endunless -%}
+
+{%- if template != 'product' -%}
+  {% include 'style-file', file_name: 'product-styles.scss.css' %}
+{%- endif -%}
+{% include 'custom-styles' %}
+
+{% unless settings.shipping_calculator == 'Disabled' %}
+{% if template == 'cart' and cart.item_count > 0 %}
+{% include 'style-file', file_name: 'shipping-calculator.scss.css' %}
+{% endif %}
+{% endunless %}
+
+{%- if settings.enale_rtl -%}
+{% include 'style-file', file_name: 'bootstrap-rtl.min.css' %}
+{%- endif -%}
+
+{% comment %}For user write their custom css{% endcomment %}
+{% include 'style-file', file_name: 'custom-css.scss.css' %}
+{% comment %}{% include 'load-css-script' %}{% endcomment %}

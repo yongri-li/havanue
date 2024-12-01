@@ -1,0 +1,74 @@
+<div class="group-header group-header-style-default{% if section.settings.nav_sticky %} sticky-menu{% endif %}">
+  <section class="top-header">
+    <div class="top-header-wrapper">
+      <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+        <div class="row">
+          <div class="top-header-inner-group">
+            <div class="top-header-inner col-sm-12">
+              <div class="left-area">
+                {% if settings.show_multiple_currencies %}
+                <div class="is-mobile-currency currency_group">
+                  <div class="currencies-switcher"> 
+                    {% include 'currencies-switcher' with settings.currency_style %}
+                  </div>
+                </div>
+                {% endif %}
+                {% include 'language-picker' %}                
+              </div>
+              <div class="right-area">
+                {% include 'header_links' %}
+              </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="main-header hidden-xs hidden-sm">
+    <div class="main-header-wrapper">
+      <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+        <div class="row">
+          <div class="main-header-inner">
+            <div data-section-id="{{ section.id }}" data-section-type="header-section">  
+              <div class="top_header_wrapper">
+                <div class="top_header">
+                  <div class="left-area col-sm-4 col-xs-3">
+                    <div class="search_form">
+                      <div class="site-header__search">
+                        {% include 'search-form', align_suggestion_class: 'sug-left' %}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="middle-area col-sm-4 col-xs-6">       
+                    {% include 'header_logo' %}
+                  </div>
+                  <div class="right-area col-sm-4 col-xs-3">                 
+                    {% include 'header_cart' %}  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="nav-header hidden-sm hidden-xs">
+    <div class="nav-header-wrapper">
+      <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+        <div class="row">
+          <div class="nav-header-inner">
+            <nav class="site-nav small--hide skeleton-loading" id="AccessibleNav" role="navigation">
+              {% include 'site-nav' %}              
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include 'header_nav_mobile' %}
+</div>
+{% include 'header_menu_mobile' %}

@@ -1,0 +1,43 @@
+{% if section.settings.use_linklist_main_menu %}
+{% assign main_menu_linklist = section.settings.main_menu_linklist %}
+{% if main_menu_linklist and linklists[main_menu_linklist].links.size > 0 %}
+<div class="menu-load-wrap normal-menu">
+	<div class="cdz-menu cdz-horizontal-menu" data-megamenu='{"dropdownEffect":"translate","type":"0"}'>
+		<ul class="groupmenu">
+			{% for l in linklists[main_menu_linklist].links %}
+			{%- assign child_list_handle = l.title | handleize -%}
+			<li class="item level0  level-top {% if linklists[child_list_handle].links != blank %} parent{% endif %}">
+				<a class="menu-link{% if l.active %} active{% endif %}" href="{{ l.url }}" title="{{ l.title | escape }}"><span>{{ l.title | escape }}</span></a>
+				{% if linklists[child_list_handle].links != blank %}
+					<ul class="groupmenu-drop slidedown">
+						{% for childlink in linklists[child_list_handle].links %}
+						{% assign grand_child_list_handle = childlink.title | handle %}
+						<li class="item level1 {% if linklists[grand_child_list_handle].links != blank %} parent{% endif %}">
+							<a class="{% if childlink.active %}active{% endif %}" href="{{ childlink.url }}" title="{{ childlink.title | escape }}"><span>{{ childlink.title | escape }}</span></a>
+							{% if linklists[grand_child_list_handle].links != blank %}
+							<ul class="groupmenu-drop slidedown">
+								{% for grandchildlink in linklists[grand_child_list_handle].links %}
+									<li class="item level2">
+										<a class="{% if grandchildlink.active %}active{% endif %}" href="{{ grandchildlink.url }}" title="{{ grandchildlink.title | escape }}"><span>{{ grandchildlink.title | escape }}</span></a>
+									</li>	
+								{% endfor %}
+							</ul>
+							{% endif %}
+						</li>	
+						{% endfor %}
+					</ul>	
+				{% endif %}
+
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endif %}
+{% else %}
+<div class="menu-load-wrap menu-main{% if is_mobile %} mobile-menu{% endif %}"{% if dataMenu %} data-override-megamenu='{{ dataMenu }}'{% endif %} data-handle="main">
+	{%- if settings.load_menu_ajax == false -%}
+	{% if is_mobile %}{% else %}{% include 'menu-render-inner-main' %}{% endif %}
+	{%- endif -%}
+</div>
+{% endif %}

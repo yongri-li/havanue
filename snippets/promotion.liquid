@@ -1,0 +1,50 @@
+{% if settings.promo_active %}
+<div class="promotion_wrap non-section {{ settings.promo_style }}" style="display: none;{% if settings.promo_bkg_color or settings.promo_image %}background: {{ settings.promo_bkg_color | default: '#fc7071' }} {% if settings.promo_image %}url('{{ settings.promo_image | img_url: 'master' }}'){% endif %} center top {% endif %}">
+	<div class="promo_text">
+		<div class="promo_text_inner">
+			{% if settings.promo_style == 'promo1' %}
+			{%- if settings.promo_text1_style1 != blank -%}<div class="text-1{% if settings.promo_text2_style1 == blank %} no-separate{% endif %}">{{ settings.promo_text1_style1 }}</div>{%- endif -%}
+			{%- if settings.promo_text2_style1 != blank -%}<div class="text-2">{{ settings.promo_text2_style1 }}</div>{%- endif -%}
+			{%- if settings.promo_button_text_style1 -%}<a href="{{ settings.promo_link_style1 }}">{{ settings.promo_button_text_style1 }}</a>{%- endif -%}
+			{% elsif settings.promo_style == 'promo2' %}
+			{%- if settings.promo_text_style2 != blank -%}<div class="text">{{ settings.promo_text_style2 }}</div>{%- endif -%}
+			<div class="social-buttons">
+				<div class="addthis_toolbox addthis_default_style" addthis:url="{{ shop.url }}">
+					<a class="addthis_button_facebook_like"></a> 
+					<a class="addthis_button_facebook"></a>
+				</div>
+			</div>
+			{% else %}
+			{%- if settings.promo_text_style3 -%}<div class="text">{{ settings.promo_text_style3 }}</div>{%- endif -%}
+			<div class="news-form">
+				{% if settings.use_mail_chimp and settings.mail_chimp_url != blank %}
+					{% include 'mailchimp-newsletter' %}
+				{% else %}
+					{% form 'customer' %}
+					{% if form.posted_successfully? %}
+					<p class="form--success"><span class="brackets skeleton-loading" data-trans-key="general.newsletter_form.confirmation">{{ 'general.newsletter_form.confirmation' | t }}</span></p>
+					{% else %}
+					<div class="input-box">
+						<input type="hidden" name="contact[tags]" value="newsletter" />
+						<input type="email"
+						name="contact[email]"
+						id="Email"
+						class="input-group__field newsletter__input"
+						value="{% if customer %}{{ customer.email }}{% endif %}"
+						data-placeholder-trans="general.newsletter_form.email_placeholder" data-placeholder-default="{{ 'general.newsletter_form.email_placeholder' | t }}"{%- if settings.enable_translate == false -%} placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"{%- endif -%}
+						autocorrect="off"
+						autocapitalize="off" />
+					</div>
+					<div class="actions">
+						<input type="submit" data-value-trans="general.newsletter_form.submit" data-value-default="{{ 'general.newsletter_form.submit' | t }}"{% if settings.enable_translate == false %} value="{{ 'general.newsletter_form.submit' | t }}"{% endif %} class="button" />
+					</div>
+					{% endif %}        
+					{% endform %}
+				{% endif %}
+			</div>
+			{% endif %}
+		</div>
+	</div>
+	<a class="promo-close" href="javascript:void(0);" title="promotion">{% include 'icon-close' %}</a>
+</div>
+{% endif %}

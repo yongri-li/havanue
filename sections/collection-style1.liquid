@@ -1,0 +1,258 @@
+{%- assign collection = collections[section.settings.collection] -%}
+{%- assign total = collection.all_products_count | divided_by : 1 -%}
+{%- assign limit = section.settings.limit | divided_by : 1 -%}
+{%- assign image_size = section.settings.image_size -%}
+{%- assign more_view_size = section.settings.more_view_size -%}
+{% capture ulId %}collection_{{ section.id }}{% endcapture %}
+<div id="collection_{{ section.id }}" class="collection-style1 collection-widget" data-section-id="{{ section.id }}" data-section-type="collection-style1">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+    <div class="row">
+      <div class="section-inner col-xs-12">
+        {% if section.settings.title != blank %}
+        <div class="block-title">
+          <span><span class="title_icon">{% include 'icon-diamond' %}</span><span class="title_text{% if section.settings.title_trans != blank %} skeleton-loading" data-content-trans="#{{ ulId }}_title_trans{% endif %}">{{ section.settings.title | raw }}</span></span>
+          {% if section.settings.title_trans != blank %}
+          <span id="{{ ulId }}_title_trans" class="hide">
+            {{ section.settings.title_trans | raw }}
+          </span>
+          {% endif %}
+
+          {% if section.settings.block_sub_title != blank %}
+          <span class="sub-title{% if section.settings.block_sub_title_trans != blank %} skeleton-loading" data-content-trans="#{{ ulId }}_block_sub_title_trans{% endif %}">{{ section.settings.block_sub_title }}</span>
+          {% endif %}
+          {% if section.settings.block_sub_title_trans != blank %}
+          <span id="{{ ulId }}_block_sub_title_trans" class="hide">
+            {{ section.settings.block_sub_title_trans | raw }}
+          </span>
+          {% endif %}
+
+          {% if section.settings.block_button_href != blank and section.settings.block_button_title != blank %}
+          <a class="sub-button{% if section.settings.block_button_title_trans != blank %} skeleton-loading" data-content-trans="#{{ ulId }}_block_button_title_trans{% endif %}" href="{{ section.settings.block_button_href }}">{{ section.settings.block_button_title }}</a>
+          {% endif %}
+          {% if section.settings.block_button_title_trans != blank %}
+          <span id="{{ ulId }}_block_button_title_trans" class="hide">
+            {{ section.settings.block_button_title_trans | raw }}
+          </span>
+          {% endif %}
+
+        </div>
+        {% endif %}
+        <div class="block-content">
+          {% if collection and total > 0 %}
+          <div class="product-list-wrapper">
+            <div class="product-list">
+              {% for product in collection.products %}
+              <div class="product-item{% if forloop.index > limit %} hide{% endif %} item item--size-{{ section.settings.item_size }}">
+                <div class="product-item-wrapper">
+                  <div class="product-item-top">
+                    <div class="product-item-media">
+                      {% include 'product-wishlist' with tooltip_pos: 'right' %}
+                      <a href="{{ product.url }}" class="product-image" title="{{ product.title }}">
+                        <img {% if section.settings.use_effect_appear and forloop.index > 4 %} class="lozad" data-{% endif %}src="{{ product.featured_image | product_img_url: image_size , crop: 'top' }}" alt="{{ product.featured_image.alt | escape }}" id="{{ ulId }}_{{ product.id }}_main1_img" />
+                      </a>
+                    </div>
+                    {% include 'product-item-more-views-slider' %}
+                    {% include 'product-social-share' %}
+                    <div class="product-item-hover product-qs-wrapper">
+                      {% include 'product-qs-btn' %}  
+                    </div>
+                    {% include 'product-labels' %}
+                  </div>
+                  <div class="product-item-bottom">
+                    <div class="product-details">
+                      <div class="product-name">
+                        <a href="{{ product.url }}" title="{{ product.title }}">{{ product.title }}</a>
+                      </div>
+                      <div class="list-mode-description">
+                        {{ product.description | strip_html | truncatewords: 5 }}
+                      </div>
+                      {% include 'product-price' %}  
+                    </div>
+                    <div class="actions product-item-hover{% if section.settings.show_compare_btn == false or settings.enable_compare == false %} no-compare{% endif %}">
+                      {% include 'product-cart-btn' %}
+                      {% include 'product-compare-btn' %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% if total > limit %}
+          <div class="load_more_wrap">
+            <a class="load_more_btn skeleton-loading" href="#" data-more-items="{{ limit }}" data-more-li="#collection_{{ section.id }} .product-list .product-item.hide" data-trans-key="collections.general.load_more">{{ 'collections.general.load_more' | t }}</a>
+          </div>
+          {% endif %}
+          {% else %}
+          <p class="alert alert-info"><span class="brackets skeleton-loading" data-trans-key="collections.general.no_matches">{{ 'collections.general.no_matches' | t }}</span></p>
+          {% endif %}
+        </div> 
+      </div>   
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Block product style 1",
+  "class": "collection-style1-section section",
+  "settings": [
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Heading",
+    "default": "New Trend Fashion"
+  },
+  {
+    "type": "textarea",
+    "id": "title_trans",
+    "label": "Translate Heading"
+  },
+  {
+    "type": "collection",
+    "id": "collection",
+    "label": "Collection"
+  },
+  {
+    "type": "text",
+    "id": "limit",
+    "label": "Limit",
+    "default": "8"
+  },
+  {
+    "type": "select",
+    "id": "item_size",
+    "label": "Choose item size",
+    "info": "You can change item size to change the number of products per row",
+    "options": [
+      {
+        "value": "small",
+        "label": "Small"
+      },
+      {
+        "value": "medium",
+        "label": "Medium"
+      },
+      {
+        "value": "large",
+        "label": "Large"
+      },
+      {
+        "value": "very-large",
+        "label": "Very Large"
+      }
+    ],
+    "default": "medium"
+  },
+  {
+    "type": "text",
+    "id": "block_sub_title",
+    "label": "Block Sub Title"
+  },
+  {
+    "type": "textarea",
+    "id": "block_sub_title_trans",
+    "label": "Translate Sub Title"
+  },
+  {
+    "type": "url",
+    "id": "block_button_href",
+    "label": "Block Button Href"
+  },
+  {
+    "type": "text",
+    "id": "block_button_title",
+    "label": "Block Button Title"
+  },
+  {
+    "type": "textarea",
+    "id": "block_button_title_trans",
+    "label": "Translate Button Title"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_label",
+    "label": "Show label",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "show_wishlist",
+    "label": "Show Wishlist",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "show_cart_btn",
+    "label": "Show Add to cart button",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "show_qs_btn",
+    "label": "Show Quick Shop button",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "show_compare_btn",
+    "label": "Show Compare button",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "show_more_view",
+    "label": "Show More View Slider",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "show_social_share",
+    "label": "Show Social Sharing",
+    "default": false
+  },
+  {
+    "type": "checkbox",
+    "id": "use_effect_appear",
+    "label": "Use lazy loading image",
+    "default": true
+  },
+  {
+    "type": "text",
+    "id": "image_size",
+    "label": "Image Size",
+    "default": "300x"
+  },
+  {
+    "type": "text",
+    "id": "more_view_size",
+    "label": "Image More View Size",
+    "default": "30x40"
+  },
+  {
+    "type": "checkbox",
+    "id": "full_width",
+    "label": "Full Width",
+    "default": false
+  }
+],
+  "presets": [{
+    "name": "Block product style 1",
+    "category": "Collection",
+    "settings": {
+      "title": "New Trend Fashion",
+      "limit": "8",
+      "show_label": true,
+      "show_wishlist": true,
+      "show_cart_btn": true,
+      "show_qs_btn": true,
+      "show_compare_btn": true,
+      "show_more_view": true,
+      "show_social_share": false,
+      "use_effect_appear": true,
+      "full_width": false,
+      "image_size": "300x",
+      "more_view_size": "30x40"
+    }
+  }]
+}
+{% endschema %}

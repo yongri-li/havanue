@@ -1,0 +1,58 @@
+{% if section.blocks.size > 0 %}
+	<div class="icon-blocks {% unless section.settings.is_desktop %}hide--desktop{% endunless %} {% unless section.settings.is_mobile %}hide--mobile{% endunless %}">
+      	{% for block in section.blocks %}
+      		{% assign bs = block.settings %}
+      		{% if bs.item_icon != blank and bs.item_text != blank %}
+      			<div class="icon_item">
+                  	<div class="svg_icon">{{ bs.item_icon }}</div>
+                  	<div class="item_text">{{ bs.item_text }}</div>
+      			</div>
+      		{% endif %}
+		{% endfor %}
+	</div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Icon Block",
+	"class": "icons-block",
+	"settings": [
+		{
+			"type": "checkbox",
+			"id": "is_desktop",
+			"label": "Enable Desktop?",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "is_mobile",
+			"label": "Enable Mobile?",
+			"default": true
+		}
+	],
+    "blocks": [
+		{
+			"type": "icon",
+			"name": "Icon Item",
+			"settings": [
+				{
+					"type": "html",
+					"id": "item_icon",
+					"label": "Item Icon"
+				},
+				{
+					"type": "text",
+					"id": "item_text",
+					"label": "Item Text"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Icon Blocks",
+        	"category": "Icon"
+		}
+	]
+  }
+{% endschema %}

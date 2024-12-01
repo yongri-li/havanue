@@ -1,0 +1,340 @@
+{% assign ss = section.settings %}
+<section class="global-hero {{ ss.hero_layout }} {{ ss.hero_size }}">
+  	{% assign mob_image = ss.mob_image | default: ss.image %}
+      <div class="global-hero__image-wrapper">
+        <img src="{{ ss.image | img_url: 'master' }}" alt="{{ ss.image.alt }}" class="hide--mobile" />
+         <img class="hide--desktop" src="{{ mob_image | img_url: '767x' }}" alt="{{ ss.mob_image.alt }}" />
+      </div>
+    <div class="global-hero__body {{ss.alignment}}">
+      {% if ss.subtitle != blank %}
+      <div class="global-hero__subtitle">{{ ss.subtitle }}</div>
+      {% endif %}
+      {%- if ss.title != blank -%}
+        <h1 class="global-hero__title">{{ ss.title | escape }}</h1>
+      {%- endif -%}
+      {% if ss.text != blank %}
+        <div class="global-hero__text">{{ ss.text }}</div>
+      {% endif %}
+      
+      {% if ss.button_text != blank and ss.button_url != blank %}
+      	<a class="btn btn-primary" href="{{ ss.button_url }}">{{ ss.button_text }}</a>
+      {% endif %}
+    </div>
+</section>
+{% schema %}
+{
+    "name": {
+        "de": "Foto mit überlegtem Text",
+        "en": "Hero",
+        "es": "Imagen con texto",
+        "fr": "Image avec texte",
+        "it": "Immagine con testo",
+        "ja": "テキストオーバーレイ付き画像",
+        "nl": "Foto met tekstoverlay",
+        "pt-BR": "Imagem com texto",
+        "zh-CN": "带文本叠加的图片",
+        "zh-TW": "附文字疊加的圖片"
+    },
+    "settings": [
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": {
+            "de": "Foto",
+            "en": "Image",
+            "es": "Imagen",
+            "fr": "Image",
+            "it": "Immagine",
+            "ja": "画像",
+            "nl": "Afbeelding",
+            "pt-BR": "Imagem",
+            "zh-CN": "图片",
+            "zh-TW": "圖片"
+        }
+    },
+    {
+        "type": "image_picker",
+        "id": "mob_image",
+        "label": {
+            "de": "Foto",
+            "en": "Mob_Image",
+            "es": "Imagen",
+            "fr": "Image",
+            "it": "Immagine",
+            "ja": "画像",
+            "nl": "Afbeelding",
+            "pt-BR": "Imagem",
+            "zh-CN": "图片",
+            "zh-TW": "圖片"
+        }
+    },
+    {
+        "type": "select",
+        "id": "alignment",
+        "label": {
+            "de": "Fotoausrichtung",
+            "en": "Content alignment",
+            "es": "Alineación de imagen",
+            "fr": "Alignement de l'image",
+            "it": "Allineamento immagine",
+            "ja": "画像アラインメント",
+            "nl": "Afbeelding uitlijnen",
+            "pt-BR": "Alinhamento da imagem",
+            "zh-CN": "图片对齐方式",
+            "zh-TW": "圖片對齊"
+        },
+        "default": "middle center",
+        "options": [
+        {
+            "value": "top left",
+            "label": "Top Left"
+        },
+        {
+            "value": "top center",
+            "label": "Top center"
+        },
+        {
+            "value": "top right",
+            "label": "Top Right"
+        },
+        {
+            "value": "middle left",
+            "label": "Middle Left"
+        },
+        {
+            "value": "middle center",
+            "label": "Middle Center"
+        },
+        {
+            "value": "middle right",
+            "label": "Middle Right"
+        },
+        {
+            "value": "bottom left",
+            "label": "Bottom Left"
+        },
+        {
+            "value": "bottom center",
+            "label": "Bottom Center"
+        },
+        {
+            "value": "bottom right",
+            "label": "Bottom Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "hero_layout",
+      "label": {
+        "de": "Layout",
+        "en": "Layout",
+        "es": "Diseño",
+        "fr": "Mise en page",
+        "it": "Layout",
+        "ja": "レイアウト",
+        "nl": "Indeling",
+        "pt-BR": "Layout",
+        "zh-CN": "布局",
+        "zh-TW": "版面配置"
+      },
+      "default": "full_width",
+      "options": [
+        {
+          "label": {
+            "de": "Volle Breite",
+            "en": "Full width",
+            "es": "Ancho completo",
+            "fr": "Pleine largeur",
+            "it": "Intera larghezza",
+            "ja": "全幅",
+            "nl": "Volledige breedte",
+            "pt-BR": "Largura completa",
+            "zh-CN": "全宽",
+            "zh-TW": "全寬度"
+          },
+          "value": "full_width"
+        },
+        {
+          "label": {
+            "de": "Feste Breite",
+            "en": "Fixed width",
+            "es": "Ancho fijo",
+            "fr": "Largeur fixe",
+            "it": "Larghezza fissa",
+            "ja": "固定幅",
+            "nl": "Vaste breedte",
+            "pt-BR": "Largura fixa",
+            "zh-CN": "固定宽度",
+            "zh-TW": "固定寬度"
+          },
+          "value": "fixed_width"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "hero_size",
+      "label": {
+        "de": "Bereichs-Höhe",
+        "en": "Section height",
+        "es": "Altura de la sección",
+        "fr": "Hauteur de la section",
+        "it": "Altezza sezione",
+        "ja": "セクションの高さ",
+        "nl": "Sectiehoogte",
+        "pt-BR": "Altura da seção",
+        "zh-CN": "分区高度",
+        "zh-TW": "區塊高度"
+      },
+      "default": "medium",
+      "options": [
+        {
+          "label": {
+            "de": "An Bild anpassen",
+            "en": "Adapt to image",
+            "es": "Adaptar a la imagen",
+            "fr": "S'adapter à l'image",
+            "it": "Adatta all'immagine",
+            "ja": "画像に適応する",
+            "nl": "Aanpassen aan afbeelding",
+            "pt-BR": "Adaptar à imagem",
+            "zh-CN": "适应图片",
+            "zh-TW": "配合圖片"
+          },
+          "value": "adapt"
+        },
+        {
+          "label": {
+            "de": "Extra klein",
+            "en": "Extra Small",
+            "es": "Extra pequeña",
+            "fr": "Très petite",
+            "it": "Molto piccola",
+            "ja": "極小",
+            "nl": "Extra klein",
+            "pt-BR": "Extra pequeno",
+            "zh-CN": "特小",
+            "zh-TW": "超小型"
+          },
+          "value": "x-small"
+        },
+        {
+          "label": {
+            "de": "Klein",
+            "en": "Small",
+            "es": "Pequeña",
+            "fr": "Petite",
+            "it": "Small",
+            "ja": "小",
+            "nl": "Klein",
+            "pt-BR": "Pequeno",
+            "zh-CN": "小",
+            "zh-TW": "小型"
+          },
+          "value": "small"
+        },
+        {
+          "label": {
+            "de": "Mitte",
+            "en": "Medium",
+            "es": "Mediana",
+            "fr": "Moyenne",
+            "it": "Medium",
+            "ja": "中",
+            "nl": "Gemiddeld",
+            "pt-BR": "Médio",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
+          },
+          "value": "medium"
+        },
+        {
+          "label": {
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fr": "Grande",
+            "it": "Large",
+            "ja": "大",
+            "nl": "Groot",
+            "pt-BR": "Grande",
+            "zh-CN": "大",
+            "zh-TW": "大型"
+          },
+          "value": "large"
+        },
+        {
+          "label": {
+            "de": "Extra groß",
+            "en": "Extra Large",
+            "es": "Extra grande",
+            "fr": "Très grande",
+            "it": "Molto grande",
+            "ja": "特大",
+            "nl": "Extra groot",
+            "pt-BR": "Extra grande",
+            "zh-CN": "特大",
+            "zh-TW": "超大型"
+          },
+          "value": "x-large"
+        }
+      ]
+    },
+	{
+		"type": "text",
+		"id": "subtitle",
+		"label": "Subtitle"
+	},
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "En-tête",
+        "it": "Heading",
+        "ja": "見出し",
+        "nl": "Kop",
+        "pt-BR": "Título",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      }
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": {
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fr": "Texte",
+        "it": "Testo",
+        "ja": "テキスト",
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+		{
+			"type": "text",
+			"id": "button_text",
+			"label": "Button Text"
+		},
+		{
+			"type": "url",
+			"id": "button_url",
+			"label": "Button Url"
+		}
+  ],
+  "presets": [
+    {
+      "name": "Custom Hero",
+      "category": "Image Banner"
+    }
+  ]
+}
+{% endschema %}

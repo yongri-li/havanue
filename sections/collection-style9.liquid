@@ -1,0 +1,295 @@
+{%- assign limit = section.settings.limit | divided_by : 1 -%}
+{%- assign image_size_1 = section.settings.image_size_1 -%}
+{%- assign image_size_2 = section.settings.image_size_2 -%}
+{%- assign image_more_view_size_1 = section.settings.more_view_size_1 -%}
+{%- assign image_more_view_size_2 = section.settings.more_view_size_2 -%}
+{% capture ulId %}more_views_{{ section.id }}{% endcapture %}
+{% capture wrapId %}collection_{{ section.id }}{% endcapture %}
+<div id="{{ wrapId }}" class="collection-style9 collection-widget" data-section-id="{{ section.id }}" data-section-type="collection-style9">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+    <div class="row">
+      <div class="section-inner col-xs-12">
+        <div class="block-content">
+          <div class="row">
+            <div class="col-xs-8 col-block1">
+              {% if section.settings.title_col_1 %}
+              <span class="title-col title-col-1{% if section.settings.title_col_1_trans != blank %} skeleton-loading" data-content-trans="#{{ wrapId }}_title_col_1_trans{% endif %}">
+                {{ section.settings.title_col_1 }}
+              </span>
+              {% if section.settings.title_col_1_trans != blank %}
+              <span id="{{ wrapId }}_title_col_1_trans" class="hide">
+                {{ section.settings.title_col_1_trans | raw }}
+              </span>
+              {% endif %}
+              {% endif %}
+
+              {% if section.settings.product_one %}
+              {% assign product = all_products[section.settings.product_one] %}
+              {% if product %}
+              <div class="product-list-wrapper">
+                <div class="product-list">
+                  <div class="product-item">
+                    <div class="product-item-wrapper">
+                      <div class="product-item-left{% if section.settings.use_effect_appear %} wait-animated{% endif %}">
+                        <div class="product-item-media">
+                          <a href="{{ product.url }}" class="product-image" title="{{ product.title }}">
+                            <img {% if section.settings.use_effect_appear %}class="lozad"  data-{% endif %}src="{{ product.featured_image | product_img_url: image_size_1 , crop: 'top' }}" alt="{{ product.featured_image.alt | escape }}" id="{{ ulId }}_main1_img"/>
+                          </a>
+                        </div>
+                        <div class="product-details">
+                          {% include 'product-deal' %}
+                          <div class="product-name">
+                            <a href="{{ product.url }}" title="{{ product.title }}">{{ product.title }}</a>
+                          </div>
+                          {% include 'product-review' %}
+                          <div class="list-mode-description {% if template == 'index' %}hide{% endif %}">
+                            {{ product.description | strip_html | truncatewords: 150 }}
+                          </div>
+                          {% include 'product-price' %}  
+                        </div>
+
+                        <div class="product-item-hover product-qs-wrapper">
+                          {% include 'product-qs-btn' %}  
+                        </div>
+                      </div>
+                      <div class="product-item-right">
+                        <div class="more-views-wrap">
+                          <div class="more-views">
+                            {% for image in product.images %}
+                            <div class="item">
+                              <a href="{{ image.src | img_url: image_size_1, crop: 'top' }}" data-target="#{{ ulId }}_main1_img" class="switch-img">
+                                <img class="product-single__thumbnail-image{% if section.settings.use_effect_appear %} lozad{% endif %}" {% if section.settings.use_effect_appear %} data-{% endif %}src="{{ image.src | img_url: image_more_view_size_1, crop: 'top' }}" alt="{{ image.alt | escape }}" />
+                              </a>  
+                            </div>
+                            {% endfor %}
+                          </div>
+                        </div>
+                        <div class="banner">
+                          {% if section.settings.banner %}
+                          <img {% if section.settings.use_effect_appear %} class="lozad" data-{% endif %}src="{{ section.settings.banner | img_url: '370x180' }}"/>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endif %}
+            </div>
+            <div class="col-xs-4 col-block2">
+              {% if section.settings.title_col_2 %}
+              <span class="title-col title-col-2{% if section.settings.title_col_2_trans != blank %} skeleton-loading" data-content-trans="#{{ wrapId }}_title_col_2_trans{% endif %}">
+                {{ section.settings.title_col_2 }}
+              </span>
+              {% if section.settings.title_col_2_trans != blank %}
+              <span id="{{ wrapId }}_title_col_2_trans" class="hide">
+                {{ section.settings.title_col_2_trans | raw }}
+              </span>
+              {% endif %}
+              {% endif %}
+
+              {% if section.settings.product_two %}
+              {%- assign product = all_products[section.settings.product_two] -%}
+              {% if product %}
+              <div class="product-list-wrapper">
+                <div class="product-list">
+                  <div class="product-item">
+                    <div class="product-item-wrapper">
+                      <div class="product-item-left">
+                        <div class="product-item-media">
+                          <a href="{{ product.url }}" class="product-image" title="{{ product.title }}">
+                            <img {% if section.settings.use_effect_appear %}class="lozad" data-{% endif %}src="{{ product.featured_image | product_img_url: image_size_2 , crop: 'top' }}" alt="{{ product.featured_image.alt | escape }}" id="{{ ulId }}_main2_img"/>
+                            {% if product.images.size > 1 %}
+                            <img {% if section.settings.use_effect_appear %}data-{% endif %}src="{{ product.images[1] | product_img_url: image_size_2 , crop: 'top' }}" class="alternative-img img-responsive{% if section.settings.use_effect_appear %} lozad{% endif %}" alt="{{ product.images[1].alt | escape }}" />
+                            {% endif %}
+                          </a>
+                        </div>
+                        <div class="product-item-hover product-qs-wrapper">
+                          {% include 'product-qs-btn' %}  
+                        </div>
+                      </div>
+                      <div class="product-item-right">
+                        <div class="product-details">
+                          <div class="product-name">
+                            <a href="{{ product.url }}" title="{{ product.title }}">{{ product.title }}</a>
+                          </div>
+                          {% include 'product-review' %}
+                          <div class="list-mode-description {% if template == 'index' %}hide{% endif %}">
+                            {{ product.description | strip_html | truncatewords: 150 }}
+                          </div>
+                          {% include 'product-price' %}  
+                        </div>
+
+                        <div class="actions">
+                          {% include 'product-cart-btn' %}
+                        </div>
+                      </div>
+                      <div class="product-item-bottom">
+                        <div class="more-views-wrap">
+                          <div class="more-views use-slider owl-carousel" data-slider-ele="#{{ ulId }}_slider_data">
+                            {% for image in product.images %}
+                            <div class="item">
+                              <a href="{{ image.src | img_url: image_size_2, crop: 'top' }}" data-target="#{{ ulId }}_main2_img" class="switch-img">
+                                <img class="product-single__thumbnail-image{% if section.settings.use_effect_appear %} owl-lazy{% endif %}" {% if section.settings.use_effect_appear %} data-{% endif %}src="{{ image.src | img_url: image_more_view_size_2, crop: 'top' }}" alt="{{ image.alt | escape }}" />
+                              </a>
+                            </div>
+                            {% endfor %}
+                          </div>
+                          <span id="{{ ulId }}_slider_data" class="hide">
+                            {
+                              "nav": true,
+                              "dots": false,
+                              "responsive": {
+                                "0": { "items": 3}
+                              } 
+                            }
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div> 
+      </div>   
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Block product style 9",
+  "class": "collection-style9-section section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Block Name",
+      "default": "Block product Style 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show Wishlist",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_btn",
+      "label": "Show Add to cart button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qs_btn",
+      "label": "Show Quick Shop button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_btn",
+      "label": "Show Compare button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "use_effect_appear",
+      "label": "Use lazy loading image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content" : "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "title_col_1",
+      "label": "Column Title"
+    },
+    {
+      "type": "textarea",
+      "id": "title_col_1_trans",
+      "label": "Translate Column Title"
+    },
+    {
+      "type": "product",
+      "id": "product_one",
+      "label": "Choose Product"
+    },
+    {
+      "type": "text",
+      "id": "image_size_1",
+      "label": "Image Size",
+      "default": "370x370"
+    },
+    {
+      "type": "text",
+      "id": "more_view_size_1",
+      "label": "Image More View Size",
+      "default": "210x210"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner",
+      "label": "Banner"
+    },
+    {
+      "type": "header",
+      "content" : "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "title_col_2",
+      "label": "Column Title"
+    },
+    {
+      "type": "textarea",
+      "id": "title_col_2_trans",
+      "label": "Translate Column Title"
+    },
+    {
+      "type": "product",
+      "id": "product_two",
+      "label": "Choose Product"
+    },
+    {
+      "type": "text",
+      "id": "image_size_2",
+      "label": "Image Size",
+      "default": "370x370"
+    },
+    {
+      "type": "text",
+      "id": "more_view_size_2",
+      "label": "Image More View Size",
+      "default": "210x210"
+    }
+  ],
+  "presets": [{
+    "name": "Block product style 9",
+    "category": "Collection",
+    "settings": {
+      "show_wishlist": false,
+      "show_cart_btn": false,
+      "show_qs_btn": false,
+      "show_compare_btn": false,
+      "use_effect_appear": true,
+      "full_width": false,
+      "image_size_1": "370x370",
+      "more_view_size_1": "210x210",
+      "image_size_2": "370x370",
+      "more_view_size_2": "210x210"
+    }
+  }]
+}
+{% endschema %}

@@ -1,0 +1,13 @@
+$(document).ready(function(){
+  $(document).on('click', '.num-items-in-cart', function(e){
+    $('.block.block-cart').addClass('active');
+    $('.block-cart-overlay').addClass('active');
+  });	
+  $(document).on('click', '.block-cart-overlay, .minicart-close', function(e){
+    $('.block.block-cart').removeClass('active');
+    $('.block-cart-overlay').removeClass('active');
+    $('body').removeClass('modal-open');
+  });
+
+  
+})

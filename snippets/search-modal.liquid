@@ -1,0 +1,22 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="searchModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </button>
+        <h4 class="modal-title">Search something</h4>
+        <span class="demo-text">Type <b>"donec"</b> to view Autocomplete Search</span>
+      </div>
+      <div class="modal-body">
+        <form action="/search" method="get" class="search-header search" role="search">
+          <input class="search-header__input search__input"
+          type="search"
+          name="q"
+          placeholder="{{ 'general.search.placeholder' | t }}"
+          aria-label="{{ 'general.search.placeholder' | t }}" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

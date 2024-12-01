@@ -1,0 +1,93 @@
+<div class="block block-layered-nav left-layered-nav">
+  <div class="block-layered-nav-inner">
+    <div class="block-title sidebar-title">
+      <strong>
+        <span>
+          {% assign lowerTitle = section.settings.filter_title | downcase %}
+          {% if lowerTitle == 'filter' %}
+          <span class="skeleton-loading" data-trans-key="collections.filters.title">{{ "collections.filters.title" | t }}</span>
+          {% else %}
+          {{ section.settings.filter_title }}
+          {% endif %}
+        </span>
+      </strong>
+    </div>
+    <div class="block-content sidebar-content">
+      {% if section.settings.enable_tagsfilter %}
+      
+      {% if current_tags %}
+      <div class="active_filters">
+        <div class="active_filters_inner">
+          <ul>
+            {% for tag in collection.all_tags %}
+            {% if current_tags contains tag %}
+            {% capture tagLabel %}
+            <span data-trans-key="collections.filters.{{ tag | downcase }}" class="skeleton-loading">{{ tag }}</span>
+            {% endcapture %}
+            <li class="active">{{ tagLabel | link_to_remove_tag: tag }}</li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      
+      <div class="clear-all-btn-wrap">
+        <a class="clear-all-btn" href="{% if collection.handle == 'all' %}/collections/all{% else %}{{ collection.url }}{% endif %}" data-trans-key="collections.general.clear_all">{{ 'collections.general.clear_all' | t }}</a>
+      </div>
+      {% endif %}
+
+      {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        {% assign array_tag = block.settings.group_tag | replace: '  ', '' | replace: ' ,', ',' | replace: ', ', ',' | split: ',' %}
+        {%- if array_tag.size > 0 and block.settings.enable -%}
+          {%- assign filter_title = block.settings.title -%}
+          {%- assign filter_title_downcase = block.settings.title | downcase -%}
+          {% assign swatch = false %}
+          {% if filter_title_downcase contains 'color' or filter_title_downcase contains 'colour' %}
+          {% assign swatch = true %}
+          {% endif %}
+          {%- capture tag_list -%}
+              {%- for t in array_tag -%}
+              {%- assign tag = t | strip | downcase -%}
+              {%- assign tagU = t | strip | upcase -%}
+              {%- assign tagUF = tag | strip | capitalize -%}
+              {%- assign tagCa = tag | strip | camelcase -%}
+              {%- if collection.tags contains t or collection.tags contains tag or collection.tags contains tagU or collection.tags contains tagUF or collection.tags contains tagCa -%}
+              {%- if swatch -%}
+              {%- include 'color-tags' -%}
+              {%- else -%}
+              {%- if current_tags contains t or current_tags contains tag or current_tags contains tagU or current_tags contains tagUF or current_tags contains tagCa -%}
+              <li class="active">{{ '<span class="fe-checkbox"></span> ' | append: t | link_to_remove_tag: tag }}</li>
+              {%- else -%}
+              <li>{{ '<span class="fe-checkbox"></span> ' | append: t | link_to_add_tag: tag }}</li>
+              {%- endif -%}
+              {%- endif -%}
+              {%- endif -%}
+              {%- endfor -%}
+          {%- endcapture -%}
+          
+          {%- if tag_list != '' -%}
+          <div class="filter-block tag-group {% if swatch == true %}color{% else %}non-color{% endif %}" id="coll-filter-{{ forloop.index }}">
+              <div class="filter-title cdz-toggle-title active" data-cdz-toggle="#filter-content-{{ forloop.index }}">
+                {% if filter_title_downcase == 'color' or filter_title_downcase == 'size' or filter_title_downcase == 'brand' or filter_title_downcase == 'price' %}
+                {% assign transKey = 'collections.filters.' | append: filter_title_downcase %}
+                <span class="skeleton-loading" data-trans-key="{{ transKey }}">{{ transKey | t }}</span>
+                {% else %}
+                {{ filter_title }}
+                {% endif %}
+              </div>
+              <div class="filter-content" id="filter-content-{{ forloop.index }}">
+                <ul>
+                {{ tag_list }}
+                </ul>
+              </div>
+          </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- endif -%}
+
+      {% endif %}
+    </div>
+  </div>
+</div>

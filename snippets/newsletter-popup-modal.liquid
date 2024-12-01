@@ -1,0 +1,66 @@
+{% if settings.newsletter_popup_active %}
+<div class="modal fade cdz-popup-wrapper in" id="cdz-popup-newsletter" role="dialog">
+  <div class="modal-dialog modal-inner-wrap modal-lg">
+    <header class="modal-header">
+      <button type="button" data-dismiss="modal" class="action-close close"></button>
+    </header>
+    <div class="modal-content">
+      <div class="cdz-popup-content">
+        <div class="block-popup-content">
+          <div class="widget widget-static-block">
+            <div class="cdz-popup-newsletter non-section">
+              <div class="cdz-popup-newsletter-left">
+                <div class="popup-banner">
+                  <div class="banner">
+                    <a href="#" title="{{ settings.newsletter_popup_title | escape }}"><img class="img-responsive lozad" data-src="{{ 'newsletter_popup_banner.png' | asset_url }}" alt="{{ settings.newsletter_popup_title | escape }}"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="cdz-popup-newsletter-right">
+                <div class="popup-title">
+                  <h3 class="text-uppercase"><span>{{ settings.newsletter_popup_title }}</span></h3>
+                </div>
+                <div class="popup-content">
+                  <div class="popup-content-ads">
+                    <p class="popup-content-title h3">{{ settings.newsletter_popup_ads_title }}</p>
+                    <p class="popup-content-desc">{{ settings.newsletter_popup_ads_desc }}</p>
+                    <div class="popup-content-newsletter">
+                      <div class="block block-subscribe">
+                        {% if settings.use_mail_chimp and settings.mail_chimp_url != blank %}
+                        {% include 'mailchimp-newsletter-popup' %}
+                        {% else %}
+                        {% form 'customer', id: 'newsletter-popup-form' %}
+                        {{ form.errors | default_errors }}
+                        {% if form.posted_successfully? %}
+                        <p class="form--success"><span class="brackets skeleton-loading" data-trans-key="general.newsletter_form.confirmation">{{ 'general.newsletter_form.confirmation' | t }}</span></p>
+                        {% else %}
+                        <input type="hidden" name="contact[tags]" value="newsletter">
+                        <div class="block-content">
+                          <div class="form-subscribe-header">
+                            <label for="newsletter"><span class="brackets skeleton-loading" data-trans-key="general.newsletter_form.email_placeholder">{{ 'general.newsletter_form.email_placeholder' | t }}</span>:</label>
+                          </div>
+                          <div class="input-box">
+                            <input type="email" name="contact[email]" id="newsletter_popup" title="{{ 'general.newsletter_form.email_placeholder' | t }}" data-title-trans="general.newsletter_form.email_placeholder" data-title-default="{{ 'general.newsletter_form.email_placeholder' | t }}" class="input-text required-entry validate-email" data-placeholder-trans="general.newsletter_form.email_placeholder" data-placeholder-default="{{ 'general.newsletter_form.email_placeholder' | t }}"{%- if settings.enable_translate == false -%} placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"{%- endif -%} value="{% if customer %}{{ customer.email }}{% endif %}">
+                          </div>
+                          <div class="actions">
+                            <button type="submit" title="{{ 'general.newsletter_form.submit'|t }}" data-title-trans="general.newsletter_form.submit" data-title-default="{{ 'general.newsletter_form.submit' | t }}" class="button"><span><span><span class="brackets skeleton-loading" data-trans-key="general.newsletter_form.submit">{{ 'general.newsletter_form.submit' | t }}</span></span></span></button>
+                          </div>
+                        </div>
+                        {% endif %}
+                        {% endform %}
+                        {% endif %}  
+                      </div>
+                    </div>
+                    <p class="popup-content-small">{{ settings.newsletter_popup_bottom_content }}</p>
+                    <p><input type="checkbox" class="newsletter_popup_hide_btn" name="newsletter_popup_hide" id="newsletter_popup_hide_btn" checked="checked"/><label for="newsletter_popup_hide_btn" class="newsletter_popup_hide_label"><span class="brackets skeleton-loading" data-trans-key="general.newsletter_form.show_me_text">{{ 'general.newsletter_form.show_me_text' | t }}</span></label></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

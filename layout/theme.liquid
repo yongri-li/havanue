@@ -1,0 +1,295 @@
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ shop.locale }}"{% if settings.enale_rtl %} dir="rtl"{% endif %}> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta name="theme-color" content="{{ settings.color_button }}">
+  {%- if settings.enale_theme_panel -%}
+  {%- include 'cdz-meta-tags' -%}
+  {%- endif -%}
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
+  {%- if settings.favicon_apple != blank -%}
+  <link rel="apple-touch-icon" href="{{ settings.favicon_apple | img_url: 'master' }}"> 
+  {%- endif -%}
+
+  {%- assign seo_title = page_title -%}
+  {%- if current_tags -%}
+  {%- assign meta_tags = current_tags | join: ', ' %}
+  {%- assign tag_title = 'general.meta.tags' | t: tags: meta_tags -%}
+  {%- assign seo_title = seo_title | append: ' - ' | append: tag_title -%}
+  {%- endif -%}
+  {%- if current_page != 1 -%}
+  {%- assign tag_title = 'general.meta.page' | t: page: current_page -%}
+  {%- assign seo_title = seo_title | append: ' - ' | append: tag_title -%}
+  {%- endif -%}
+  {% unless page_title contains shop.name %}
+  {%- assign seo_title = seo_title | append: ' - ' | append : shop.name -%}
+  {% endunless %}
+  <title>{{ seo_title }}</title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {% include 'social-meta-tags' %}
+  <style type="text/css" rel="stylesheet">
+    {% include 'bootstrap.min.css' %}
+    {% include 'preload-styles.scss' %}
+    {% include 'preload-product.scss' %}
+  </style>
+  {% include 'style-file', file_name: 'vendor-1.scss.css' %}
+  {% include 'style-file', file_name: 'vendor-2.scss.css' %}
+  {% comment %}
+  	{% include 'style-file', file_name: 'slick.css' %}
+  {% endcomment %}
+  {%- if template == 'index' -%}
+  {% include 'style-file', file_name: 'home-styles.scss.css' %}
+  {%- elsif template == 'product' -%}
+  {% include 'style-file', file_name: 'product-styles.scss.css' %}
+  {%- elsif template contains 'collection' or template == 'search' -%}
+  {% include 'style-file', file_name: 'collection-page-styles.scss.css' %}
+  {%- elsif template == 'cart' -%}
+  {% include 'style-file', file_name: 'cart-page-styles.scss.css' %}
+  {%- elsif template contains 'customer' -%}
+  {% include 'style-file', file_name: 'customer-page-styles.scss.css' %}
+  {%- elsif template == 'blog' or template == 'article' -%}
+  {% include 'style-file', file_name: 'blog-page-styles.scss.css' %}
+  {%- elsif template == 'page.contact' -%}
+  {% include 'style-file', file_name: 'contact-page-styles.scss.css' %}
+  {%- endif -%}  
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  {%- if settings.prod_mode -%}
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'vendor.js' | asset_url }}"></script><![endif]-->
+  {%- else -%}
+  {{ 'vendor.js' | asset_url | script_tag }}
+  {%- endif -%}
+
+  <script type="text/javascript">
+    var baseShopUrl = '/';
+    var theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        showMore: {{ 'general.filters.show_more' | t | json }},
+        showLess: {{ 'general.filters.show_less' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }},
+      rtl : {% if settings.enale_rtl %}true{% else %}false{% endif %},
+      thumbnailSliderType: '{{ settings.thumbnail_slider_type }}',
+      menuUrl: baseShopUrl,
+      menuHandles: {% include 'menu-handles' %},
+      useMenuAjax: {% if settings.load_menu_ajax == true %}true{% else %}false{% endif %}
+    }
+    {% if settings.languages_support %}
+    var useLocaleImg = {% if settings.use_image_flag %}{{ 'true' }}{% else %}{{ 'false' }}{% endif %};
+    {% endif %}
+
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  
+    var enableTranslate = {% if settings.enable_translate %}true{% else %}false{% endif %};
+    var useShopifyReviewApp = {% if settings.enable_review and settings.review_app == 'product_review' %}true{% else %}false{% endif %};
+    var localeUrl = '/';
+    var currentLocale = '{{ settings.default_language_code | default: shop.locale }}';
+    var defaultLocale = '{{ shop.locale }}';
+    var cdzCart = {{ cart | json }};
+    var quickViewShowSku = {% if settings.qv_show_sku %}true{% else %}false{% endif %};
+    var upsell = {
+      showPopup : {% if settings.upsell_show_popup %}true{% else %}false{% endif %},
+      showProductPage : {% if settings.upsell_show_product_page %}true{% else %}false{% endif %},
+      showCartPage : {% if settings.upsell_show_cart_page %}true{% else %}false{% endif %}
+    };
+    var crosssell = {
+      enable: {% if settings.crosssell_enable %}true{% else %}false{% endif %},
+      limit: "{{ settings.crosssell_limit }}"
+    };
+    var enableSearchSuggest = {%- if settings.search_auto -%}true{%- else -%}false{%- endif -%};
+    var currencyFormat = '{{ settings.currency_format | default: 'money_with_currency_format' }}';
+    var shopCurrency = '{{ shop.currency }}';
+    var defaultCurrency = '{{ settings.default_currency | default: shop.currency }}';
+    var cookieCurrency;
+    var currencyFormat1 = {{ shop.money_with_currency_format | strip_html | json }};
+    var currencyFormat2 = {{ shop.money_format | strip_html | json }};
+    var preloaderDelayTime = {% if template == 'product' %}1500{% else %}1000{% endif %};
+
+    // Load Youtube API
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  </script>
+  <script src="https://player.vimeo.com/api/player.js" type="text/javascript" defer="defer"></script>
+  {% if template.directory == 'customers' %}
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script><![endif]-->
+  {% endif %}
+
+  <script src="{{ 'option_selection.js' | shopify_asset_url }}" type="text/javascript"{% if settings.prod_mode %} defer="defer"{% endif %}></script>
+  <script src="{{ 'api.jquery.js' | shopify_asset_url }}" type="text/javascript"{% if settings.prod_mode %} defer="defer"{% endif %}></script>
+  {% comment %}{% include 'currencies' %}{% endcomment %}
+  
+  
+  
+  {{ content_for_header }}
+<!--AZEXO_Header_Scripts--> {% include 'azexo-header-scripts' %} <!--End_AZEXO_Header_Scripts--><!--AZEXO_Version_85-->
+<!-- Hotjar Tracking Code for https://havanue.com/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:2568706,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+</head>
+
+<body id="body" class="load-site template-{{ template | split: '.' | first }} cdz-off-canvas-wrap{% if settings.enale_rtl %} rtl{% endif %}{% if settings.enable_translate == false %} no-translate{% endif %}">
+  <div class="wrap-all">
+    {% include 'promotion' %}
+    <div id="headerApp" class="headerApp">
+      {% section 'header' %}
+    </div>
+    <div class="page-container" id="PageContainer">
+      <main class="main-content" id="MainContent" role="main"{% if settings.use_preloader %} style="position: relative;"{% endif %}>
+        {{ content_for_layout }}
+
+        {% if template == 'index' %}
+          
+          {% section 'product-review-app' %}
+        {% endif %}
+      </main>
+    </div>
+    {% include 'upsell' %}
+    {% section 'footer' %}
+    <div id="countdown_html" class="hide">
+      <div class="wrap-countdown">
+        <div class="days countdown-ele">
+          <span class="number">$1</span>
+          {% comment %}<span class="label day" data-trans-key="products.product.deal_days">{{ 'products.product.deal_days' | t }}</span>{% endcomment %}
+          <span class="label day">{{ 'products.product.deal_days' | t }}</span>
+        </div>
+        <div class="hours countdown-ele">
+          <span class="number">$2</span>
+          {% comment %}<span class="label hours" data-trans-key="products.product.deal_hours">{{ 'products.product.deal_hours' | t }}</span>{% endcomment %}
+          <span class="label hours">{{ 'products.product.deal_hours' | t }}</span>
+        </div>
+        <div class="minutes countdown-ele">
+          <span class="number">$3</span>
+          {% comment %}<span class="label minutes" data-trans-key="products.product.deal_minutes">{{ 'products.product.deal_minutes' | t }}</span>{% endcomment %}
+          <span class="label minutes">{{ 'products.product.deal_minutes' | t }}</span>
+        </div>
+        <div class="second countdown-ele">
+          <span class="number">$4</span>
+          {% comment %}<span class="label seonds" data-trans-key="products.product.deal_second">{{ 'products.product.deal_second' | t }}</span>{% endcomment %}
+          <span class="label seonds">{{ 'products.product.deal_second' | t }}</span>
+        </div>  
+      </div>
+    </div>
+    {% include 'product-label-trans' %}
+
+    <span id="prevSliderBtn" class="hide">{% if settings.enale_rtl %}{% include 'icon-next' %}{% else %}{% include 'icon-prev' %}{% endif %}</span>
+    <span id="nextSliderBtn" class="hide">{% if settings.enale_rtl %}{% include 'icon-prev' %}{% else %}{% include 'icon-next' %}{% endif %}</span>
+    <span id="icon-instagram-html" class="hide">{% include 'icon-instagram' %}</span>
+    <span id="icon-expand-html" class="hide">{% include 'icon-expand' %}</span>
+    {% if settings.enale_theme_panel %}
+    {% include 'demo-theme-panel' %}
+    {% endif %}
+    <div class="overlay"></div>
+  </div>
+
+  {% include 'general-styles' %}
+  {% include 'newsletter-popup-modal' %}
+
+  
+	
+  {% unless settings.prod_mode %}
+  {{ 'lozad.min.js' | asset_url | script_tag }}
+  {{ 'jquery.currencies.min.js' | asset_url | script_tag }}
+  {{ 'imagesloaded.pkgd.min.js' | asset_url | script_tag }}
+  {{ 'jquery.validate.min.js' | asset_url | script_tag }}
+  {{ 'jquery.form.min.js' | asset_url | script_tag }}
+  <!--[if (lte IE 9) ]>{{ 'match-media.min.js' | asset_url | script_tag }}<![endif]-->
+  
+  <script src="{{ 'bootstrap.min.js' | asset_url }}" type="text/javascript"></script>
+  <script src="https://unpkg.com/vue" type="text/javascript"></script>
+
+  
+  
+  <script src="{{ 'prop-ripple-effect.js' | asset_url }}" type="text/javascript"></script>
+  <script src="{{ 'prop-alert.js' | asset_url }}" type="text/javascript"></script>
+  <script src="{{ 'owl.carousel.min.js' | asset_url }}" type="text/javascript"></script>
+  <script src="{{ 'jquery.countdownTimer.min.js' | asset_url }}" type="text/javascript"></script>
+  <script src="{{ 'lightslider.min.js' | asset_url }}" type="text/javascript"></script>
+  {% comment %}<script src="{{ 'xzoom.min.js' | asset_url }}" type="text/javascript"></script>{% endcomment %}
+  <script src="{{ 'cloudzoom.js' | asset_url }}" type="text/javascript"></script>    
+
+  <script src="{{ 'velocity.min.js' | asset_url }}" type="text/javascript"></script>
+
+  <script src="{{ 'menu.js' | asset_url }}" type="text/javascript"></script>
+  <script src="{{ 'effects.js' | asset_url }}" type="text/javascript"></script>
+
+  {% comment %} For Product detail page and quick view popup {% endcomment %}
+  <script src="{{ 'lightgallery.min.js' | asset_url }}" type="text/javascript"></script>
+  <script src="{{ 'lg-thumbnail.min.js' | asset_url }}" type="text/javascript"></script>
+  <script src="{{ 'lg-fullscreen.min.js' | asset_url }}" type="text/javascript"></script>
+  
+  <script src="{{ 'product.js' | asset_url }}" type="text/javascript"></script>
+  <script src="{{ 'sections.js' | asset_url }}" type="text/javascript"></script>
+
+  {% include 'custom-scripts' %}
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer" type="text/javascript"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'theme.js' | asset_url }}" type="text/javascript"></script><![endif]-->
+  <script src="{{ 'data-app.js' | asset_url }}" type="text/javascript"></script>
+  {% else %}
+  	
+  	<script src="{{ 'jquery.1.1.3.min.js' | asset_url }}" type="text/javascript"></script>
+  {% endunless %}
+
+  <script>
+    $(document).on('click', '.footer-cart', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $('.block.block-cart').addClass('active');
+      $('.block-cart-overlay').addClass('active');
+    });
+  </script>
+
+  {% if settings.prod_mode %}
+  <script src="{{ 'application.min.js' | asset_url }}" defer="defer"></script>
+  {% endif %}
+  
+  {% unless settings.shipping_calculator == 'Disabled' %}
+  {% if template == 'cart' and cart.item_count > 0 %}
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js" defer="defer"></script>
+    <script src="/services/javascripts/countries.js" defer="defer"></script>
+    <script src="{{ 'shipping-cart.min.js' | asset_url }}" defer="defer"></script>
+  {% endif %}
+  {% endunless %}
+  {% if settings.enale_theme_panel %}
+  <script src="{{ 'panel.js' | asset_url }}" type="text/javascript"></script>
+  {{ 'demo-theme-panel.scss.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  <script type="text/javascript" src="{{ 'custom.js' | asset_url }}"></script>
+  {% include 'google-fonts' %}
+
+  {% if template == 'blog' or template == 'article' or settings.promo_style == 'promo2' %}
+  <script type="text/javascript">var addthis_config = {"data_track_clickback":false};</script>
+  <script type="text/javascript" async src="{{ settings.addthis_url }}"></script>
+  <script type="text/javascript">
+    var addthis_config = {
+      ui_language: currentLocale
+    }
+  </script>
+  {% endif %}
+<!--AZEXO_Footer_Scripts--> {% include 'azexo-footer-scripts' %} <!--End_AZEXO_Footer_Scripts--></body>
+</html>

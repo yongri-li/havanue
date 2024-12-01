@@ -1,0 +1,89 @@
+<style>
+  .images-text .text_wrapper {
+    background-color: {{ section.settings.text_bg_color }};
+  }
+  {% unless section.settings.is_desktop %}
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }} {
+		display: none !important;
+      }
+    }
+  {% endunless %}
+  {% unless section.settings.is_mobile %}
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }} {
+		display: none !important;
+      }
+    }
+  {% endunless %}
+</style>
+<div class="text_wrapper">
+	{% if section.settings.title != blank %}
+  		<div class="assist_title">{{ section.settings.title }}</div>
+  	{% endif %}
+  	{% if section.settings.text != blank %}
+  		<div class="assist_text">{{ section.settings.text }}</div>
+  	{% endif %}
+</div>
+<div class="img_wrapper">
+	{% for block in section.blocks %}
+  		{% if block.settings.item_image != blank %}
+  			<div class="img_item_{{ forloop.index0 }}"><img src="{{ block.settings.item_image | img_url: 'x210' }}" alt="{{ block.settings.item_image.alt }}" /></div>
+  		{% endif %}
+  	{% endfor %}
+</div>
+{% schema %}
+  {
+    "name": "Assist Images Text",
+	"class": "images-text",
+    "settings": [
+		{
+			"type": "checkbox",
+			"id": "is_desktop",
+			"label": "Enable Desktop?",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "is_mobile",
+			"label": "Enable Mobile?",
+			"default": true
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		},
+		{
+			"type": "richtext",
+			"id": "text",
+			"label": "Text"
+		},
+		{
+			"type": "color",
+			"id": "text_bg_color",
+			"label": "Text Background Color"
+		}
+	],
+	"blocks": [
+		{
+			"type": "image",
+            "name": "Image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "item_image",
+                    "label": "Item Image"
+                }
+            ]
+		}
+	],
+	"presets": [
+		{
+			"category": "Images",
+			"name": "Assist Bag"
+		}
+	]
+  }
+{% endschema %}
+

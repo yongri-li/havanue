@@ -1,0 +1,78 @@
+{{ "//cdn.shopify.com/s/javascripts/currencies.js" | script_tag }}
+{{ "jquery.currencies.min.js" | asset_url | script_tag }}
+
+<script>
+CdzCurrency.rates = Currency.rates;
+CdzCurrency.format = '{{ settings.currency_format | default: 'money_with_currency_format' }}';
+
+var shopCurrency = '{{ shop.currency }}';
+
+/* Sometimes merchants change their shop currency, let's tell our JavaScript file */
+CdzCurrency.moneyFormats[shopCurrency].money_with_currency_format = {{ shop.money_with_currency_format | strip_html | json }};
+CdzCurrency.moneyFormats[shopCurrency].money_format = {{ shop.money_format | strip_html | json }};
+  
+/* Default currency */
+var defaultCurrency = '{{ settings.default_currency | default: shop.currency }}';
+CdzCurrency.currentCurrency = defaultCurrency;  
+/* Cookie currency */
+var cookieCurrency;
+try {cookieCurrency = CdzCurrency.cookie.read();} catch (err) {} // ignore errors reading cookies
+
+/* Fix for customer account pages */
+jQuery('span.money span.money').each(function() {
+  jQuery(this).parents('span.money').removeClass('money');
+});
+
+/* Saving the current price */
+jQuery('span.price').each(function() {
+  jQuery(this).attr('data-currency-{{ shop.currency }}', jQuery(this).html());
+});
+
+// If there's no cookie.
+if (cookieCurrency == null || cookieCurrency == undefined || cookieCurrency == 'undefined') {
+  if (shopCurrency !== defaultCurrency) {
+    CdzCurrency.convertAll(shopCurrency, defaultCurrency);
+  }
+  else {
+    CdzCurrency.currentCurrency = defaultCurrency;
+    try {CdzCurrency.cookie.write(defaultCurrency);} catch (err) {} // ignore errors reading cookies
+  }
+}
+// If the cookie value does not correspond to any value in the currency dropdown.
+else if (jQuery('.currency-picker').length && jQuery('.currency-picker option[value=' + cookieCurrency + ']').length === 0) {
+  CdzCurrency.currentCurrency = shopCurrency;
+  try {CdzCurrency.cookie.write(shopCurrency);} catch (err) {} // ignore errors reading cookies
+}
+else if (cookieCurrency === shopCurrency) {
+  CdzCurrency.currentCurrency = shopCurrency;
+}
+else {
+  CdzCurrency.convertAll(shopCurrency, cookieCurrency);
+}
+jQuery('.store-currency .cdz-trigger span:not(.icon-cdz)').html(CdzCurrency.currentCurrency);
+//jQuery('.currency-picker option[value=' + CdzCurrency.currentCurrency + ']').attr('selected','selected');
+jQuery(document).on('click', '.store-currency ul li a', function(e) {
+  e.preventDefault();
+  var newCurrency = jQuery(this).attr('data-code');
+  CdzCurrency.convertAll(CdzCurrency.currentCurrency, newCurrency);
+  jQuery('.store-currency .cdz-trigger span:not(.icon-cdz)').html(CdzCurrency.currentCurrency);
+  $(this).parents('.cdz-dropdown').find('.cdz-trigger').trigger('click');
+  //$('.store-currency ul li').show();
+  //$(this).parent('li').hide();
+});
+
+var original_selectCallback = window.selectCallback;
+var selectCallback = function(variant, selector) {
+  original_selectCallback(variant, selector);
+  CdzCurrency.convertAll(shopCurrency, jQuery('.store-currency ul li a.active').attr('data-code'));
+  jQuery('.selected-currency').text(CdzCurrency.currentCurrency);
+};
+
+$('body').on('ajaxCart.afterCartLoad', function(cart) {
+  CdzCurrency.convertAll(shopCurrency, jQuery('[name=currencies]').val());
+  jQuery('.selected-currency').text(CdzCurrency.currentCurrency);  
+});
+
+jQuery('.selected-currency').text(CdzCurrency.currentCurrency);
+
+</script>

@@ -1,0 +1,22 @@
+{% if settings['sale_active'] and product.compare_at_price and product.compare_at_price > product.price %}
+{%- assign label_type = 'sale_type' -%}
+{%- assign label_text = 'sale_text' -%}
+{%- assign label_color = 'sale_color' -%}
+{%- assign label_bkgcolor = 'sale_bkgcolor' -%}
+{%- assign label_img = 'sale_img' -%}
+<div class="lb-item lb-sale">
+	<div class="lb-content">
+		{% if settings[label_type] == 'text' or settings[label_type] == 'percent' %}
+		<span style="color:{{ settings[label_color] }}; background-color: {{ settings[label_bkgcolor] }};">
+			{% if settings[label_type] == 'percent' %}
+			-{{ product.compare_at_price | minus:product.price | times:100 | divided_by:product.compare_at_price }}%
+			{% else %}
+			{{ settings[label_text] }}
+			{% endif %}
+		</span>
+		{% else %}
+		<img src="{{ settings[label_img] | asset_url }}" alt="sale-label"/>
+		{% endif %}
+	</div>
+</div>
+{% endif %}

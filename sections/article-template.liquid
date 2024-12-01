@@ -1,0 +1,193 @@
+{%- assign new_comment = false -%}
+{% if comment and comment.created_at %}
+  {%- assign new_comment = true -%}
+  {%- assign new_comment_id = comment.id -%}
+{% endif %}
+
+{% if new_comment %}
+  {%- assign duplicate_comment = false %}
+  {% for comment in article.comments %}
+    {% if comment.id == new_comment_id %}
+      {%- assign duplicate_comment = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if duplicate_comment %}
+    {%- assign number_of_comments = article.comments_count -%}
+  {% else %}
+    {%- assign number_of_comments = article.comments_count | plus: 1 -%}
+  {% endif %}
+{% else %}
+  {%- assign number_of_comments = article.comments_count -%}
+{% endif %}
+<div class="blog-post-view">
+  <div class="col-sm-9 col-main">
+    <div class="col-wrapper-main">
+      <div class="postWrapper" itemscope itemtype="http://schema.org/Article">
+        <meta itemprop="author" content="{{ article.author }}"/>
+        <meta itemprop="image" content="{{ article | img_url: 'master' }}"/>
+        <meta itemprop="datePublished" content="{{ article.published_at }}"/>
+        <meta itemprop="name" content="{{ article.title }}"/>
+        <meta itemprop="headline" content="{{ article.title }}"/>
+        <meta itemprop="publisher" content="admin"/>
+
+        <div class="post-image">
+          {% if article.image %}
+          <a href="{{ article.url }}">
+            <img data-src="{{ article | img_url: '840x619' }}" class="lozad img-responsive" alt="{{ article.title | escape }}"/>
+          </a>
+          {% endif %}
+          {% if section.settings.blog_show_date %}
+          <div class="blog-date"><span>{{ article.published_at | time_tag: format: 'month_day_year' }}</span></div>
+          {% endif %}
+        </div>
+        <div class="postTitle">
+          <div class="postTitle-blog">
+            <h2>{{ article.title }}</h2>
+            {% if section.settings.blog_show_author %}
+            <div class="postDetails">
+              <span class="brackets skeleton-loading" data-trans-key="blogs.article.by_author" data-trans-val='{"author":"{{ article.author }}"}'>{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+            </div>
+            {% endif %}
+          </div>
+          <div class="addthis_toolbox addthis_default_style" addthis:url="{{ shop.url }}{{ article.url }}">
+            <a class="addthis_button_facebook"></a>
+            <a class="addthis_button_twitter"></a>
+            <a class="addthis_button_email"></a>
+            <a class="addthis_button_compact"></a>
+          </div>
+        </div>
+        <div class="postContent std" itemprop="articleBody">{{ article.content }}</div>
+      </div>
+
+      {% if blog.comments_enabled? %}
+
+      {% if number_of_comments > 0 %}
+      <div class="postTitle"><a name="commentBox" ></a>
+        <h2><span class="brackets skeleton-loading" data-trans-key="blogs.comments.title">{{ 'blogs.comments.title' | t }}</span></h2>
+      </div>
+      {% paginate article.comments by 5 %}
+      {% for comment in article.comments %}
+      {% include 'comment' %}
+      {% endfor %}
+      {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+      {% endif %}
+      {% endpaginate %}
+      {% endif %}
+
+      {% form 'new_comment', article %}
+      {{ form.errors | default_errors }}
+      <div class="fieldset">
+        <h4 class="legend">{{ 'blogs.comments.title' | t }}</h4>
+        <ul class="form-list">
+          <li>
+            {% if customer %}
+            <input type="hidden" name="comment[author]" id="CommentAuthor" class="input-full" value="{{ customer.name }}">
+            <input type="hidden" name="comment[email]" id="CommentEmail" class="input-full" value="{{ customer.email }}" autocorrect="off" autocapitalize="off">
+            {% else %}
+            <div class="field input-box label-effect">
+              <label for="CommentAuthor" class="required"><span class="brackets skeleton-loading" data-trans-key="blogs.comments.name">{{ 'blogs.comments.name' | t }}</span><em>*</em></label>
+              <input type="text" name="comment[author]" id="CommentAuthor" class="input-text{% if form.errors contains 'author' %} input--error{% endif %}" value="{{ form.author }}">
+            </div>
+
+            <div class="field input-box label-effect">
+              <label for="CommentEmail" class="required"><span class="brackets skeleton-loading" data-trans-key="blogs.comments.email">{{ 'blogs.comments.email' | t }}</span><em>*</em></label>
+              <input name="comment[email]" id="CommentEmail" value="{{ form.email }}" title="{{ 'blogs.comments.email' | t }}" class="required-entry input-text validate-email" type="text" />
+            </div>
+
+            <div class="clear"></div>
+
+            {% endif %}
+            <div class="field input-box aw-blog-comment-area">
+              <label for="comment" class="required"><span class="brackets skeleton-loading" data-trans-key="blogs.comments.message">{{ 'blogs.comments.message' | t }}</span><em>*</em></label>
+              <textarea name="comment[body]" id="CommentBody" class="input-full{% if form.errors contains 'body' %} input--error{% endif %}" style="height:150px;width:100%;" cols="50" rows="5">{{ form.body }}</textarea>
+            </div>
+
+            {% if blog.moderated? %}
+              <p class="fine-print"><span class="brackets skeleton-loading" data-trans-key="blogs.comments.moderated">{{ 'blogs.comments.moderated' | t }}</span></p>
+            {% endif %}
+
+            <input type="submit" class="btn skeleton-loading" data-value-trans="blogs.comments.post" data-value-default="{{ 'blogs.comments.post' | t }}"{% if settings.enable_translate == false %} value="{{ 'blogs.comments.post' | t }}"{% endif %}>
+          </li>
+        </ul>
+      </div>
+      {% endform %}
+
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-sm-3 col-right sidebar">{% include 'blog-sidebar' %}</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Posts",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "blog_show_author",
+        "label": "Show author",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Blog Sidebar"
+      },
+    {
+        "type": "checkbox",
+        "id": "show_recent",
+        "label": "Show recent posts",
+        "default": true
+      },
+      {
+        "type": "blog",
+        "id": "blog_recent_blog",
+        "label": "Use blog"
+      },
+    {
+        "type": "text",
+        "id": "recent_title",
+        "label": "Recent Title Block",
+        "default": "Recent Posts"
+      },
+    {
+        "type": "text",
+        "id": "recent_limit",
+        "label": "Limit post",
+        "default": "5"
+      },
+    {
+        "type": "checkbox",
+        "id": "show_tags",
+        "label": "Show tags",
+        "default": true
+      },
+    {
+        "type": "text",
+        "id": "tag_title",
+        "label": "Tag Title Block",
+        "default": "Blog Tags"
+      },
+    {
+        "type": "checkbox",
+        "id": "show_banner",
+        "label": "Show banner",
+        "default": true
+      },
+    {
+        "type": "image_picker",
+        "id": "banner",
+        "label": "Upload banner image",
+        "info": "PNG format"
+      }
+    ]
+  }
+{% endschema %}

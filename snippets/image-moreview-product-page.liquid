@@ -1,0 +1,28 @@
+{%- assign data_group = '' -%}
+{%- assign data_variant_id = '' -%}
+{%- if image.variants.size > 0 -%}
+{%- for img_variant in image.variants -%}
+  {%- assign filter_code = img_variant.options[opt_index] | handle -%}
+  {%- if data_group == '' -%}
+    {%- assign data_group = 'group-' | append: filter_code -%}
+    {%- assign data_variant_id = img_variant.id -%}
+  {%- else -%}
+    {%- unless data_group contains filter_code -%}
+    {%- assign data_group = data_group | append: ' group-' | append: filter_code -%}
+    {%- assign data_variant_id = data_variant_id | append: ',' | append: img_variant.id -%}
+    {%- endunless -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- else -%}
+{%- assign data_group = 'group-all' -%}
+{%- assign data_variant_id = '' -%}
+{%- endif -%}
+{%- capture img_alt -%}{%- include 'shortcode-video-ignore', str: image.alt -%}{%- endcapture -%}
+<div class="{% if forloop.index > 4 %}hide-os-desktop {% endif %}{% if forloop.index > 3 %}hide-os-mobile {% endif %}image-item item{% if image.alt contains 'group-' %} {{ img_alt | handle | escape }}{% else %} {{ data_group }}{% endif %}"{% if data_variant_id != '' %} data-variant-id="{{ data_variant_id }}"{% endif %}>
+<a data-image-id="{{ image.id }}" class="thumb-link cloudzoom-gallery{% if is_active %} active{% endif %}{% if image.alt contains '{{video' or image.alt contains '{{youtube' or image.alt contains '{{vimeo' %} play-video{% endif %}" href="javascript:void(0);" data-cloudzoom-image="{{ image.src | img_url: product_image_size }}" data-cloudzoom-big-image="{{ image.src | img_url: 'master' }}" title="{{ img_alt | escape }}"{% if image.alt contains '{{video' or image.alt contains '{{youtube' or image.alt contains '{{vimeo' %} style="position:relative;"{% endif %}>
+  <img class="img-responsive xzoom-gallery" src="{{ image.src | img_url: product_small_image_size }}" alt="{{ img_alt | escape }}"/>
+  {%- if image.alt contains '{{video' or image.alt contains '{{youtube' or image.alt contains '{{vimeo' -%}
+    <i class="play-icon cdz-mi-play-button-1" style="position: absolute;top: calc(50% - 15px);left: calc(50% - 15px);font-size: 30px;color: #c3bfbf;"></i>
+  {%- endif -%}
+</a>
+</div>

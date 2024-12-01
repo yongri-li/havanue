@@ -1,0 +1,33 @@
+{% if section.settings.show_social_share or force_display %}
+{% assign url = shop.url | append: product.url | url_param_escape %}
+{% assign title = product.title  | url_param_escape %}
+{% assign desc = product.description | strip_html | url_param_escape %}
+{% assign imageShare = featured_img_src | img_url: '1024x1024' %}
+<div class="sharing-ctl">
+    <a href="javascript:void(0);" class="social-trigger" title="{{ 'products.product.share'|t }}" data-title-trans="products.product.share" data-title-default="{{ 'products.product.share' | t }}">{% include 'icon-share' %}</a>
+    <div class="social-icons">
+      <ul class="list-inline">
+        <li>
+          <a title="{{ 'products.product.share_on_facebook'|t }}" data-title-trans="products.product.share_on_facebook" data-title-default="{{ 'products.product.share_on_facebook' | t }}" target="_blank" href="//www.facebook.com/sharer.php?u={{ url }}" class="social-wrapper">
+            <span class="social-icon"><i class="fa fa-facebook"></i></span>
+          </a>
+        </li>
+        <li>
+          <a title="{{ 'products.product.share_on_twitter'|t }}" data-title-trans="products.product.share_on_twitter" data-title-default="{{ 'products.product.share_on_twitter' | t }}" target="_blank" href="//twitter.com/share?url={{ url }}&amp;text={{ title }}" class="social-wrapper">
+            <span class="social-icon"><i class="fa fa-twitter"></i></span>
+          </a>
+        </li>
+        <li>
+          <a title="{{ 'products.product.share_on_pinterest'|t }}" data-title-trans="products.product.share_on_pinterest" data-title-default="{{ 'products.product.share_on_pinterest' | t }}" target="_blank" href="//pinterest.com/pin/create/button/?url={{ url }}&amp;media={{ imageShare }}&amp;description={{ desc }}" class="social-wrapper">
+            <span class="social-icon"><i class="fa fa-pinterest"></i></span>
+          </a>
+        </li>
+        <li>
+          <a title="{{ 'products.product.share_on_google'|t }}" data-title-trans="products.product.share_on_google" data-title-default="{{ 'products.product.share_on_google' | t }}" target="_blank" href="//plus.google.com/share?url={{ url }}" class="social-wrapper">
+            <span class="social-icon"><i class="fa fa-google-plus"></i></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+</div>
+{% endif %}

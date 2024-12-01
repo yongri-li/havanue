@@ -1,0 +1,133 @@
+{% capture wrapId %}collection_list_{{ section.id }}{% endcapture %}
+{%- assign collection_image_size = section.settings.image_size -%}
+<div id="{{ wrapId }}" class="collection-list collection-widget" data-section-id="{{ section.id }}" data-section-type="collection-list">
+  <div class="container">
+    <div class="row">
+      <div class="section-inner col-xs-12">
+        <div class="block-heading">
+          {% if section.settings.title != blank %}
+          <div class="block-title">
+            <span><span class="title_icon">{% include 'icon-diamond' %}</span><span class="title_text{% if section.settings.title_trans != blank %} skeleton-loading" data-content-trans="#{{ wrapId }}_title_trans{% endif %}">{{ section.settings.title | raw }}</span></span>
+            {% if section.settings.title_trans != blank %}
+            <span id="{{ wrapId }}_title_trans" class="hide">
+              {{ section.settings.title_trans | raw }}
+            </span>
+            {% endif %}
+
+            {% if section.settings.sub_title != blank %}
+            <span class="sub-title{% if section.settings.sub_title_trans != blank %} skeleton-loading" data-content-trans="#{{ ulId }}_sub_title_trans{% endif %}">{{ section.settings.sub_title }}</span>
+            {% endif %}
+            {% if section.settings.sub_title_trans != blank %}
+            <span id="{{ ulId }}_sub_title_trans" class="hide">
+              {{ section.settings.sub_title_trans | raw }}
+            </span>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="block-content">
+          <div class="row">
+            {% if section.blocks.size > 0 %}
+              {% assign col_class = 12 | divided_by: section.blocks.size %}
+              {% for block in section.blocks %}
+              {%- assign collection = collections[block.settings.collection] -%}
+              {% if collection %}
+              {% if collection.image %}
+                {% capture collection_image_url %}{{ collection | img_url: collection_image_size, crop: 'top' }}{% endcapture %}
+              {% elsif collection.products.first and collection.products.first.images != empty %}
+                {% capture collection_image_url %}{{ collection.products.first | img_url: collection_image_size, crop: 'top' }}{% endcapture %}
+              {% else %}
+                {% assign collection_image_url = blank %}
+              {% endif %}
+                <div class="col-xs-6 {% if section.blocks.size != 5 %}col-sm-{{ col_class }}{% else %}col-20{% endif %}">
+                  <div class="collection-item style-{{ forloop.index }}">
+                    <div class="collection-item-wrapper">
+                      <a href="{{ collection.url }}" class="collection-image" title="{{ collection.title | escape }}">
+                        <img data-src="{{ collection_image_url }}" alt="{{ collection.title | escape }}" class="lozad" />
+                      </a>  
+                      <a href="{{ collection.url }}" class="collection-name" title="{{ collection.title | escape }}">{{ collection.title }}</a>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+              {% endfor %}
+            {% else %}
+              {% include 'no-blocks' %}  
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Collection list",
+    "class": "collection-list-section section",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Collection list"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Title",
+        "default": "Sold in your shop"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_title_trans",
+        "label": "Translate sub title"
+      },
+      {
+        "type": "text",
+        "id": "image_size",
+        "label": "Collection Image Size",
+        "default": "300x"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "featured_collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "label": "Collection",
+            "id": "collection",
+            "type": "collection"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection list",
+        "category": "Collection",
+        "settings": {
+          "title": "Collection list",
+          "image_size": "300x"
+        },
+        "blocks": [
+          {
+            "type": "featured_collection"
+          },
+          {
+            "type": "featured_collection"
+          },
+          {
+            "type": "featured_collection"
+          },
+          {
+            "type": "featured_collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

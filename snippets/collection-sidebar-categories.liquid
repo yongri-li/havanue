@@ -1,0 +1,25 @@
+{% if section.settings.enable_allcollections %}
+<div class="block category-list">
+	<div class="block-title sidebar-title">
+		<strong>
+			<span>
+			{% assign lowerTitle = section.settings.allcollections_title | downcase %}
+			{% if lowerTitle == 'categories' %}
+				<span class="brackets skeleton-loading" data-trans-key="collections.filters.categories">{{ 'collections.filters.categories' | t }}</span>
+			{% else %}
+				{{ section.settings.allcollections_title }}
+			{% endif %}
+			</span>
+		</strong>
+	</div>
+	<div class="block-content sidebar-content">
+		<ul class="links">
+			{% for l in linklists[section.settings.allcollections_link].links %}
+			<li>
+				<a href="{{ l.url }}" title="{{ l.title | escape }}"><span>{{ l.title }}</span></a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endif %}

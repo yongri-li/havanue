@@ -1,0 +1,26 @@
+{% if section.settings.custom_code != blank %}
+	<div class="app_container">
+		{{ section.settings.custom_code }}
+      	<div class="hide--desktop slider-text">Swipe left or
+          <br> right to see more.</div>
+	</div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Review App",
+    "settings": [
+		{
+			"type": "html",
+			"id": "custom_code",
+			"label": "App Code"
+		}
+	],
+	"presets": [
+		{
+			"category": "Review",
+			"name": "Review App"
+		}
+	]
+  }
+{% endschema %}

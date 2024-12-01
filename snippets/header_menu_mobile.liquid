@@ -1,0 +1,112 @@
+<div class="mobile-header visible-sm visible-xs">
+  <div class="cdz-mobile-header-menu">
+    <div class="container{% if section.settings.full_width %}-fluid{% endif %} nav-bar-canvas direction-right hide">
+      <div id="cdz-mobile-nav" class="cdz-mobile-nav mobile-nav-container navbar-canvas-inner" role="navigation">
+        <div class="canvas-content">
+          <div class="cdz-menu-logo" itemscope itemtype="http://schema.org/Organization">
+            <div class="close-btn-canvas">
+              <button type="button" class="cdz-navbar-toggle navbar-toggle cdz-menu-responsive" aria-label="Button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            {% include 'header_logo' with google_structure: true %}
+          </div>
+          <div class="menu-search-form">
+            {% include 'search-form', align_suggestion_class: 'sug-left' %}
+          </div>
+          <div class="menu-items">
+            <div class="cdz-menu cdz-horizontal-menu  menu-wrapper cdz-translate" data-megamenu='{"dropdownEffect":"translate","type":"0"}'>
+              {% include 'mobile-menu' %}
+            </div>  
+          </div>
+          {%- assign show_customer_link = false -%}
+          {%- if shop.customer_accounts_enabled -%}
+            {%- assign show_customer_link = true -%}
+          {%- endif -%}
+          {%- if settings.enable_wishlist -%}
+            {%- assign show_customer_link = true -%}
+          {%- endif -%}
+          {%- if settings.enable_compare -%}
+            {%- assign show_customer_link = true -%}
+          {%- endif -%}
+          {%- if show_customer_link -%}
+          <div class="customer-links">
+            {% if shop.customer_accounts_enabled %} 
+            <div class="account-links">
+              {% if customer  %}
+              <div class="link your-account-wrap">
+                {% include 'icon-user' %}
+                <a href="/account"><span class="brackets skeleton-loading" data-trans-key="customer.account.title">{{ 'customer.account.title' | t }}</span></a>
+              </div>
+              <div class="link logout-wrap">
+                {% include 'icon-logout' %}
+                <a href="/account/logout"><span class="brackets skeleton-loading" data-trans-key="layout.customer.logout">{{ 'layout.customer.logout' | t }}</span></a>
+              </div>
+              {% else %}
+              <div class="link login-wrap">
+                {% include 'icon-login' %}
+                <a href="/account/login"><span class="brackets skeleton-loading" data-trans-key="layout.customer.log_in">{{ 'layout.customer.log_in' | t }}</span></a>
+              </div>
+              <div class="link register-wrap">
+                {% include 'icon-register' %}
+                <a href="/account/register"><span class="brackets skeleton-loading" data-trans-key="sections.header.top_header_register">{{ 'sections.header.top_header_register' | t }}</span></a>
+              </div>
+              {% endif %}
+            </div>
+            {% endif %}
+            {%- if settings.enable_wishlist -%}
+            <div class="link wishlist wish-list-trigger">
+              <a href="javascript:void(0);">{% include 'icon-wishlist' %}<span class="brackets skeleton-loading" data-trans-key="sections.header.top_header_wishlist">{{ 'sections.header.top_header_wishlist' | t }}</span><span v-if="wishlistItems.length > 0" v-html="'(' + wishlistItems.length + ')'"></span></a>
+            </div>
+            {%- endif -%}
+            {%- if settings.enable_compare -%}
+            <div class="link comparing-box">
+              <a href="javascript:void(0);" class="comparing-box-btn">
+                {% include 'icon-compare' %}
+                <span class="brackets skeleton-loading" data-trans-key="collections.product_item.compare">{{ 'collections.product_item.compare' | t }}</span>  
+              </a>
+            </div>
+            {%- endif -%}
+          </div>
+          {%- endif -%}
+
+          {% if settings.languages_support and settings.enable_translate %}
+          <div class="form-language skeleton-loading">
+            {% assign languages = settings.languages_support | split: ',' %}
+            <ul class="language-list">
+              {% for l in languages %}
+              {% assign l = l | strip %}
+              {% assign groups = l | split: '=' %}
+              {% assign code = groups | first | strip %}
+              <li>
+                <a href="javascript:void(0);"
+                data-code="{{ code }}"
+                data-text="{{ groups | last | strip }}"
+                data-img="{{ code | append: '.png' | asset_img_url: 'master' }}">
+                <span class="lang-code">{{ code }}</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% if settings.show_multiple_currencies %}
+        <div class="store-currency skeleton-loading">
+          <ul class="currency-list">
+            {% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
+            {% assign supported_codes = settings.supported_currencies | split: ' ' %}
+            {% for code in supported_codes %}
+            {% if codes contains code %}
+            <li><a href="#" data-code="{{ code }}"><span>{{ code }}</span></a></li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>

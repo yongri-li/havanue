@@ -1,0 +1,263 @@
+{% layout none %}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign product_image_size = settings.qv_main_image_size -%}
+{%- assign product_small_image_size = settings.qv_small_image_size -%}
+
+{%- assign featured_img = current_variant.featured_image | default: product.featured_image -%}
+{%- assign featured_img_src = featured_img.src -%}
+{%- assign featured_img_alt = featured_img.alt -%}
+
+{%- assign group_option = settings.group_option -%}
+{%- if group_option != 'none' -%}
+{%- if group_option == 'first' -%}
+{%- assign group_option = product.options[0] | downcase -%}
+{%- assign opt_index = 0 -%}
+{%- else -%}
+{%- for opt in product.options -%}
+{%- assign opt_down = opt | downcase -%}
+{%- if opt_down == group_option -%}
+{%- assign opt_index = forloop.index0 -%}
+{%- endif -%}
+{%- endfor -%}	
+{%- endif -%}
+{%- endif -%}
+
+<div class="{% if settings.thumbnail_slider_type == 'vertical' %}col-sm-7{% else %}col-sm-5{% endif %} product-view-media">
+	<div class="product-img-box">
+		<div class="row">
+			<div class="images-container col-sm-12">
+				<div class="more-views" data-moreview='{}' style="min-width:100%; max-width: 100%;">
+					<div class="row">
+						<div class="col-sm-12 {% if settings.thumbnail_slider_type == 'vertical' %}col-md-10 {% if settings.enale_rtl %}f-left{% else %}f-right{% endif %}{% endif %}">
+							{%- assign youtubeCapture = '' -%}
+              {%- assign vimeoCapture = '' -%}
+              <div style="position:relative;">
+								<div class="viewmore-main product-cover slider slick-slider{% if settings.thumbnail_slider_type == 'vertical' %} is_vertical{% endif %}">
+	                {% include 'image-main-product-page', image: featured_img, is_active: true %}
+	                {% for image in product.images %}
+	                {% if image.src != featured_img_src %}
+	                {% include 'image-main-product-page', image: image, is_active: false %}
+	                {% endif %}
+	                {% endfor %}
+	              </div>
+	              {{ youtubeCapture }}
+                {{ vimeoCapture }}
+	            </div>
+						</div>
+
+						<div class="col-sm-12{% if settings.thumbnail_slider_type == 'vertical' %} col-md-2{% else %} is_horizontal{% endif %}">
+							<div class="viewmore-thumbs slider slick-slider">
+								{% if featured_img %}
+								{% include 'image-moreview-product-page', image : featured_img, id_zoom : "#FeaturedImage-quickview", is_active: true %}
+								{% endif %}
+								{% for image in product.images %}
+								{% if image.src != featured_img_src %}
+								{% include 'image-moreview-product-page', image: image, id_zoom : "#FeaturedImage-quickview", is_active: false %}
+								{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="{% if settings.thumbnail_slider_type == 'vertical' %}col-sm-5{% else %}col-sm-7{% endif %} product-view-info">
+	<div class="product-shop">
+		
+		
+
+		<div class="product-shop-wrap product-shop-title">
+			<div class="product-name">
+				<span class="product-name-h1 hidden-xs">{{ product.title }}</span>
+				{% if settings.show_vendor %}
+				<span class="vendor"><span class="brackets skeleton-loading" data-trans-key="products.product.vendor">{{ 'products.product.vendor' | t }}</span> : {{ product.vendor }}</span>
+				{% endif %}
+			</div>
+			<div class="row product-rating-sku hidden-xs">
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-xs-4 sku-wrap{% if current_variant.sku == blank or settings.qv_show_sku == false %} hide{% endif %}">
+							<h3 class="product-shop-sku"><span><span class="brackets skeleton-loading" data-trans-key="customer.order.sku">{{ 'customer.order.sku' | t }}</span>: </span><strong>{{ current_variant.sku }}</strong></h3>
+						</div>
+						<div class="{% if current_variant.sku != blank and settings.qv_show_sku == true %}col-sm-8{% else %}col-xs-12 no-sku{% endif %} sku-rating" data-sku-class="{% if current_variant.sku != blank and settings.qv_show_sku == true %}col-sm-8{% else %}col-xs-12 no-sku{% endif %}" data-no-sku-class="col-xs-12 no-sku">
+							<a class="rating-star hidden-xs" href="javascript:void(0);"> 
+								{%- include 'product-review-stars' -%}
+							</a>
+							<div class="product-shop-stock-avai visible-xs">
+								<p class="availability in-stock">
+									<label><span class="brackets skeleton-loading" data-trans-key="products.product.availability">{{ 'products.product.availability' | t }}</span>: </label>
+									<span>
+										<span class="brackets skeleton-loading in-stock-text"{% if current_variant.available == false %} style="display: none;"{% endif %} data-trans-key="products.product.in_stock">{{ 'products.product.in_stock' | t }}</span>
+										<span class="brackets skeleton-loading out-stock-text"{% if current_variant.available %} style="display: none;"{% endif %} data-trans-key="products.product.out_of_stock">{{ 'products.product.out_of_stock' | t }}</span>
+									</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="product-shop-wrap product-shop-price-stock">
+			<div>
+				<div class="product-shop-stock-avai hidden-xs">
+					<p class="availability in-stock">
+						<label><span class="brackets skeleton-loading" data-trans-key="products.product.availability">{{ 'products.product.availability' | t }}</span>: </label>
+						<span>
+							<span class="brackets skeleton-loading in-stock-text"{% if current_variant.available == false %} style="display: none;"{% endif %} data-trans-key="products.product.in_stock">{{ 'products.product.in_stock' | t }}</span>
+							<span class="brackets skeleton-loading out-stock-text"{% if current_variant.available %} style="display: none;"{% endif %} data-trans-key="products.product.out_of_stock">{{ 'products.product.out_of_stock' | t }}</span>
+						</span>
+					</p>
+				</div>
+				<div class="product-shop-stock-price">
+					<div class="price-box">
+						<p class="product-single__price product-single__price-quickview{% unless current_variant.available %} product-price--sold-out{% endunless %}">
+							{% if current_variant.compare_at_price > current_variant.price %}
+							<span class="product-price__price product-price__price-quickview product-price__sale">
+								<span id="ProductPrice-quickview"
+								itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}" class="price">
+								{% include 'display-price' with price: current_variant.price %}
+							</span>
+							<span class="product-price__sale-label product-price__sale-label-quickview"><span class="brackets skeleton-loading" data-trans-key="products.product.on_sale">{{ 'products.product.on_sale' | t }}</span></span>
+						</span>
+						<s id="ComparePrice-quickview" class="price">{% include 'display-price' with price: current_variant.compare_at_price %}</s>
+						{% else %}
+						<s id="ComparePrice-quickview" class="hide price">{% include 'display-price' with price: current_variant.compare_at_price %}</s>
+						<span class="product-price__price product-price__price-quickview">
+							<span id="ProductPrice-quickview"
+							itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}" class="price">
+							{% include 'display-price' with price: current_variant.price %}
+						</span>
+					</span>
+					{% endif %}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="product-shop-wrap product-shop-option">
+	{% assign form_class = "product-form product-form-quickview" %}
+	{% unless settings.show_variant_labels %} {% assign form_class = form_class | append: ' product-form--hide-variant-labels' %}{% endunless %}
+	{% form 'product', product, class: form_class %}
+		<div class="product-options" id="product-options-wrapper-quickview">
+			{% assign dropdown_option = settings.qv_dropdown_option %}
+			{% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+			{% for option in product.options_with_values %}
+			{% assign downcased_option_swatch = option.name | downcase %}
+			{% if dropdown_option contains downcased_option_swatch %}
+			{% assign is_dropdown = true %}
+			{% else %}
+			{% assign is_dropdown = false %}
+			{% endif %}
+			<div class="swatch clearfix"{% if is_dropdown == false or option.values.size < 2 %} style="display:none;"{% endif %}>
+				<div class="header {% if downcased_option_swatch == 'title' %} label--hidden{% endif %}" for="SingleOptionSelector-quickview-{{ forloop.index0 }}" >
+					<span class="skeleton-loading" data-trans-key="collections.filters.{{ downcased_option_swatch | escape }}">{{ option.name }}</span>
+				</div>
+				<select class="single-option-selector single-option-selector-quickview product-form__input{% if downcased_option_swatch == group_option and group_option != 'none' %} is_group_option{% endif %}" id="SingleOptionSelector-quickview-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
+					{% for value in option.values %}
+					<option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			{% if is_dropdown == false %}
+			{% if downcased_option_swatch != 'title' %}
+			{% include 'swatch' with option.name, option_index : forloop.index0 %}
+			{% endif %}
+			{% endif %}
+			{% endfor %}
+			{% endunless %}
+			<select name="id" id="ProductSelect-quickview" data-section="quickview" class="product-form__variants no-js">
+				{% for variant in product.variants %}
+				{% if variant.available %}
+				<option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">
+					{{ variant.title }}
+				</option>
+				{% else %}
+				<option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+				{% endif %}
+				{% endfor %}
+			</select>
+		</div>
+
+		<div class="product-options-bottom">
+			<div class="add-to-cart">
+				<div class="product-button-top">
+					{% if settings.so_show_qty %}
+					<div class="qty_cart">
+						<div class="qty-ctl">
+							<button class="decrease change-qty" title="{{ 'products.product.qty_decrease' | t }}" data-title-trans="products.product.qty_decrease" data-title-default="{{ 'products.product.qty_decrease' | t }}"><span class="brackets skeleton-loading" data-trans-key="products.product.qty_decrease">{{ 'products.product.qty_decrease' | t }}</span></button>
+						</div>
+						<input type="number" name="quantity" value="1" min="1" class="input-text qty" pattern="[0-9]*" />
+						<div class="qty-ctl">
+							<button title="{{ 'products.product.qty_increase' | t }}" data-title-trans="products.product.qty_increase" data-title-default="{{ 'products.product.qty_increase' | t }}" class="increase change-qty">{{ 'products.product.qty_increase' | t }}</button>
+						</div>
+					</div>
+					{% endif %}
+					{% include 'product-size-chart' %}
+				</div>
+				<div class="product-button-bottom">
+					<button type="submit" name="add" id="AddToCart-quickview" {% unless current_variant.available %}disabled="disabled"{% endunless %} class="btn product-form__cart-submit{% if product.options.size == 1 and product.variants[0].title == 'Default Title' %} product-form__cart-submit--small{% endif %}">
+						<span id="AddToCartText-quickview">
+							<span>
+								<span class="brackets skeleton-loading out-stock-text" data-trans-key="products.product.sold_out"{% if current_variant.available %} style="display:none;"{% endif %}>{{ 'products.product.sold_out' | t }}</span>
+								<span class="brackets skeleton-loading in-stock-text" data-trans-key="products.product.add_to_cart"{% if current_variant.available == false %} style="display:none;"{% endif %}>{{ 'products.product.add_to_cart' | t }}</span>
+							</span>
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	{% endform %}
+	{%- if settings.enable_wishlist or settings.enable_compare -%}
+	<div class="product-view">
+		<ul class="add-to-links">
+			{%- if settings.enable_wishlist -%}
+			<li class="wishlist">
+				<a data-title-trans="products.product.add_to_wishlist" data-title-default="{{ 'products.product.add_to_wishlist' | t }}" class="need-to-wishlist link-wishlist" data-product-handle="{{ product.handle }}" data-product-title="{{ product.title | escape }}" title="{{ 'products.product.add_to_wishlist' | t }}" href="javascript:void(0);">
+					{% include 'icon-heart-hover' %}  
+					{% include 'icon-heart' %}
+					<span class="brackets skeleton-loading" data-trans-key="products.product.add_to_wishlist">{{ 'products.product.add_to_wishlist' | t }}</span>
+				</a>
+			</li>
+			{%- endif -%}
+
+			{%- if settings.enable_compare -%}
+			<li class="compare">
+				<span class="separator">|</span> 
+				<a href="{{ product.url }}" class="action link-compare" data-product-title="{{ product.title | escape }}">{% include 'icon-compare' %}<span class="brackets skeleton-loading" data-trans-key="collections.product_item.compare">{{ 'collections.product_item.compare' | t }}</span></a>
+			</li>
+			{%- endif -%}  
+		</ul>
+	</div>
+	{%- endif -%}
+	<a class="qv-details-link" href="{{ product.url }}" data-trans-key="products.product.quick_view_details">{{ 'products.product.quick_view_details' | t }}</a>
+</div>
+
+{% if product.metafields.cdz.sale %}
+<div class="progress_bar_wrap">
+	<center>
+		<span class="progressbartext skeleton-loading" data-trans-key="products.product.sale_left_text" data-trans-val='{"sales":"{{ product.metafields.cdz.sale | escape }}"}'>{{ 'products.product.sale_left_text' | t: sales: product.metafields.cdz.sale }}</span>
+	</center>
+	<div class="pbar"></div>
+	<div class="progressbar">
+		<div class="progressbar_inner"></div>
+	</div>
+</div>
+{% endif %}
+</div>
+</div>
+
+<div class="col-sm-12 description">
+	<div class="std">{{ product.description }}</div>
+</div>
+
+{% unless product == empty %}
+<script type="application/json" id="ProductJson-quickview">
+	{{ product | json }}
+</script>
+<script type="application/json" id="ProductJson-quickview-current-variant">
+	{{ current_variant | json }}
+</script>
+{% endunless %}

@@ -1,0 +1,52 @@
+{% if product.title %}
+{%- assign compare_at_price = product.compare_at_price -%}
+{%- assign price = product.price -%}
+{%- assign price_varies = product.price_varies -%}
+{%- assign available = product.available -%}
+{% else %}
+{%- assign compare_at_price = 1999 -%}
+{%- assign price = 1999 -%}
+{%- assign price_varies = false -%}
+{%- assign available = true -%}
+{% endif %}
+
+{% if settings.currency_format == 'money_format' %}
+{%- assign money_price = price | money  -%}
+{% else %}
+{%- assign money_price = price | money_with_currency  -%}
+{% endif %}
+<div class="product-price">
+	{% if compare_at_price > price %}
+		{% if price_varies %}
+			<span class="product-price__price product-price__sale">
+				<span class="price">{{ money_price }}</span>
+				<span class="product-price__sale-label"><span class="brackets skeleton-loading" data-trans-key="products.product.on_sale">{{ 'products.product.on_sale' | t }}</span></span>
+			</span>
+
+			<span class="visually-hidden"><span class="brackets skeleton-loading" data-trans-key="products.product.regular_price">{{ 'products.product.regular_price' | t }}</span></span>
+			<span class="product-price__price compare_price"><span class="price">
+			{% include 'display-price' with price: compare_at_price %}	
+			</span></span>
+		{% else %}
+			<span class="product-price__price product-price__sale">
+				<span class="price">{{ money_price }}</span>
+				<span class="product-price__sale-label"><span class="brackets skeleton-loading" data-trans-key="products.product.on_sale">{{ 'products.product.on_sale' | t }}</span></span>
+			</span>
+
+			<span class="visually-hidden"><span class="brackets skeleton-loading" data-trans-key="products.product.regular_price">{{ 'products.product.regular_price' | t }}</span></span>
+			<span class="product-price__price compare_price"><span class="price">
+			{% include 'display-price' with price: compare_at_price %}	</span></span>
+		{% endif %}
+	{% else %}
+
+	{% if price_varies %}
+	<span class="product-price__price"><span class="price">{{ money_price }}</span></span>
+	{% else %}
+	<span class="visually-hidden"><span class="brackets skeleton-loading" data-trans-key="products.product.regular_price">{{ 'products.product.regular_price' | t }}</span></span>
+	<span class="product-price__price"><span class="price">{{ money_price }}</span></span>
+	{% endif %}
+	{% endif %}
+</div>
+{% unless available %}
+<span class="product-price__sold-out"><span class="brackets skeleton-loading" data-trans-key="products.product.sold_out">{{ 'products.product.sold_out' | t }}</span></span>
+{% endunless %}

@@ -1,0 +1,26 @@
+{% if settings.languages_support and settings.enable_translate %}
+<div class="form-language cdz-dropdown skeleton-loading">
+  <a class="cdz-trigger" href="javascript:void(0)">
+    <span class="lang-flag default"{% if settings.use_image_flag == false %} style="display:none;"{% endif %}></span>
+    <span class="lang-name"></span>
+    {% include 'icon-arrow' %}
+  </a>
+{% assign languages = settings.languages_support | split: ',' %}
+  <ul class="cdz-dropdown-content" style="display:none;">
+    {% for l in languages %}
+    {% assign l = l | strip %}
+    {% assign groups = l | split: '=' %}
+     {% assign code = groups | first | strip %}
+    <li>
+      <a href="javascript:void(0);"
+         data-code="{{ code }}"
+         data-text="{{ groups | last | strip }}"
+         data-img="{{ code | append: '.png' | asset_img_url: 'master' }}">
+        <span class="lang-flag {{ code }}"><img data-src="{{ code | append: '.png' | asset_img_url: 'master' }}" alt="{{ groups | last | strip }}"></span>
+        <span class="lang-name">{{ groups | last | strip }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

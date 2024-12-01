@@ -1,0 +1,24 @@
+<div class="no-dropdown menu-tabs cdz-horizontal-tabs groupmenu-width-24">
+  <ul class="groupmenu-nondrop">
+    <li class="item level2 tab-item">
+      <div class="cdz-link-wrap">
+        <a class="cdz-tab-link active" href="#">{{ list.title }}</a>
+      </div>
+      <div class="cdz-tab-pane">
+        <div class="groupmenu-drop-content">
+          <div class="row">
+            <div class="col-sm-4">
+              <ul class="groupdrop-link">
+                {% for link in list.links %}
+                <li class="list-unstyled li-sub-mega">
+                  <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

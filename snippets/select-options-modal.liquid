@@ -1,0 +1,110 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="select-product-option">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">{% include 'icon-close' %}</button>
+        <h4 class="modal-title">{{ '{{ selectOption.product.title' }}}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="product-option-image">
+              <img :src="displayImageSelectOption()" />
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="product-shop-wrap product-shop-price-stock">
+              <div class="product-shop-stock-avai">
+                <p class="availability in-stock">
+                  <label><span class="brackets skeleton-loading" data-trans-key="products.product.availability">{{ 'products.product.availability' | t }}</span>: </label>
+                  <span v-if="selectOption.availableVariant == true"><span class="brackets skeleton-loading" data-trans-key="products.product.in_stock">{{ 'products.product.in_stock' | t }}</span></span>
+                  <span v-else><span class="brackets skeleton-loading" data-trans-key="products.product.out_of_stock">{{ 'products.product.out_of_stock' | t }}</span></span>
+                </p>
+              </div>
+              <div class="product-shop-stock-price">
+                <div class="price-box">
+                  <p class="product-single__price product-single__price-selectOption">
+                    <template v-if="selectOption.currentVariant.compare_at_price > selectOption.currentVariant.price">
+                      <span class="product-price__price product-price__price-selectOption product-price__sale product-price__sale--single">
+                        <span id="ProductPrice-selectOption">
+                          <money :price="selectOption.currentVariant.price | displayPrice(currentCurrency)"></money>
+                        </span>
+                        <span class="product-price__sale-label product-price__sale-label-selectOption"><span class="brackets skeleton-loading" data-trans-key="products.product.on_sale">{{ 'products.product.on_sale' | t }}</span></span>
+                      </span>
+
+                      <span class="visually-hidden"><span class="brackets skeleton-loading" data-trans-key="products.product.regular_price">{{ 'products.product.regular_price' | t }}</span></span>
+                      <s id="ComparePrice-selectOption"><money :price="selectOption.currentVariant.compare_at_price | displayPrice(currentCurrency)"></money></s>
+                    </template>
+                    <template v-else>
+                      <span class="visually-hidden"><span class="brackets skeleton-loading" data-trans-key="products.product.regular_price">{{ 'products.product.regular_price' | t }}</span></span>
+                      <s id="ComparePrice-selectOption" class="hide"><money :price="selectOption.currentVariant.compare_at_price | displayPrice(currentCurrency)"></money></s>
+                      <span class="product-price__price product-price__price-selectOption">
+                        <span id="ProductPrice-selectOption">
+                          <money :price="selectOption.currentVariant.price | displayPrice(currentCurrency)"></money>
+                        </span>
+                        <span class="product-price__sale-label product-price__sale-label-selectOption hide"><span class="brackets skeleton-loading" data-trans-key="products.product.on_sale">{{ 'products.product.on_sale' | t }}</span></span>
+                      </span>
+                    </template>
+                  </p>
+                </div>
+              </div>
+
+              <div class="product-shop-wrap product-shop-option">
+                <form method="post" enctype="multipart/form-data" class="product-form product-form-selectOption{% unless settings.show_variant_labels %} product-form--hide-variant-labels{% endunless %}" data-section="selectOption">
+                  <div class="product-options">
+                    <template v-if="selectOption.product.options.length != 1 || selectOption.currentVariant.title != 'Default Title'">
+                      <div v-for="(option, index) in selectOption.product.options" class="selector-wrapper js product-form__item">
+                        <label v-bind:class="[option.name == 'default' ? 'label--hidden' : '']" v-bind:for="'SingleOptionSelector-' + index">
+                          {{ "{{ defaultTrans(getTextTransByKey('collections.filters.' + lowercase(option.name)), option.name) " }}}}
+                        </label>
+                        <select @change="changeOptionSelectOption" class="single-option-selector single-option-selector-selectOption product-form__input" :id="'SingleOptionSelector-selectOption-' + index" :data-index="'option' + (index + 1) ">
+                          <option v-for="value in option.values" :value="value">
+                            {{ "{{ defaultTrans(getTextTransByKey('collections.filters.' + lowercase(value)), value) " }}}}
+                          </option>
+                        </select>
+                      </div>
+                    </template>
+                    <select v-model="selectOption.currentVariant.id" name="id" id="ProductSelect-selectOption" data-section="selectOption" class="product-form__variants no-js"> 
+                      <option v-for="variant in selectOption.product.variants" :disable="variant.available == false" :value="variant.id">
+                        <template v-if="variant.available">{{ '{{ variant.title ' }}}}</template>
+                        <template v-else>{{ '{{ variant.title ' }}}} - <span class="brackets skeleton-loading" data-trans-key="products.product.sold_out">{{ 'products.product.sold_out' | t }}</span></template>
+                      </option>
+                    </select>
+
+                  </div>
+                  <div class="product-options-bottom">
+                    <div class="add-to-cart">
+                      <div class="product-button-top">
+                        {% if settings.so_show_qty %}
+                        <div class="qty_cart">
+                          <div class="qty-ctl">
+                            <button data-title-trans="products.product.qty_decrease" data-title-default="{{ 'products.product.qty_decrease' | t }}" title="{{ 'products.product.qty_decrease' | t }}" data-input="#Quantity-select-option" class="decrease change-qty"><span class="brackets skeleton-loading" data-trans-key="products.product.qty_decrease">{{ 'products.product.qty_decrease' | t }}</span></button>
+                          </div>
+                          <input type="number" id="Quantity-select-option" name="quantity" :value="selectOption.qty" min="1" class="input-text qty" pattern="[0-9]*">
+                          <div class="qty-ctl">
+                            <button data-input="#Quantity-select-option" class="increase change-qty" data-title-trans="products.product.qty_increase" data-title-default="{{ 'products.product.qty_increase' | t }}" title="{{ 'products.product.qty_increase' | t }}"><span class="brackets skeleton-loading" data-trans-key="products.product.qty_increase">{{ 'products.product.qty_increase' | t }}</span></button>
+                          </div>
+                        </div>
+                        {% endif %}
+                      </div>
+                      <div class="product-button-bottom">
+                        <button type="submit" name="add" id="AddToCart-selectOption" :disabled="selectOption.availableVariant == false" :class="['btn', 'product-form__cart-submit', (selectOption.product.options.length != 1 || selectOption.product.variants[0].title != 'Default Title') ? 'product-form__cart-submit--small' : '']">
+                          <span id="AddToCartText-selectOption">
+                            <span v-show="selectOption.availableVariant == true">
+                              <span class="brackets skeleton-loading" data-trans-key="products.product.add_to_cart">{{ 'products.product.add_to_cart' | t }}</span>
+                            </span>
+                            <span v-show="selectOption.availableVariant == false"><span class="brackets skeleton-loading" data-trans-key="products.product.sold_out">{{ 'products.product.sold_out' | t }}</span></span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+{% assign number_of_related_products_to_show = section.settings.rel_limit | default: 10 %}
+
+{% assign number_of_related_products_to_fetch = number_of_related_products_to_show | plus: 1 %}
+
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+{% assign found_a_collection = false %}
+{% for c in product.collections %}
+{% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
+{% assign found_a_collection = true %}
+{% assign collection = c %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if collection and collection.products_count > 1 %}
+{%- assign image_size = '300x' -%}
+{%- assign more_view_size = '30x40' -%}
+<div class="block block-related collection-widget">
+  <div class="section-inner">
+    <div class="block-title">
+      <strong><span><span class="brackets skeleton-loading" data-trans-key="products.product.related_title">{{ 'products.product.related_title' | t }}</span></span></strong>
+    </div>
+    <div class="block-content product-list-wrapper">
+      <div class="product-list same-height owl-carousel owl-theme use-slider-custom" id="block-related" data-slider-ele="#related_products_slider_data">
+          {% assign current_product = product %}
+          {% assign current_product_found = false %}
+          {% assign current_index = 1 %}
+          {% for product in collection.products limit: number_of_related_products_to_fetch %}
+          {% if product.handle == current_product.handle %}
+          {% assign current_product_found = true %}
+          {% else %}
+          {% unless current_product_found == false and forloop.last %}
+          <div class="product-item item item--size-large{% if current_index > 4 %} hide-os-desktop{% endif %}{% if current_index > 2 %} hide-os-mobile{% endif %}">
+            <div class="product-item-wrapper">
+              <div class="product-item-top">
+                <div class="product-item-media">
+                  {% include 'product-wishlist' with tooltip_pos: 'right' %}
+                  <a href="{{ product.url | within: collection }}" class="product-image" title="{{ product.title }}">
+                    <img data-src="{{ product.featured_image | product_img_url: image_size , crop: 'top' }}" alt="{{ product.featured_image.alt | escape }}" id="related_{{ product.id }}_main1_img" class="lozad"/>
+                    {% if product.images.size > 1 %}
+                    <img data-src="{{ product.images[1]| product_img_url: image_size , crop: 'top' }}" class="alternative-img lozad" alt="{{ product.images[1].alt | escape }}"/>    
+                    {% endif %}
+                  </a>
+                </div>
+                {% include 'product-item-more-views-slider', ulId: 'related' %}
+                <div class="product-item-hover product-qs-wrapper">
+                  {% include 'product-qs-btn' %}  
+                </div>
+                {% include 'product-labels' %}
+              </div>
+              <div class="product-item-bottom">
+                <div class="product-details">
+                  <div class="product-name">
+                    <a href="{{ product.url | within: collection }}" title="{{ product.title }}">{{ product.title }}</a>
+                  </div>
+                  <div class="list-mode-description">
+                    {{ product.description | strip_html | truncatewords: 3 }}
+                  </div>
+                  {% include 'product-price' %}  
+                </div>
+                <div class="actions product-item-hover{% if section.settings.show_compare_btn == false or settings.enable_compare == false %} no-compare{% endif %}">
+                  {% include 'product-cart-btn' %}
+                  {% include 'product-compare-btn' %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% assign current_index = current_index | plus: 1 %}
+          {% endunless %}
+          {% endif %}
+          {% endfor %}
+      </div>
+      <span id="related_products_slider_data" class="hide">
+        {
+          "nav": true,
+          "dots": false,
+          "responsive": {
+            "0": { "items": 1},
+            "768": { "items": 4}
+          } 
+        }
+      </span>
+    </div>
+  </div>
+</div>
+{% endif %}

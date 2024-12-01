@@ -1,0 +1,48 @@
+{% if section.settings.show_share_buttons %}
+{% assign url = shop.url | append: product.url | url_param_escape %}
+{% assign title = product.title  | url_param_escape %}
+{% assign desc = product.description | strip_html | url_param_escape %}
+{% assign imageShare = featured_img_src | img_url: '1024x1024' %}
+<div class="product-shop-wrap product-shop-social">
+  <div class="row">
+    <div class="col-sm-8">
+      <ul class="cdz-social-listing">
+        {% if section.settings.show_share_facebook %}
+        <li class="cdz-facebook pull-left">
+          <a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]={{ url }}&p[images][0]={{ imageShare }}&p[title]={{ title }}&p[summary]={{ desc }}" target="_blank" title="{{ 'products.product.share_on_facebook' | t | escape }}" class="trasition-all" data-placement="top" data-toggle="tooltip" data-data-original-title-trans="products.product.share_on_facebook" data-data-original-title-default="{{ 'products.product.share_on_facebook' | t }}" data-original-title="{{ 'products.product.share_on_facebook' | t }}" rel="nofollow"><i class="fa fa-facebook"></i>
+          </a>
+        </li>
+        {% endif %}
+        
+        {% if section.settings.show_share_twitter %}
+        <li class="twitter pull-left">
+          <a href="https://twitter.com/intent/tweet?url={{ url }}&text={{ desc }}&amp;pubid=ra-5469982e19f36f4c&amp;ct=1&amp;pco=tbxnj-1.0&quot;,&quot;&quot;,&quot;" target="_blank" title="{{ 'products.product.share_on_twitter' | t | escape }}" rel="nofollow" class="trasition-all" data-placement="top" data-toggle="tooltip" data-data-original-title-trans="products.product.share_on_twitter" data-data-original-title-default="{{ 'products.product.share_on_twitter' | t }}" data-original-title="{{ 'products.product.share_on_twitter' | t }}"><i class="fa fa-twitter"></i>
+          </a>
+        </li>
+        {% endif %}
+        
+        {% if section.settings.show_share_linkedin %}
+        <li class="linkedin pull-left">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ url }}&title={{ title }}&ro=false&amp;summary={{ desc }}&amp;source=&quot;,&quot;&quot;,&quot;" rel="nofollow" target="_blank" rel="nofollow" title="{{ 'products.product.share_on_linkedin' | t | escape }}" class="trasition-all" data-placement="top" data-toggle="tooltip" data-data-original-title-trans="products.product.share_on_linkedin" data-data-original-title-default="{{ 'products.product.share_on_linkedin' | t }}" data-original-title="{{ 'products.product.share_on_linkedin' | t }}"><i class="fa fa-linkedin"></i>
+          </a>
+        </li>
+        {% endif %}
+        
+        {% if section.settings.show_share_google_plus %}
+        <li class="google-plus pull-left">
+          <a href="https://plus.google.com/share?url={{ url }}&amp;pubid=ra-5469982e19f36f4c&amp;ct=1&amp;pco=tbxnj-1.0&quot;,&quot;&quot;,&quot;" rel="nofollow" title="{{ 'products.product.share_on_google' | t | escape }}" target="_blank" class="trasition-all" data-placement="top" data-toggle="tooltip" data-data-original-title-trans="products.product.share_on_google" data-data-original-title-default="{{ 'products.product.share_on_google' | t }}" data-original-title="{{ 'products.product.share_on_google' | t }}"><i class="fa fa-google-plus"></i>
+          </a>
+        </li>
+        {% endif %}
+        
+        {% if section.settings.show_share_pinterest %}
+        <li class="pinterest pull-left">
+          <a href="https://www.pinterest.com/pin/create/button/?url={{ url }}&amp;media={{ imageShare }}&amp;description={{ desc }}&amp;pubid=ra-5469982e19f36f4c&amp;ct=1&amp;pco=tbxnj-1.0&quot;,&quot;&quot;,&quot;" rel="nofollow" title="{{ 'products.product.share_on_pinterest' | t | escape }}" target="_blank" class="trasition-all" data-placement="top" data-toggle="tooltip" data-data-original-title-trans="products.product.share_on_pinterest" data-data-original-title-default="{{ 'products.product.share_on_pinterest' | t }}" data-original-title="{{ 'products.product.share_on_pinterest' | t }}"><i class="fa fa-pinterest"></i>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endif %}

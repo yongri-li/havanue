@@ -1,0 +1,115 @@
+{% if section.settings.title != blank %}
+	<div class="review_title">{{ section.settings.title }}</div>
+{% endif %}
+{% if section.settings.subtitle != blank %}
+	<div class="review_subtitle">{{ section.settings.subtitle }}</div>
+{% endif %}
+{% if section.settings.review_img != blank %}
+	<div class="review_img"><img src="{{ section.settings.review_img | img_url: 'master' }}" alt="{{ section.settings.review_img.alt }}" /></div>
+{% endif %}
+{% if section.settings.review_link_text != blank and section.settings.review_link != blank %}
+	<a href="{{ section.settings.review_link }}">{{ section.settings.review_link_text | append: "    >" }}</a>
+{% endif %}
+{% if section.blocks.size > 0 %}
+	<div class="slider_contents">
+		{% for block in section.blocks %}
+      		{% assign bs = block.settings %}
+      		<div class="slider_item">
+              <div class="review_header">
+              	{% if bs.authur_img != blank %}
+                	<div class="authur_img"><img src="{{ bs.authur_img | img_url: '82x' }}" alt="{{ bs.authur_img.alt }}" /></div>
+                {% endif %}
+                {% if bs.authur_name != blank %}
+                	<div class="authur_main">
+                      <div class="authur_name">{{ bs.authur_name }}</div>
+                      {% assign review_num = bs.authur_review %}
+                      <div class="authur_review_rating">
+                        {% for i in (1..review_num) %}
+							<i class="stamped-fa stamped-fa-star"></i>
+                        {% endfor %}
+                      </div>
+                	</div>
+                {% endif %}
+              </div>
+              {% if bs.authur_text != blank %}
+              	<div class="review_content">{{ bs.authur_text }}</div>
+              {% endif %}
+      		</div>
+      	{% endfor %}
+	</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Review Slider",
+	"class": "review-slider",
+    "settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		},
+		{
+			"type": "text",
+			"id": "subtitle",
+			"label": "Subtitle"
+		},
+		{
+			"type": "image_picker",
+			"id": "review_img",
+			"label": "Review Image"
+		},
+		{
+			"type": "text",
+			"id": "review_link_text",
+			"label": "Review Link Text"
+		},
+		{
+			"type": "url",
+			"id": "review_link",
+			"label": "Review Link"
+		},
+		{
+			"type": "image_picker",
+			"id": "badge",
+			"label": "Badge Image"
+		}
+	],
+	"blocks": [
+		{
+			"type": "text",
+            "name": "Review Item",
+            "settings": [
+				{
+					"type": "image_picker",
+					"id": "authur_img",
+					"label": "Authur Image"
+				},
+				{
+					"type": "text",
+					"id": "authur_name",
+					"label": "Authur Name"
+				},
+				{
+					"type": "range",
+					"id": "authur_review",
+					"label": "Authur Review Rating",
+					"min": 1,
+					"max": 5,
+					"default": 5
+				},
+				{
+					"type": "richtext",
+					"id": "authur_text",
+					"label": "Authur Review Text"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"category": "Review",
+			"name": "Review Slider"
+		}
+	]
+  }
+{% endschema %}

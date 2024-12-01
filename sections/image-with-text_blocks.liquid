@@ -1,0 +1,81 @@
+{% if section.settings.title != blank %}
+	<div class="title">{{ section.settings.title }}</div>
+{% endif %}
+{% if section.blocks.size > 0 %}
+	<div class="image-text_block-list">
+		{% for block in section.blocks %}
+      		{% if block.settings.item_title != blank and block.settings.item_img != blank %}
+              <div class="image-text_block-item">
+                <div class="image_wrapper">
+					<img src="{{ block.settings.item_img | img_url: '1000x' }}" alt="{{ block.settings.item_img.alt }}" />
+                </div>
+                <div class="text_wrapper" {% if block.settings.text_first %}style="order: -1"{% endif %}>
+                  	<div class="item_title">{{ block.settings.item_title }}</div>
+                  	<div class="item_text">{{ block.settings.item_text }}</div>
+                </div>
+              </div>
+      		{% endif %}
+      	{% endfor %}
+	</div>
+{% endif %}
+{% if section.settings.button_text != blank and section.settings.button_url != blank %}
+      	<a class="btn btn-primary" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+      {% endif %}
+{% schema %}
+  {
+    "name": "Image With Text Block",
+	"class": "image-text_blocks",
+	"settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		},
+		{
+			"type": "text",
+			"id": "button_text",
+			"label": "Button Text"
+		},
+		{
+			"type": "url",
+			"id": "button_url",
+			"label": "Button Url"
+		}
+	],
+    "blocks": [
+		{
+			"type": "icon",
+			"name": "Image & Text Item",
+			"settings": [
+				{
+					"type": "checkbox",
+					"id": "text_first",
+					"label": "Text First?",
+					"default": true
+				},
+				{
+					"type": "image_picker",
+					"id": "item_img",
+					"label": "Item Image"
+				},
+				{
+					"type": "text",
+					"id": "item_title",
+					"label": "Item Title"
+				},
+				{
+					"type": "richtext",
+					"id": "item_text",
+					"label": "Item Text"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Image with Text",
+        	"category": "Image With Text"
+		}
+	]
+  }
+{% endschema %}

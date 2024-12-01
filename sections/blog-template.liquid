@@ -1,0 +1,90 @@
+<div class="col-sm-9 col-main">
+  <div class="col-wrapper-main">
+    {% paginate blog.articles by 12 %}
+
+    <ol class="post-list">
+      {% for article in blog.articles %}
+      <li class="row postWrapper postWrapper-{{ article.id }}">
+        {% include 'blog-item' %}
+      </li>
+      {% endfor %}
+    </ol>
+
+    {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+    {% endif %}
+
+    {% endpaginate %}
+  </div>
+</div>
+<div class="col-sm-3 col-right sidebar">{% include 'blog-sidebar' %}</div>
+{% schema %}
+  {
+    "name": "Blog pages",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "blog_show_author",
+        "label": "Show author",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date",
+        "label": "Show date",
+        "default": true
+      },
+    {
+        "type": "header",
+        "content": "Blog Sidebar"
+      },
+    {
+        "type": "checkbox",
+        "id": "show_recent",
+        "label": "Show recent posts",
+        "default": true
+      },
+      {
+        "type": "blog",
+        "id": "blog_recent_blog",
+        "label": "Use blog"
+      },
+    {
+        "type": "text",
+        "id": "recent_title",
+        "label": "Recent Title Block",
+        "default": "Recent Posts"
+      },
+    {
+        "type": "text",
+        "id": "recent_limit",
+        "label": "Limit post",
+        "default": "5"
+      },
+    {
+        "type": "checkbox",
+        "id": "show_tags",
+        "label": "Show tags",
+        "default": true
+      },
+    {
+        "type": "text",
+        "id": "tag_title",
+        "label": "Tag Title Block",
+        "default": "Blog Tags"
+      },
+    {
+        "type": "checkbox",
+        "id": "show_banner",
+        "label": "Show banner",
+        "default": true
+      },
+    {
+        "type": "image_picker",
+        "id": "banner",
+        "label": "Upload banner image",
+        "info": "PNG format"
+      }
+    ]
+  }
+{% endschema %}

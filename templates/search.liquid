@@ -1,0 +1,31 @@
+<div class="main-container col1-layout">
+  <div class="main">
+    <div class="content-breadcrums">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            {% include 'breadcrumbs' %}
+          </div>
+        </div>
+      </div>    
+    </div>
+    <div class="container col-main-containter">
+      <div class="row">
+        <div class="col-main col-xs-12">
+          <div class="col-wrapper-main">
+            <div class="page-title">
+              <h1>
+                {% if search.results_count == 0 or search.performed == false %}
+                <span data-trans-key="general.search.title" class="skeleton-loading">{{ 'general.search.title' | t }}</span>
+                {% else %}
+                <span class="skeleton-loading" data-trans-key="general.search.results_with_count.{% if search.results_count > 1 %}other{% else %}one{% endif %}" data-trans-val='{"terms":"{{ search.terms }}", "count": "{{ search.results_count }}"}'>{{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}</span>
+                {% endif %}
+              </h1>
+            </div>
+            {% section 'search' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

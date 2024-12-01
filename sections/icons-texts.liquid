@@ -1,0 +1,85 @@
+{% assign ss = section.settings %}
+<style>
+  .icons-with-texts {
+    background: {{ ss.bg_color }};
+  }
+</style>
+<div class="container">
+  {% if ss.title != blank %}
+  <div class="icons_title">{{ ss.title }}</div>
+  {% endif %}
+  {% if section.blocks.size > 0 %}
+      <div class="icons-blocks">
+          {% for block in section.blocks %}
+              {% assign bs = block.settings %}
+              {% if bs.item_icon != blank or bs.item_img != blank %}
+                  <div class="icon_texts_item">
+                      <div class="svg_icon">
+                        {% if bs.item_img != blank %}
+                        	<img src="{{ bs.item_img | img_url: 'master' }}" alt="{{ bs.item_img.alt }}" />
+                        {% else %}
+                        	{{ bs.item_icon }}
+                        {% endif %}
+                      </div>
+                      <div class="text_wrapper">
+                          <div class="item_title">{{ bs.item_title }}</div>
+                          <div class="item_text">{{ bs.item_text }}</div>
+                      </div>
+                  </div>
+              {% endif %}
+          {% endfor %}
+      </div>
+  {% endif %}
+</div>
+{% schema %}
+  {
+    "name": "Icons With Texts",
+	"class": "icons-with-texts",
+    "settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		},
+		{
+			"type": "color",
+			"id": "bg_color",
+			"label": "Background Color"
+		}
+	],
+	"blocks": [
+		{
+			"type": "icons",
+			"name": "Icon With Text Item",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "item_img",
+					"label": "Item Image"
+				},
+				{
+					"type": "html",
+					"id": "item_icon",
+					"label": "Item Icon"
+				},
+				{
+					"type": "text",
+					"id": "item_title",
+					"label": "Item Title"
+				},
+				{
+					"type": "richtext",
+					"id": "item_text",
+					"label": "Item Text"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Icons With Texts",
+			"category": "Icon with Text"
+		}
+	]
+  }
+{% endschema %}

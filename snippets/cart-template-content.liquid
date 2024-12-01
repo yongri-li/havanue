@@ -1,0 +1,184 @@
+{%- if cart.item_count > 0 -%}
+<div class="cart-wrap">
+  <div class="cart">
+    <form action="/cart" method="post" novalidate class="cart form_cart">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8">
+          <div class="page-title title-buttons">
+            <h1>
+              <span class="brackets" data-trans-key="cart.general.title">{{ 'cart.general.title' | t }}</span>
+            </h1>
+          </div>
+          <fieldset>
+            <table id="shopping-cart-table" class="data-table cart-table">
+              <colgroup>
+                <col width="1">
+                <col>
+                <col width="1">
+                <col width="1">
+                <col width="1">
+                <col width="1">
+              </colgroup>
+              <thead>
+                <tr class="first last">
+                  <th rowspan="1">&nbsp;</th>
+                  <th rowspan="1"><span class="nobr"><span class="brackets" data-trans-key="cart.label.product">{{ 'cart.label.product' | t }}</span></span></th>
+                  <th class="a-center" colspan="1"><span class="nobr"><span class="brackets" data-trans-key="cart.label.price">{{ 'cart.label.price' | t }}</span></span></th>
+                  <th rowspan="1" class="a-center"><span class="brackets" data-trans-key="cart.label.quantity">{{ 'cart.label.quantity' | t }}</span></th>
+                  <th class="a-center" colspan="1"><span class="brackets" data-trans-key="cart.label.total">{{ 'cart.label.total' | t }}</span></th>
+                  <th rowspan="1" class="a-center last">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for item in cart.items -%}
+                <tr class="{% cycle 'odd', 'even' %}{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}">
+                  <td class="shoppingcart-image">
+                    <a href="{{ item.url }}" class="product-image" title="{{ item.title | escape }}">
+                      <img src="{{ item.image | img_url : '100x' }}" alt="{{ item.title | escape }}"/>
+                    </a>
+                  </td>
+                  <td class="shoppingcart-name">
+                    <h2 class="product-name">
+                      <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
+                    </h2>
+                    {% unless item.variant.title contains 'Default' %}
+                      <div class="cart__meta-text">
+                        {% for option in item.product.options %}
+                          {{ option }}: {{ item.variant.options[forloop.index0] }}<br/>
+                        {% endfor %}
+                      </div>
+                    {% endunless %}
+                    {%- assign property_size = item.properties | size -%}
+                    {% if property_size > 0 %}
+                      <div class="cart__meta-text">
+                        {% for p in item.properties %}
+                          {% unless p.last == blank %}
+                            {{ p.first }}:
+
+                            {% comment %}
+                              Check if there was an uploaded file associated
+                            {% endcomment %}
+                            {% if p.last contains '/uploads/' %}
+                              <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                            {% else %}
+                              {{ p.last }}
+                            {% endif %}
+                          {% endunless %}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  </td>
+                  <td class="a-right shoppingcart-unittax">
+                    <span class="price">{% include 'display-price' with price: item.price %}</span>
+                  </td>
+                  <td class="a-center shoppingcart-qty">
+                    <div class="cart-qty-inner">
+                      <div class="qty-ctl">
+                        <button data-input=".cart-input-{{ forloop.index0 }}" class="decrease change-qty not-bind" data-title-trans="products.product.qty_decrease" data-title-default="{{ 'products.product.qty_decrease' | t }}" title="{{ 'products.product.qty_decrease' | t }}"></button>
+                      </div>
+                      <input class="cart__qty-input cart-input-{{ forloop.index0 }}" type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" pattern="[0-9]*" data-item-id="{{ forloop.index }}"/>
+                      <div class="qty-ctl">
+                        <button data-title-trans="products.product.qty_increase" data-title-default="{{ 'products.product.qty_increase' | t }}" title="{{ 'products.product.qty_increase' | t }}" class="increase change-qty not-bind" data-input=".cart-input-{{ forloop.index0 }}">{{ 'products.product.qty_increase' | t }}</button>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="a-right shoppingcart-tax">
+                    {% if item.original_line_price != item.line_price %}
+                    <div class="cart-item__original-price">
+                      <s><span class="price">{% include 'display-price' with price: item.original_line_price %}</span></s>
+                    </div>
+                    {% endif %}
+
+                    <div>
+                      <span class="price">{% include 'display-price' with price: item.line_price %}</span>
+                    </div>
+
+                    {% for discount in item.discounts %}
+                    <div class="cart-item__discount">{{ discount.title }}</div>
+                    {% endfor %}
+                  </td>
+                  <td class="a-center last"><a href="javascript:void(0)" class="btn-remove btn-remove2 cart__remove update-cart-btn" data-update-cart-index="{{ forloop.index }}" data-update-cart-value="0">{{ 'cart.general.remove' | t }}</a></td>
+                </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </fieldset>
+          <a href="/" class="btn btn--secondary cart__update cart__continue--large small--hide" >
+            <span class="brackets" data-trans-key="cart.general.continue_shopping">{{ 'cart.general.continue_shopping' | t }}</span>
+          </a>   
+        </div>
+        <div class="col-xs-12 col-lg-4">
+          <footer class="cart__footer">
+            <div class="grid">
+              {% if section.settings.cart_notes_enable %}
+              <div class="grid__item medium-up--one-half cart-note">
+                <label for="CartSpecialInstructions" class="cart-note__label small--text-center"><span class="brackets" data-trans-key="cart.general.note">{{ 'cart.general.note' | t }}</span></label>
+                <textarea name="note" id="CartSpecialInstructions" class="cart-note__input">{{ cart.note }}</textarea>
+              </div>
+              {% endif %}
+              <div class="grid__item text-right small--text-center{% if section.settings.cart_notes_enable %} medium-up--one-half{% endif %}">
+                <div>
+                  <span class="cart__subtotal-title"><span class="brackets" data-trans-key="cart.general.subtotal">{{ 'cart.general.subtotal' | t }}</span></span>
+                  <span class="cart__subtotal">
+                    <span class="price">{% include 'display-price' with price: cart.total_price %}</span>
+                  </span>
+                </div>
+                {% if cart.total_discounts > 0 %}
+                <div class="cart__savings">
+                  <span data-trans-key="cart.general.savings">{{ 'cart.general.savings' | t }}</span>
+                  <span class="cart__savings-amount">
+                    <span class="price">{% include 'display-price' with price: cart.total_discounts %}</span>
+                  </span>
+                </div>
+                {% endif %}
+                <div class="cart__shipping"><span class="brackets" data-trans-key="cart.general.shipping_at_checkout">{{ 'cart.general.shipping_at_checkout' | t }}</span></div>
+                
+                <input type="submit" name="checkout" class="btn btn--small-wide checkout-btn" data-value-trans="cart.general.checkout" data-value-default="{{ 'cart.general.checkout' | t }}"{% if settings.enable_translate == false %} value="{{ 'cart.general.checkout' | t }}"{% endif %}/>
+
+                <a href="javascript:void(0);" name="clear_cart_action" title="{{ 'cart.general.clear'|t }}" data-title-trans="cart.general.clear" data-title-default="{{ 'cart.general.clear' | t }}" class="btn button btn-empty" id="empty_cart_button"><span class="brackets" data-trans-key="cart.general.clear">{{ 'cart.general.clear' | t }}</span></a>
+                {% if additional_checkout_buttons %}
+                <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </footer>
+          <div class="cart-reassurance">
+            {% if section.blocks.size > 0 %}
+            <ul>
+              {% for block in section.blocks %}
+              <li>
+                <div class="block-reassurance-item">
+                  {%- if block.settings.icon != blank -%}
+                  <img src="{{ block.settings.icon | img_url: 'master' }}" alt="{{ block.settings.icon.alt | escape }}" />
+                  {%- else -%}
+                  {%- if forloop.index < 4 -%}
+                  {%- assign cart_res_icon = 'cart_res_' | append: forloop.index | append: '.png' -%}
+                  <img src="{{ cart_res_icon | asset_url }}" />
+                  {%- endif -%}
+                  {%- endif -%}
+                  <span class="h6">{{ block.settings.reassurance | raw }}</span>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+        {% include 'shipping-calculator' %} 
+      </div>
+    </form>
+  </div>
+</div>
+{%- else -%}
+<div class="cart-empty-wrap">
+  <div class="page-title">
+    <h1><span class="brackets" data-trans-key="cart.general.empty_page_title">{{ 'cart.general.empty_page_title' | t }}</span></h1>
+  </div>
+  <div class="cart-empty">
+    <p><span class="brackets" data-trans-key="cart.general.empty">{{ 'cart.general.empty' | t }}</span></p>
+    <p>
+      <a href="/"><span class="brackets" data-trans-key="cart.general.empty_continue_html">{{ 'cart.general.empty_continue_html' | t }}</span></a>
+    </p>
+  </div>
+</div>
+{%- endif -%}

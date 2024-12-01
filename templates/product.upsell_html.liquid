@@ -1,0 +1,22 @@
+{%- layout none -%}
+{%- assign image_size = '300x' -%}
+{%- assign more_view_size = '30x40' -%}
+<div class="owl-carousel use-slider-custom product-list">
+	{%- assign cart_items_handle = ',' -%}
+	{%- for item in cart.items -%}
+	{%- assign cart_items_handle = cart_items_handle | append: item.product.handle | append: ',' -%}
+	{%- endfor -%}
+	{%- if product.metafields.cdz.usp != blank -%}
+	{%- assign upsell_handles = ',' -%}
+	{%- assign handles = product.metafields.cdz.usp | remove: " " | split: ',' -%}
+	{%- for handle in handles -%}
+	{%- assign up_product = all_products[handle] -%}
+	{%- if up_product -%}
+	{%- unless cart_items_handle contains handle -%}
+	{%- include 'product-item-upsell' with a_product: up_product -%}
+	{%- assign upsell_handles = upsell_handles | append : ',' | append : handle -%}
+	{%- endunless -%}
+	{%- endif -%}
+	{%- endfor -%}
+	{%- endif -%}
+</div>

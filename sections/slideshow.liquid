@@ -1,0 +1,316 @@
+{% capture classId %}class_id_{{ section.id }}{% endcapture %}
+{% if section.blocks.size > 0 %}
+<div class="slideshow-content{% if section.settings.fullWidth %} full-width{% endif %}" data-section-id="{{ section.id }}" data-section-type="slideshow">
+  {% if section.settings.fullWidth == false %}
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+    {% endif %}  
+        <div class="cdz-slideshow">
+          <div class="slider-wrapper theme-default">
+            <div id="{{ classId }}" class="owl-theme main-slideshow" data-slideshow-ele="#{{ classId }}_slideshow_ele_data" data-width="{{ section.settings.width }}" data-height="{{ section.settings.height }}">
+              {% capture imageSize %}{{ section.settings.width }}x{{ section.settings.height }}{% endcapture %}
+              {% for block in section.blocks %}
+              {% if block.settings.video_id != blank or block.settings.image != blank %}
+
+              {% if block.settings.video_enable %}
+              <!-- Video -->
+              <div class="slider-item item-video{% if forloop.first == false %} hide{% endif %}" {% if section.settings.controlNavThumbs %}data-hash="{{ classId }}{{ forloop.index }}"{% endif %}>
+                {% if block.settings.video_source == 'vimeo' %}
+                <a class="owl-video" href="http://vimeo.com/{{ block.settings.video_id }}"></a>
+                {% else %}
+                <a class="owl-video" href="https://www.youtube.com/watch?v={{ block.settings.video_id }}"></a>
+                {% endif %}
+              </div>
+              <!-- End Video -->
+              {% else %}
+              {% if block.settings.image != blank %}
+              <!-- Image -->
+              <div class="slider-item{% if forloop.first == false %} hide{% endif %}" {% if section.settings.controlNavThumbs %}data-hash="{{ classId }}{{ forloop.index }}"{% endif %}>
+                {% if block.settings.link != blank %}
+                    <a href="{{ block.settings.link }}" title="{{ block.settings.title | escape }}">
+                  {% endif %}
+                  <img alt="{{ block.settings.title }}" 
+                  {% if section.settings.lazyLoad and forloop.first != true %}
+                  class="owl-lazy"
+                  data-src="{{ block.settings.image | img_url: imageSize }}"
+                  {% else %}
+                  src="{{ block.settings.image | img_url: imageSize }}"
+                  {% endif %}
+                      alt="{{ block.settings.image.alt | escape  }}"/>
+                  {% if block.settings.link != blank %}
+                </a>
+                {% endif %}
+
+              </div>
+              <!-- End Image -->
+              {% endif %}
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+
+            </div>
+
+            {% if section.settings.controlNavThumbs %}
+            {% for block in section.blocks %}
+            {% if block.settings.image != blank %}
+            <a class="slider-thumbnail" href="#{{ classId }}{{ forloop.index }}" title="{{ block.settings.title | escape }}">
+              {% capture imageSize %}{{ section.settings.thumbWidth }}x{{ section.settings.thumbHeight }}{% endcapture %}
+              <img data-src="{{ block.settings.image | img_url: imageSize }}" class="lozad" alt="{{ block.settings.image.alt | escape }}"/>
+            </a>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+          {% comment %}<div class="slideshow-loader"><img src="{{ 'infinity.gif' | asset_url }}" /></div>{% endcomment %}
+        </div>
+    {% if section.settings.fullWidth == false %}    
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+<span class="hide" id="{{ classId }}_slideshow_ele_data">
+  {
+    "animateOut": "{{ section.settings.animateOut }}",
+    "animateIn": "{{ section.settings.animateIn }}",
+    "items": 1,
+    "loop": {% if section.settings.loop %} true {% else %} false {% endif %},
+    "center": true,
+    "rewind": false,
+
+    "startPosition": {{ section.settings.startPosition }},
+
+    "autoplay" : {% if section.settings.autoplay %} true {% else %} false {% endif %},
+
+    "autoplayHoverPause" : {% if section.settings.autoplayHoverPause %} true {% else %} false {% endif %},
+    "autoplaySpeed": {% if section.settings.autoplaySpeed %} true {% else %} false {% endif %},
+    "smartSpeed": {% if section.settings.smartSpeed != blank %}{{ section.settings.smartSpeed }} {% else %} 250 {% endif %},
+    "nav": {% if section.settings.nav %} true {% else %} false {% endif %},
+    "dots": {% if section.settings.dots %} true {% else %} false {% endif %},
+    "lazyLoad": {% if section.settings.lazyLoad %} true {% else %} false {% endif %},
+    "URLhashListener": {% if section.settings.controlNavThumbs %} true {% else %} false {% endif %},    
+    "video": true
+  }
+</span>
+{% endif %}
+{% schema %}
+  {
+    "name": "Slideshow",
+    "class": "index-section index-section--flush",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "text",
+        "id": "width",
+        "label": "Width",
+        "default": "1900"
+      },
+      {
+        "type": "text",
+        "id": "height",
+        "label": "Height",
+        "default": "730"
+      },
+      {
+        "type": "select",
+        "id": "animateIn",
+        "label": "Animate In",
+        "default": "fadeIn",
+        "options": [
+          {
+            "label": "Fade In",
+            "value": "fadeIn"
+          },
+          {
+            "label": "Fade Out",
+            "value": "fadeOut"
+          },
+          {
+            "label": "None",
+            "value": "none"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "animateOut",
+        "label": "Animate Out",
+        "default": "fadeOut",
+        "options": [
+          {
+            "label": "Fade In",
+            "value": "fadeIn"
+          },
+          {
+            "label": "Fade Out",
+            "value": "fadeOut"
+          },
+          {
+            "label": "None",
+            "value": "none"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "startPosition",
+        "label": "Start Slide",
+        "default": "0"
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplayHoverPause",
+        "label": "Pause on mouse over",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplaySpeed",
+        "label": "Autoplay Speed",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "smartSpeed",
+        "label": "Smart Speed",
+    "default": "250"
+      },
+      {
+        "type": "checkbox",
+        "id": "lazyLoad",
+        "label": "Lazy Load",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "loop",
+        "label": "Loop",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "nav",
+        "label": "Next & Prev navigation",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "Paging navigation",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "controlNavThumbs",
+        "label": "Show Thumbnails",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "fullWidth",
+        "label": "Full Width",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "thumbWidth",
+        "label": "Thumbnail Width",
+        "default": "100"
+      },
+      {
+        "type": "text",
+        "id": "thumbHeight",
+        "label": "Thumbnail Height",
+        "default": "100"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "link",
+            "label": "URL of Banners"
+          },
+          {
+            "type": "checkbox",
+            "id": "video_enable",
+            "label": "Enable video"
+          },
+          {
+            "type": "select",
+            "id": "video_source",
+            "label": "Video From",
+            "options": [
+              {
+                "label": "youtube.com",
+                "value": "youtuble"
+              },
+              {
+                "label": "vimeo.com",
+                "value": "vimeo"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "video_id",
+            "label": "Video ID"
+          }
+        ]
+      }
+    ],
+    "presets": 
+    [
+      {
+        "name": "Slideshow",
+        "category": "Image",
+        "settings": {
+        "width": "1900",
+        "height": "730",
+        "animateIn": "fadeIn",
+        "animateOut": "fadeOut",
+        "startPosition": "0",
+        "autoplay": false,
+        "autoplayHoverPause": true,
+        "autoplaySpeed": false,
+        "smartSpeed": "250",
+        "lazyLoad": false,
+        "loop": true,
+        "nav": true,
+        "dots": true,
+        "controlNavThumbs": false,
+        "fullWidth": false,
+        "thumbWidth": "100",
+        "thumbHeight": "100"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }]
+  }
+{% endschema %}

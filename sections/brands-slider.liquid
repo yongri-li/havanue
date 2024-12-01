@@ -1,0 +1,86 @@
+{% if section.blocks.size > 0 %}
+{% capture wrapId %}brands_slider_{{ section.id }}{% endcapture %}
+{%- assign column_count = 6 -%}
+<div id="brands_slider_{{ section.id }}" class="section" data-section-id="{{ section.id }}" data-section-type="brands-slider">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="brands-list-wrap">
+          <div class="brands-list use-slider-custom owl-carousel" data-slider-ele="#{{ wrapId }}_slider_data">
+            {% for block in section.blocks %}
+            <div class="item{% if forloop.index > column_count %} hide-overfloat{% endif %}">
+              <a href="{{ block.settings.link }}"{% if section.settings.use_target_blank %} target="_blank"{% endif %} title="{{ block.settings.image.alt | escape }}">
+                <img data-src="{{ block.settings.image | img_url : 'master' }}" class="lozad" alt="{{ block.settings.image.alt | escape }}"/>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          <span class="hide" id="{{ wrapId }}_slider_data">
+            {
+              "nav": true,
+              "dots": false,
+              "responsive": {
+                "0": { "items": 7}
+              } 
+            }
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Brands Slider",
+    "class": "brands-slider-section section",
+    "max_blocks": 30,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "use_target_blank",
+        "label": "Use target blank link",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Brand Logo",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Logo"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link",
+            "info": "Optional"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Brands Slider",
+        "category": "Image",
+        "settings": {
+          "use_target_blank": true
+        },
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,72 @@
+{% unless template == 'index' or template == 'list-collections' %}
+<div class="breadcrumbs non-section">
+  <ul>
+    <li>
+      <a href="{{ shop.url }}">
+        <span class="brackets skeleton-loading" data-trans-key="general.breadcrumbs.home">{{ 'general.breadcrumbs.home' | t }}</span>
+      </a>
+      <span class="slash">/</span>
+    </li>
+  {% if template contains 'page' %}
+    <li>
+      <strong>{{ page.title }}</strong></li>
+  {% elsif template contains 'product' %}
+    {% if collection.url %}
+    <li>
+      {{ collection.title | link_to: collection.url }}
+      <span class="slash">/</span>
+    </li>
+    {% endif %}
+    <li><strong>{{ product.title }}</strong></li>
+  {% elsif template contains 'collection' and collection.handle %}
+    {% if current_tags %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+    <li>{{ collection.title | link_to: url }}<span class="slash">/</span></li>
+    <li><strong>{{ current_tags | join: " + " }}</strong></li>
+    {% else %}
+    <li><strong>{{ collection.title }}</strong></li>
+    {% endif %}
+  {% elsif template == 'blog' %}
+    {% if current_tags %}
+    <li>{{ blog.title | link_to: blog.url }}<span class="slash">/</span></li>
+    <li><strong>{{ current_tags | join: " + " }}</strong></li>
+    {% else %}
+    <li><strong>{{ blog.title }}</strong></li>
+    {% endif %}
+  {% elsif template == 'article' %}
+    <li>{{ blog.title | link_to: blog.url }}<span class="slash">/</span></li>
+    <li><strong>{{ article.title }}</strong></li>
+  {% elsif template == 'cart' %}
+    <li>
+      <strong>
+        <span class="brackets skeleton-loading" data-trans-key="cart.general.title">{{ 'cart.general.title' | t }}</span>
+      </strong>
+    </li>
+  {% elsif template == 'customers/order' %}
+    <li>
+      <strong>
+        <span class="brackets skeleton-loading" data-trans-key="customer.order.title" data-trans-val='{"name":"{{ order.name }}"}'>{{ 'customer.order.title' | t: name: order.name }}</span>
+      </strong>
+    </li>  
+  {% elsif template == 'customers/active_account' %}
+    <li>
+      <strong>
+        <span class="brackets skeleton-loading" data-trans-key="customer.activate_account.title">{{ 'customer.activate_account.title' | t }}</span>
+      </strong>
+    </li>  
+  {% elsif template == 'reset_password' %}
+    <li>
+      <strong>
+        <span class="brackets skeleton-loading" data-trans-key="customer.reset_password.title">{{ 'customer.reset_password.title' | t }}</span>
+      </strong>  
+    </li>    
+  {% else %}
+    <li>
+      <strong>
+        <span class="brackets skeleton-loading" data-trans-key="general.breadcrumbs.{{ page_title | handleize | replace: '-', '_' }}">{{ page_title }}</span>
+      </strong>
+    </li>
+  {% endif %}
+  </ul>
+</div>
+{% endunless %}

@@ -1,0 +1,58 @@
+{% if section.settings.image != blank and section.settings.title != blank %}
+	<div class="section__contents">
+		<div class="text_wrapper" style="background: {{section.settings.txt_bg_color}}">
+          <div class="title">{{ section.settings.title }}</div>
+          <div class="text">{{ section.settings.text }}</div>
+          {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+          	<a href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+          {% endif %}
+      	</div>
+        <div class="img_wrapper">
+            <img src="{{ section.settings.image | img_url: '1000x' }}" alt="{{ section.settings.image.alt }}" />
+        </div>
+	</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Image With Text",
+	"class": "product-image_text",
+    "settings": [
+		{
+			"type": "image_picker",
+			"id": "image",
+			"label": "Image"
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		},
+		{
+			"type": "richtext",
+			"id": "text",
+			"label": "Text"
+		},
+		{
+			"type": "text",
+			"id": "button_text",
+			"label": "Button Text"
+		},
+		{
+			"type": "url",
+			"id": "button_url",
+			"label": "Button Url"
+		},
+		{
+			"type": "color",
+			"id": "txt_bg_color",
+			"label": "Text Background Color"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

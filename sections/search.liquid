@@ -1,0 +1,132 @@
+{%- assign product_image_size = section.settings.product_image_size -%}
+{%- assign post_image_size = section.settings.post_image_size -%}
+{%- assign more_view_size = section.settings.more_view_size -%}
+<div class="collection-style1" id="{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="search-template">
+  {% if search.performed %}
+  {% if search.results_count > 0 %}
+  {% paginate search.results by 8 %}
+  <div class="product-list-wrapper collection-items">
+    <div class="product-list products-grid">
+      {% for item in search.results %}
+      {% if item.object_type == 'product' %}
+      {% assign product = item %}
+      <div class="product-item">
+        <div class="product-item-wrapper">
+          <div class="product-item-top">
+            <div class="product-item-media">
+              {% include 'product-wishlist' with tooltip_pos: 'right' %}
+              {% include 'product-compare-btn' %}
+              <a href="{{ product.url | within: collection }}" class="product-image" title="{{ product.title }}">
+                <img data-src="{{ product.featured_image | product_img_url: product_image_size , crop: 'bottom' }}" alt="{{ product.featured_image.alt | escape }}" id="{{ ulId }}_{{ product.id }}_main1_img" class="lozad"/>
+              </a>
+            </div>
+            {% include 'product-item-more-views-slider', image_size: product_image_size %}
+            {% include 'product-social-share' %}
+            <div class="product-item-hover product-qs-wrapper">
+              {% include 'product-qs-btn' %}  
+            </div>
+            {% include 'product-labels' %}
+          </div>
+          <div class="product-item-bottom">
+            <div class="product-details">
+              <div class="product-name">
+                <a href="{{ product.url | within: collection }}" title="{{ product.title }}">{{ product.title }}</a>
+              </div>
+              <div class="list-mode-description">
+                {{ product.description | strip_html | truncatewords: 5 }}
+              </div>
+              {% include 'product-review' %}
+              {% include 'product-price' %}  
+            </div>
+            <div class="actions product-item-hover actions-grid-mode no-compare">
+              {% include 'product-cart-btn' %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      {% include 'blog-item-search', article: item %}
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% include 'pagination' %}
+  {% endpaginate %}
+  {% else %}
+  <p><span class="brackets skeleton-loading" data-trans-key="general.search.no_results_html" data-trans-val='{"terms":"{{ search.terms }}"}'>{{ 'general.search.no_results_html' | t: terms: search.terms }}</span></p>
+  <a href="/"><span data-trans-key="cart.general.empty_continue_html" class="brackets">{{ 'cart.general.empty_continue_html' | t }}</span></a>
+  {% endif %}
+  {% endif %}
+
+</div>
+{% schema %}
+{
+  "name": "Search pages",
+  "settings": [
+  {
+          "type": "header",
+          "content": "General Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label",
+      "label": "Show label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show Wishlist",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_btn",
+      "label": "Show Add to cart button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qs_btn",
+      "label": "Show Quick Shop button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_btn",
+      "label": "Show Compare button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_more_view",
+      "label": "Show More View Slider",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_share",
+      "label": "Show Social Sharing",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "product_image_size",
+      "label": "Product Image Size",
+      "default": "300x"
+    },
+    {
+      "type": "text",
+      "id": "more_view_size",
+      "label": "Product Image More View Size",
+      "default": "50x60"
+    },
+    {
+      "type": "text",
+      "id": "post_image_size",
+      "label": "Blog Post Image Size",
+      "default": "300x"
+    }
+  ]
+}
+{% endschema %}

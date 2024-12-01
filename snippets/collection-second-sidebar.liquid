@@ -1,0 +1,9 @@
+<div class="collection-second-sidebar">
+{% if section.settings.second_sidebar_banner != blank %}
+  <div class="banner block">
+    <div class="block-content">
+      <img src="{{ section.settings.second_sidebar_banner | img_url: 'master' }}"/>
+    </div>
+  </div>
+{% endif %}  
+</div>

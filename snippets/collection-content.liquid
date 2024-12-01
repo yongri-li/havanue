@@ -1,0 +1,83 @@
+{%- assign limit = section.settings.limit -%}
+
+{%- assign image_size = section.settings.image_size -%}
+{%- assign more_view_size = section.settings.more_view_size -%}
+
+<section class="collection-content">    
+  <div class="collection-content-wrapper">
+    <div class="collection-content-group">
+      <div class="collection-content-inner" id="collection-filter">            
+        <div class="main-content">
+          <div id="collection" class="collection-style1">
+
+            {% if collection.products.size > 0 %}
+            {% paginate collection.products by limit %}
+
+            <div class="product-list-wrapper collection-items">
+              <div class="product-list products-grid">
+                {% for product in collection.products %}
+                <div class="product-item">
+                  <div class="product-item-wrapper">
+                    <div class="product-item-top">
+                      <div class="product-item-media">
+                        {% include 'product-wishlist' with tooltip_pos: 'right' %}
+                        <a href="{{ product.url | within: collection }}" class="product-image" title="{{ product.title }}">
+                          <img {% if section.settings.use_effect_appear %}class="lozad" data-{% endif %}src="{{ product.featured_image | product_img_url: image_size , crop: 'bottom' }}" alt="{{ product.featured_image.alt | escape }}" id="{{ ulId }}_{{ product.id }}_main1_img"/>
+                        </a>
+                      </div>
+                      {% include 'product-item-more-views-slider' %}
+                      {% include 'product-social-share' %}
+                      <div class="product-item-hover product-qs-wrapper">
+                        {% include 'product-qs-btn' %}  
+                      </div>
+                      {% include 'product-labels' %}
+                    </div>
+                    <div class="product-item-bottom">
+                      <div class="product-details">
+                        <div class="product-name">
+                          <a href="{{ product.url | within: collection }}" title="{{ product.title }}">{{ product.title }}</a>
+                        </div>
+                        <div class="list-mode-description">
+                          {{ product.description | strip_html | truncatewords: 5 }}
+                        </div>
+                        <div class="list-mode-description full-desc">
+                          {{ product.description | strip_html | truncatewords: 30 }}
+                        </div>
+                        <div class="review-grid-mode">
+                          {% include 'product-review' %}
+                        </div>
+                        {% include 'product-price' %}  
+                      </div>
+                      <div class="actions product-item-hover actions-grid-mode{% if section.settings.show_compare_btn == false %} no-compare{% endif %}">
+                        {% include 'product-cart-btn' %}
+                        {% include 'product-compare-btn' %}
+                      </div>
+                      <div class="actions actions-list-mode{% if section.settings.show_compare_btn == false or settings.enable_compare == false %} no-compare{% endif %}">
+                        {% include 'product-review' %}
+                        <div class="price-wrapper">
+                          {% include 'product-price' %}  
+                        </div>
+                        {% include 'product-qs-btn' %}
+                        {% include 'product-cart-btn' %}
+                        {% include 'product-compare-btn' %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            {% if paginate.pages > 1 %}
+            {% include 'pagination' %}
+            {% endif %}
+            {% endpaginate %}
+            {% else %}
+            <p class="alert alert-info"><span class="brackets skeleton-loading" data-trans-key="collections.general.no_matches">{{ 'collections.general.no_matches' | t }}</span></p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

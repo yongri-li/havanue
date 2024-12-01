@@ -1,0 +1,55 @@
+{% assign ss = section.settings %}
+
+{% if ss.img_icon != blank %}
+<div class="img_icon">
+	<img src="{{ ss.img_icon | img_url: 'master' }}" alt="{{ ss.img_icon.alt }}" />
+</div>
+{% endif %}
+{% if ss.title != blank %}
+<div class="title">{{ ss.title }}</div>
+{% endif %}
+{% if ss.text != blank %}
+<div class="text">{{ ss.text }}</div>
+{% endif %}
+{% if ss.button_text != blank and ss.button_url != blank %}
+<a class="btn btn-primary" href="{{ ss.button_url }}">{{ ss.button_text }}</a>
+{% endif %}
+{% schema %}
+  {
+    "name": "Award With Text",
+	"class": "award-with-text",
+    "settings": [
+		{
+			"type": "image_picker",
+			"id": "img_icon",
+			"label": "Image Icon"
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		},
+		{
+			"type": "richtext",
+			"id": "text",
+			"label": "Content"
+		},
+		{
+			"type": "text",
+			"id": "button_text",
+			"label": "Button Text"
+		},
+		{
+			"type": "url",
+			"id": "button_url",
+			"label": "Button Url"
+		}
+	],
+	"presets": [
+		{
+			"name": "Award With Text",
+        	"category": "Icon"
+		}
+	]
+  }
+{% endschema %}

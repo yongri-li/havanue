@@ -1,0 +1,132 @@
+<div id="header_{{ section.id }}_section" data-section-id="{{ section.id }}" data-section-type="header">
+{% include section.settings.header_style %}
+</div>
+{%- unless section.settings.header_style == 'header-style1' -%}
+<style type="text/css" rel="stylesheet">
+{%- assign preload_header_style = 'preload-' | append: section.settings.header_style | append: '.scss' -%}
+{% include preload_header_style %}  
+</style>
+{%- endunless -%}
+<div id="headerAppWrap"></div>
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+  	{
+      "type": "header",
+      "content": "General Setting"
+    },
+	  {
+      "type": "select",
+      "id": "header_style",
+      "label": "Choose header style",
+      "options": [
+        {
+          "value": "header-style1",
+          "label": "Header style 1"
+        },
+        {
+          "value": "header-style2",
+          "label": "Header style 2"
+        },
+        {
+          "value": "header-style3",
+          "label": "Header style 3"
+        },
+        {
+          "value": "header-style4",
+          "label": "Header style 4"
+        },
+        {
+          "value": "header-style5",
+          "label": "Header style 5"
+        },
+        {
+          "value": "header-style6",
+          "label": "Header style 6"
+        },
+        {
+          "value": "header-style7",
+          "label": "Header style 7"
+        },
+        {
+          "value": "header-style8",
+          "label": "Header style 8"
+        },
+        {
+          "value": "header-style9",
+          "label": "Header style 9"
+        },
+        {
+          "value": "header-style10",
+          "label": "Header style 10"
+        }
+      ],
+      "default": "header-style1"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "text",
+      "id": "logo_size",
+      "label": "Logo size",
+      "default": "231x"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_mobile",
+      "label": "Mobile Logo image"
+    },
+    {
+      "type": "text",
+      "id": "logo_size_mobile",
+      "label": "Mobile Logo size",
+      "default": "231x"
+    },
+    {
+      "type": "select",
+      "id": "search_type",
+      "label": "Search with",
+      "options": [
+        {
+          "value": "all",
+          "label": "Product and article"
+        },
+        {
+          "value": "product",
+          "label": "Only product"
+        },
+        {
+          "value": "article",
+          "label": "Only article"
+        }
+      ],
+      "default": "product"
+    },
+	  {
+      "type": "header",
+      "content": "Navigation Setting"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_linklist_main_menu",
+      "label": "Use Linklist for main menu instead of megamenu app",
+      "default": false
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu_linklist",
+      "label": "Link list for main menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "nav_sticky",
+      "label": "Active Sticky (float) Navigation?",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

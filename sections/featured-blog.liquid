@@ -1,0 +1,166 @@
+{% capture wrapId %}featured_blog_posts_{{ section.id }}{% endcapture %}
+<div id="{{ wrapId }}" class="featured-blog-posts" data-section-id="{{ section.id }}" data-section-type="featured-blog">
+  <div class="container">
+    <div class="row">
+      <div class="section-inner col-xs-12">
+        {% if section.settings.title != blank %}
+        <div class="block-title">
+          <span><span class="title_icon">{% include 'icon-diamond' %}</span><span class="title_text{% if section.settings.title_trans != blank %}" data-content-trans="#{{ wrapId }}_title_trans{% endif %}">{{ section.settings.title | raw }}</span></span>
+          {% if section.settings.title_trans != blank %}
+          <span class="hide" id="{{ wrapId }}_title_trans">
+            {{ section.settings.title_trans | raw }}
+          </span>
+          {% endif %}
+
+          {% if section.settings.sub_title != blank %}
+          <span class="sub-title{% if section.settings.sub_title_trans != blank %} skeleton-loading" data-content-trans="#{{ ulId }}_sub_title_trans{% endif %}">{{ section.settings.sub_title }}</span>
+          {% endif %}
+          {% if section.settings.sub_title_trans != blank %}
+          <span id="{{ ulId }}_sub_title_trans" class="hide">
+            {{ section.settings.sub_title_trans | raw }}
+          </span>
+          {% endif %}
+        </div>
+        {% endif %}
+        {%- assign blog = blogs[section.settings.blog] -%}
+
+        <div class="block-content">
+          {% unless blog.articles.size == 0 %}
+          <div class="post-items use-slider-custom owl-carousel" data-slider-ele="#{{ wrapId }}_slider_data">
+            {% for article in blog.articles limit: section.settings.post_limit %}
+            <div class="cdz-post item item--size-very-large{% if forloop.index > 3 %} hide-os-desktop{% endif %}{% if forloop.index > 2 %} hide-os-mobile{% endif %} pull-left">
+              <div class="cdz-blog-top">
+                {% if article.image %}
+                <a href="{{ article.url }}" title="{{ article.title | escape }}">
+                  <img data-src="{{ article | img_url: '380x' }}" class="lozad img-responsive" alt="{{ article.title | escape }}"/>
+                </a>
+                {% endif %}
+                {% if section.settings.blog_show_date %}
+                <div class="blog-date">
+                  {{ article.published_at | time_tag: format: 'month_day_year' }}
+                </div>
+                {% endif %}
+
+              </div>
+              <div class="cdz-blog-bottom">
+                <h5 class="blog-title">
+                  <a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+                </h5>
+
+                {% if section.settings.blog_show_author %}
+                <div class="blog-author">{{ article.author }}</div>
+                {% endif %}
+
+                {% if section.settings.show_short_desc %}
+                <div class="blog-desc">
+                  {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt }}
+                  {% else %}
+                  {{ article.content | strip_html | truncate: 70 }}
+                  {% endif %}
+                </div>
+                {% endif %}
+
+                {% if section.settings.show_read_more %}
+                <p class="blog-text-link">
+                  <a href="{{ article.url }}" class="btn-link-readmore">
+                    {% include 'icon-arrow-right-double' %}
+                    <span class="brackets skeleton-loading" data-trans-key="blogs.article.read_more">{{ 'blogs.article.read_more' | t }}</span>
+                  </a>
+                </p>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}  
+          </div>
+          {% endunless %}
+          <span class="hide" id="{{ wrapId }}_slider_data">
+            {
+              "nav": true,
+              "dots": false,
+              "responsive": {
+                "0": { "items": 3}
+              } 
+            }
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Blog Featured Posts",
+    "class": "featured-blog-post-section section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Latest Blog Posts"
+      },
+      {
+        "type": "textarea",
+        "id": "title_trans",
+        "label": "Translate Heading"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub title",
+        "default": "Our blog post"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_title_trans",
+        "label": "Translate sub title"
+      },
+      {
+        "id": "blog",
+        "type": "blog",
+        "label": "Blog"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_author",
+        "label": "Show author",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_short_desc",
+        "label": "Show short description",
+        "default": true
+      },
+    {
+        "type": "checkbox",
+        "id": "show_read_more",
+        "label": "Show 'read more' button",
+        "default": true
+      },
+    {
+    "type": "text",
+    "id": "post_limit",
+    "label": "Posts",
+        "default": "10"
+    }
+    ],
+    "presets": [
+      {
+        "name": "Blog posts",
+        "category": "Blog",
+        "settings": {
+          "blog": "News",
+          "post_limit": "3"
+        }
+      }
+    ]
+  }
+{% endschema %}

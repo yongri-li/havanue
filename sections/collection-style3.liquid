@@ -1,0 +1,270 @@
+{%- assign limit = section.settings.limit | divided_by : 1 -%}
+{%- assign image_size = section.settings.image_size -%}
+{%- assign more_view_size = section.settings.more_view_size -%}
+{%- assign item_size = section.settings.item_size -%}
+{%- if item_size == 'small' -%}
+  {%- assign overfloat_threshold = 6 -%}
+{%- elsif item_size == 'medium' -%}
+  {%- assign overfloat_threshold = 5 -%}
+{%- elsif item_size == 'large' -%}
+  {%- assign overfloat_threshold = 4 -%}
+{%- else -%}
+  {%- assign overfloat_threshold = 3 -%}
+{%- endif -%}
+
+{% capture ulId %}tab_list_{{ section.id }}{% endcapture %}
+<div id="collection_{{ section.id }}" class="collection-style3 collection-widget" data-section-id="{{ section.id }}" data-section-type="collection-style3">
+  {% if section.settings.full_width == false %}
+    <div class="container">
+      <div class="row">
+  {% endif %}
+  <div class="section-inner{% if section.settings.full_width == false %} col-xs-12{% endif %}">
+    {% if section.settings.title != blank %}
+    <div class="block-title">
+      <span><span class="title_icon">{% include 'icon-diamond' %}</span><span class="title_text{% if section.settings.title_trans != blank %} skeleton-loading" data-content-trans="#{{ ulId }}_title_trans{% endif %}">{{ section.settings.title | raw }}</span></span>
+    </div>
+    {% if section.settings.title_trans != blank %}
+    <span id="{{ ulId }}_title_trans" class="hide">
+      {{ section.settings.title_trans | raw }}
+    </span>
+    {% endif %}
+    {% endif %}
+
+    <div class="block-content">
+      {% if section.blocks.size > 0 %}
+      <ul id="{{ ulId }}" class="nav nav-tabs{% if section.blocks.size < 2 %} hide{% endif %}">
+        {% for block in section.blocks %}
+        <li class="nav-tab-item{% if forloop.index == 1 %} active{% endif %}">
+          <a class="data switch" data-toggle="tab" href="#{{ ulId }}_{{ forloop.index }}">
+            <span {% if block.settings.title_trans != blank %} class="skeleton-loading" data-content-trans="#{{ ulId }}_{{ forloop.index }}_tab_title_trans"{% endif %}>{{ block.settings.title | raw }}</span>
+            {%- if block.settings.title_trans != blank -%}
+            <span class="hide" id="{{ ulId }}_{{ forloop.index }}_tab_title_trans">{{ block.settings.title_trans | raw }}</span>
+            {%- endif -%}
+          </a>
+        </li>
+        {% endfor %}  
+      </ul>
+      {% endif %}
+
+      <div class="nav-tab-content tab-content">
+        {% for block in section.blocks %}
+        {%- assign collection = collections[block.settings.collection] -%}
+        {%- assign tab_index = ulId | append: '_' | append: forloop.index -%}
+        <div class="tab-pane {% if forloop.index == 1 %} active{% endif %}" id="{{ ulId }}_{{ forloop.index }}">
+          {% if collection and collection.products.size > 0 %}
+          <div class="product-list-wrapper">
+            <div class="product-list use-slider-custom owl-carousel" data-slider-ele="#{{ ulId }}_{{ forloop.index }}_slider_data">
+              {% for product in collection.products limit: limit %}
+              <div class="product-item item item--size-{{ item_size }}{% if forloop.index > overfloat_threshold %} hide-os-desktop{% endif %} {% if forloop.index > 2 %}hide-os-mobile{% endif %}">
+                <div class="product-item-wrapper">
+                  <div class="product-item-top">
+                    <div class="product-item-media">
+                      {% include 'product-wishlist' with tooltip_pos: 'right' %}
+                      <a href="{{ product.url }}" class="product-image" title="{{ product.title | escape }}">
+                        <img {% if section.settings.use_effect_appear %}class="lozad owl-lazy" data-{% endif %}src="{{ product.featured_image | product_img_url: image_size , crop: 'bottom' }}" alt="{{ product.featured_image.alt | escape }}" id="{{ tab_index }}_{{ product.id }}_main1_img"/>
+                      </a>
+                    </div>
+                    {% include 'product-item-more-views-slider', ulId: tab_index %}
+                    {% include 'product-social-share' %}
+                    <div class="product-item-hover product-qs-wrapper">
+                      {% include 'product-qs-btn' %}
+                    </div>
+                    {% include 'product-labels' %}
+                  </div>
+                  <div class="product-item-bottom">
+                    <div class="product-details">
+                      <div class="product-name">
+                        <a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title }}</a>
+                      </div>
+                      <div class="list-mode-description">
+                        {{ product.description | strip_html | truncatewords: 3 }}
+                      </div>
+                      {% include 'product-price' %}  
+                    </div>
+                    <div class="actions product-item-hover{% if section.settings.show_compare_btn == false or settings.enable_compare == false %} no-compare{% endif %}">
+                      {% include 'product-cart-btn' %}
+                      {% include 'product-compare-btn' %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}  
+            </div>
+          </div>
+          <span id="{{ ulId }}_{{ forloop.index }}_slider_data" class="hide">
+            {
+              "nav": true,
+              "dots": false,
+              "responsive": {
+                "0": { "items": 2},
+                "768": {"items": {{ overfloat_threshold }}}
+              } 
+            }
+          </span>
+          {% else %}
+          <p class="alert alert-info"><span class="brackets skeleton-loading" data-trans-key="collections.general.no_matches">{{ 'collections.general.no_matches' | t }}</span></p>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% if section.settings.full_width == false %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% schema %}
+{
+  "name": "Block product style 3",
+  "class": "collection-style3-section section",
+  "max_blocks": 7,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Block product Style 3"
+    },
+    {
+      "type": "textarea",
+      "id": "title_trans",
+      "label": "Translate Heading"
+    },
+    {
+      "type": "text",
+      "id": "limit",
+      "label": "Limit",
+      "default": "100"
+    },
+    {
+      "type": "select",
+      "id": "item_size",
+      "label": "Choose item size",
+      "info": "You can change item size to change the number of products per row",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "very-large",
+          "label": "Very Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show Wishlist",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_btn",
+      "label": "Show Add to cart button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qs_btn",
+      "label": "Show Quick Shop button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_btn",
+      "label": "Show Compare button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_more_view",
+      "label": "Show More View Slider",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_share",
+      "label": "Show Social Sharing",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "use_effect_appear",
+      "label": "Use lazy loading image",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "image_size",
+      "label": "Image Size",
+      "default": "250x"
+    },
+    {
+      "type": "text",
+      "id": "more_view_size",
+      "label": "Image More View Size",
+      "default": "30x40"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Tab Item",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab Title"
+        },
+        {
+          "type": "textarea",
+          "id": "title_trans",
+          "label": "Translate Title Tab"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Block product style 3",
+      "category": "Collection",
+      "settings": {
+        "title": "Best Seller",
+        "limit": "100",
+        "show_wishlist": true,
+        "show_cart_btn": true,
+        "show_qs_btn": true,
+        "show_compare_btn": false,
+        "show_more_view": true,
+        "show_social_share": false,
+        "use_effect_appear": true,
+        "full_width": true,
+        "image_size": "250x",
+        "more_view_size": "30x40"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,57 @@
+{%- if image.alt contains '{{' -%}
+{%- assign words = image.alt | split: ' ' -%}
+{%- assign starting_sc = false -%}
+{%- assign capture_sc = '' -%}
+{%- assign sc_type = '' -%}
+{%- assign final_text = '' -%}
+{%- for word in words -%}
+	{%- if word == '{{video' or word == '{{youtube' or word == '{{vimeo' -%}
+		{%- assign starting_sc = true -%}
+		{%- assign capture_sc = '' -%}
+		{%- assign sc_type = word | replace: '{{', '' -%}
+	{%- endif -%}
+	{%- if word contains '}}' -%}
+		{%- assign starting_sc = 'end' -%}
+	{%- endif -%}
+	{%- if starting_sc == false -%}
+		{%- if final_text != '' -%}
+			{%- assign final_text  = final_text | append: ' ' -%}
+		{%- endif -%}
+		{%- assign final_text  = final_text | append: word -%}
+		{%- assign final_text  = final_text | strip -%}
+	{%- else -%}
+		{%- if starting_sc == 'end' -%}
+			{%- assign sc_key = '{{' | append: sc_type -%}
+			{%- assign remain_texts = word | split: '}}' -%}
+			{%- assign capture_sc = capture_sc | append: ' ' | append: remain_texts[0] | strip -%}
+			{%- assign sc_final = capture_sc | replace: sc_key, '' | strip -%}
+			{%- if sc_type == 'video' -%}
+			<div data-video-type="mp4" class="product__video-wrapper" data-video-style="muted">
+				<video loop playsinline muted data-image-count="20" data-video-type="mp4" data-video-style="muted" id="ProductVideo-{{ image.id }}" class="product__video" style="max-width:100%;" data-image-id="{{ image.id }}">
+					<source src="{{ sc_final | file_url }}" type="video/mp4">
+						Your browser does not support the video tag.
+				</video>
+			</div>
+			{%- elsif sc_type == 'youtube' -%}
+				<div data-player-id="youtube-player-{{ image.id }}" data-video-id="{{ sc_final }}" data-image-id="{{ image.id }}" class="youtube-player product__video" style="position: relative;">
+					<img src="https://img.youtube.com/vi/{{ sc_final }}/hqdefault.jpg" style="position: absolute;top:0;left:0;width:100%;" class="img-responsive"/>
+				</div>
+				{%- capture yt -%}
+					<div id="youtube-player-{{ image.id }}" class="video-{{ image.id }} hide" style="position:absolute;top:0;left:0;right:0;"></div>
+				{%- endcapture -%}
+				{%- assign youtubeCapture = youtubeCapture | append: yt -%}
+			{%- else -%}
+				<div data-player-id="vimeo-player-{{ image.id }}" data-video-id="{{ sc_final }}" data-image-id="{{ image.id }}" class="vimeo-player product__video" style="position: relative;height:100%;">
+				</div>
+				{%- capture vim -%}
+					<iframe id="vimeo-player-{{ image.id }}" class="vimeo-player product__video hide" src="https://player.vimeo.com/video/{{ sc_final }}" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="autoplay" style="position:absolute;top:0;left:0;right:0;min-height: 230px;"></iframe>
+				{%- endcapture -%}
+				{%- assign vimeoCapture = vimeoCapture | append: vim -%}
+			{%- endif -%}
+		{%- else -%}
+			{%- assign capture_sc = capture_sc | append: ' ' | append: word -%}
+			{%- assign capture_sc = capture_sc | strip -%}
+		{%- endif -%}
+	{%- endif -%}
+{%- endfor -%}
+{%- endif -%}

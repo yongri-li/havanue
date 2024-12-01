@@ -1,0 +1,14 @@
+{%- layout none -%}
+{%- assign image_size = '300x' -%}
+{%- assign more_view_size = '30x40' -%}
+{%- assign cart_items_handle = ',' -%}
+{%- for item in cart.items -%}
+{%- assign cart_items_handle = cart_items_handle | append: item.product.handle | append: ',' -%}
+{%- endfor -%}
+{%- assign upsell_handles = ',' -%}
+{%- for product in collection.products -%}
+{%- assign handle_compare = ',' | append: product.handle | append: ',' -%}
+{%- unless cart_items_handle contains handle_compare -%}
+{%- include 'product-item-upsell' with lazy: true -%}
+{%- endunless -%}
+{%- endfor -%}

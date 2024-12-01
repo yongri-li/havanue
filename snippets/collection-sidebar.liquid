@@ -1,0 +1,17 @@
+{% if section.settings.enable_tagsfilter %}
+<div class="navbar-canvas-inner">
+  <div class="canvas-content">
+    <div class="cdz-menu-logo">
+      <div class="close-btn-canvas">
+        <button type="button" class="cdz-navbar-toggle navbar-toggle cdz-menu-responsive">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <span class="collection-title visible-xs visible-sm">{{ collection.title }}</span>
+    </div>
+    {% include 'collection-sidebar-layered' %}
+  </div>
+</div>
+{% endif %}

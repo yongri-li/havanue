@@ -1,0 +1,67 @@
+<ul class="unstyled customer_accounts">
+  <!-- Customer Links -->            
+  {% if shop.customer_accounts_enabled %}            
+  {% if customer  %}
+  <li class="toolbar-customer"><a href="/account"><i class="fa fa-user"></i> <span class="brackets skeleton-loading" data-trans-key="customer.account.title">{{ 'customer.account.title' | t }}</span></a></li>                
+  <li class="toolbar-customer log-out"><a href="/account/logout"><i class="fa fa-sign-out"></i> <span class="brackets skeleton-loading" data-trans-key="layout.customer.logout">{{ 'layout.customer.logout' | t }}</span></a></li>
+  {% else %}
+  <li class="toolbar-customer login-account cdz-dropdown">                    
+    <span id="loginButton" class="dropdown-toggle cdz-trigger">
+      <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+      <i class="sub-dropdown visible-sm visible-md visible-lg"></i>
+      {% include 'icon-login' %}
+      <a href="/account/login" id="customer_login_link"><span class="brackets skeleton-loading" data-trans-key="layout.customer.log_in">{{ 'layout.customer.log_in' | t }}</span>{% include 'icon-arrow' %}</a>
+    </span>                    
+    <div id="loginBox" class="text-left cdz-dropdown-content" style="display: none;">
+      {% form 'customer_login' %}
+      <div id="bodyBox">
+        <ul class="control-container customer-accounts list-unstyled form-list">
+          <li class="clearfix">
+            <div class="field label-effect">
+              <label for="customer_email_box" class="control-label"><span class="brackets skeleton-loading" data-trans-key="customer.login.email">{{ 'customer.login.email' | t }}</span> <span class="req">*</span></label>
+              <input type="email" value="" name="customer[email]" id="customer_email_box" class="form-control input-text" />
+            </div>
+          </li>
+          {% if form.password_needed %}
+          <li class="clearfix">
+            <div class="field label-effect">
+              <label for="customer_password_box" class="control-label"><span class="brackets skeleton-loading" data-trans-key="customer.login.password">{{ 'customer.login.password' | t }}</span> <span class="req">*</span></label>
+              <input type="password" value="" name="customer[password]" id="customer_password_box" class="form-control password input-text" />
+            </div>
+          </li>
+          {% endif %}
+          <li class="clearfix">
+            <button class="btn btn-1" type="submit"><span class="brackets skeleton-loading" data-trans-key="sections.header.top_header_login">{{ 'sections.header.top_header_login' | t }}</span></button>
+          </li>                  
+          <li class="clearfix forgot-password-link">
+            <a href="/account/login#recover"><span class="brackets skeleton-loading" data-trans-key="customer.login.forgot_password">{{ 'customer.login.forgot_password' | t }}</span></a>
+          </li>
+          <li class="clearfix register-link">
+            <a href="/account/register"><span class="brackets skeleton-loading" data-trans-key="sections.header.register_dropdown">{{ 'sections.header.register_dropdown' | t }}</span></a>
+          </li>
+        </ul>
+      </div>
+      {% endform %}
+    </div>
+  </li>
+  <li class="toolbar-customer create-account">
+    {% if shop.customer_accounts_enabled %}          
+    {% include 'icon-register' %}
+    <a href="/account/register" id="customer_register_link"><span class="brackets skeleton-loading" data-trans-key="sections.header.top_header_register">{{ 'sections.header.top_header_register' | t }}</span></a>
+    {% endif %}
+  </li>                  
+  {% endif %}
+  {% if settings.enable_wishlist %}
+  <li class="toolbar-customer my-wishlist"><a href="/pages/wish-list">{% include 'icon-wishlist' %}<span class="brackets skeleton-loading" data-trans-key="sections.header.top_header_wishlist">{{ 'sections.header.top_header_wishlist' | t }}</span><span v-if="wishlistItems.length > 0" v-html="'(' + wishlistItems.length + ')'"></span></a></li>
+  {% endif %}
+  {% endif %}
+  {% if settings.enable_compare %}
+  <li class="toolbar-customer comparing-box">
+    <a href="javascript:void(0);" class="comparing-box-btn">
+      {% include 'icon-compare' %}
+      <span class="brackets skeleton-loading" data-trans-key="collections.product_item.compare">{{ 'collections.product_item.compare' | t }}</span>
+      <span v-if="compareItems.length > 0" v-html="'(' + compareItems.length + ')'"></span>
+    </a>
+  </li>
+  {% endif %}        
+</ul>

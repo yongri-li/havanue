@@ -1,0 +1,226 @@
+{%- assign limit = section.settings.limit | divided_by : 1 -%}
+{%- assign image_big_size = section.settings.image_big_size -%}
+{%- assign image_size = section.settings.image_size -%}
+{% capture ulId %}tab_list_{{ section.id }}{% endcapture %}
+<div id="collection_{{ section.id }}" class="collection-style2 collection-widget" data-section-id="{{ section.id }}" data-section-type="collection-style2">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+    <div class="row">
+      <div class="section-inner col-xs-12">
+        {% if section.settings.title != blank %}
+        <div class="block-title">
+          <span><span class="title_icon">{% include 'icon-diamond' %}</span><span class="title_text{% if section.settings.title_trans != blank %} skeleton-loading" data-content-trans="#{{ ulId }}_title_trans{% endif %}">{{ section.settings.title | raw }}</span></span>
+        </div>
+        {% if section.settings.title_trans != blank %}
+        <span id="{{ ulId }}_title_trans" class="hide">
+          {{ section.settings.title_trans | raw }}
+        </span>
+        {% endif %}
+        {% endif %}
+
+        <div class="block-content">
+          {% if section.blocks.size > 0 %}
+          {% assign tmp = section.blocks[0] %}
+          <ul id="{{ ulId }}" class="nav nav-tabs{% if section.blocks.size < 2 %} hide{% endif %}">
+            {% for block in section.blocks %}
+            <li class="nav-tab-item{% if forloop.index == 1 %} active{% endif %}">
+              <a class="data switch" data-toggle="tab" href="#{{ ulId }}_{{ forloop.index }}">
+                <span {% if block.settings.title_trans != blank %} class="skeleton-loading" data-content-trans="#{{ ulId }}_{{ forloop.index }}_tab_title_trans"{% endif %}>{{ block.settings.title | raw }}</span>
+                {%- if block.settings.title_trans != blank -%}
+                <span class="hide" id="{{ ulId }}_{{ forloop.index }}_tab_title_trans">{{ block.settings.title_trans | raw }}</span>
+                {%- endif -%}
+              </a>
+            </li>
+            {% endfor %}  
+          </ul>
+          {% endif %}
+
+          <div class="nav-tab-content tab-content">
+            {% for block in section.blocks %}
+            {%- assign collection = collections[block.settings.collection] -%}
+            <div class="tab-pane fade in{% if forloop.index == 1 %} active{% endif %}" id="{{ ulId }}_{{ forloop.index }}">
+              {% if collection and collection.products.size > 0 %}
+              <div class="product-list-wrapper">
+                <div class="product-list use-switch-slider-grid" data-switch-slider-ele="#{{ ulId }}_{{ forloop.index }}_switch_data">
+                  {% for product in collection.products limit: limit %}
+                  {% capture html %}
+                  {% assign tmp = forloop.index | modulo: 7 %}
+                  <div class="product-item item{% if forloop.last and collection.products.size > 1 %} visible-xs{% endif %}">
+                    <div class="product-item-wrapper">
+                      <div class="product-item-inner">
+                        <div class="product-item-media">
+                          {% include 'product-wishlist' with tooltip_pos: 'right' %}
+                          <a href="{{ product.url }}" class="product-image" title="{{ product.title }}">
+                            {% if forloop.last %}
+                            {% assign grid_image_width = image_big_size %}
+                            {% else %}
+                            {% assign grid_image_width = image_size %}
+                            {% endif %}
+                            <img {% if section.settings.use_effect_appear %}class="lozad" data-{% endif %}src="{{ product.featured_image | product_img_url: grid_image_width , crop: 'bottom' }}" alt="{{ product.featured_image.alt | escape }}" />
+                          </a>
+                          {% include 'product-labels' %}
+                          <div class="product-item-hover">
+                            <div class="product-name">
+                              <a href="{{ product.url }}" title="{{ product.title }}">{{ product.title }}</a>
+                            </div>
+                            {% include 'product-price' %}
+                            <div class="actions">
+                              {% include 'product-qs-btn' with showTooltip: true %}
+                              {% include 'product-cart-btn' with showTooltip: true %}
+                              {% include 'product-compare-btn' with showTooltip: true %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endcapture %}
+                  {{ html }}
+                  {% endfor %}  
+                </div>
+                <span id="{{ ulId }}_{{ forloop.index }}_switch_data" class="hide">
+                  {
+                    "carousel": {
+                      "responsive":{
+                        "0":{"items":   2}
+                      }   
+                    }
+                  }
+                </span>
+                {% if collection.products_count > 1 and html != '' %}
+                <div class="product-list big-item hidden-xs">
+                  {{ html | replace: 'visible-xs', '' }}  
+                </div>
+                {% endif %}
+              </div>
+              {% else %}
+              <p class="alert alert-info"><span class="brackets skeleton-loading" data-trans-key="collections.general.no_matches">{{ 'collections.general.no_matches' | t }}</span></p>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Block product style 2",
+  "class": "collection-style2-section section",
+  "max_blocks": 7,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Block product Style 2"
+    },
+    {
+      "type": "textarea",
+      "id": "title_trans",
+      "label": "Translate Heading"
+    },
+    {
+      "type": "text",
+      "id": "limit",
+      "label": "Limit",
+      "default": "7"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label",
+      "label": "Show label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show Wishlist",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_btn",
+      "label": "Show Add to cart button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qs_btn",
+      "label": "Show Quick Shop button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_btn",
+      "label": "Show Compare button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "use_effect_appear",
+      "label": "Use lazy loading image",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "image_size",
+      "label": "Image Size",
+      "default": "250x"
+    },
+    {
+      "type": "text",
+      "id": "image_big_size",
+      "label": "Image Big Size",
+      "default": "500x"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Tab Item",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab Title"
+        },
+        {
+          "type": "textarea",
+          "id": "title_trans",
+          "label": "Translate Title Tab"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Block product style 2",
+      "category": "Collection",
+      "settings": {
+        "limit": "7",
+        "show_label": false,
+        "show_wishlist": true,
+        "show_cart_btn": true,
+        "show_qs_btn": true,
+        "show_compare_btn": false,
+        "use_effect_appear": true,
+        "full_width": false,
+        "image_size": "250x",
+        "image_big_size": "500x"
+      }
+    }
+  ]
+}
+{% endschema %}

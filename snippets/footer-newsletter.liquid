@@ -1,0 +1,42 @@
+{% if section.settings.footer_newsletter_enable %}
+<div class="newsletter-wrapper col-sm-6">
+	<div class="news-text">
+		<p class="title{% if section.settings.title_trans != blank %} skeleton-loading" data-content-trans="#footer_{{ section.id }}_news_title_trans{% endif %}">{{ section.settings.title }}</p>
+		{% if section.settings.title_trans != blank %}
+		<span id="footer_{{ section.id }}_news_title_trans" class="hide">{{ section.settings.title_trans | raw }}</span>
+		{% endif %}
+
+		<p class="sub-title{% if section.settings.subtitle_trans != blank %} skeleton-loading" data-content-trans="#footer_{{ section.id }}_news_subtitle_trans{% endif %}">{{ section.settings.subtitle }}</p>
+		{% if section.settings.subtitle_trans != blank %}
+		<span id="footer_{{ section.id }}_news_subtitle_trans" class="hide">{{ section.settings.subtitle_trans | raw }}</span>
+		{% endif %}
+	</div>
+	<div class="news-form">
+		{% if settings.use_mail_chimp and settings.mail_chimp_url != blank %}
+			{% include 'mailchimp-newsletter' %}
+		{% else %}
+			{% form 'customer' %}
+			{% if form.posted_successfully? %}
+			<p class="form--success"><span class="brackets skeleton-loading" data-trans-key="general.newsletter_form.confirmation">{{ 'general.newsletter_form.confirmation' | t }}</span></p>
+			{% else %}
+			<div class="input-box">
+				<input type="hidden" name="contact[tags]" value="newsletter" />
+				<input type="email"
+				name="contact[email]"
+				id="Email"
+				class="input-group__field newsletter__input"
+				value="{% if customer %}{{ customer.email }}{% endif %}"
+				data-placeholder-trans="general.newsletter_form.email_placeholder" data-placeholder-default="{{ 'general.newsletter_form.email_placeholder' | t }}"
+				{%- if settings.enable_translate == false -%} placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"{%- endif -%}
+				autocorrect="off"
+				autocapitalize="off" aria-label="form"/>
+			</div>
+			<div class="actions">
+				<input type="submit" data-value-trans="general.newsletter_form.submit" data-value-default="{{ 'general.newsletter_form.submit' | t }}" class="button"{% if settings.enable_translate == false %} value="{{ 'general.newsletter_form.submit' | t }}"{% endif %} />
+			</div>
+			{% endif %}        
+			{% endform %}
+		{% endif %}
+	</div>
+</div>
+{% endif %}

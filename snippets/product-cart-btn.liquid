@@ -1,0 +1,67 @@
+{% if section.settings.show_cart_btn or force_display %}
+<form method="post" enctype="multipart/form-data">
+  {% if product.available %}
+  <div class="hide clearfix"> 
+    <select name="id" >
+      {% if product.compare_at_price_max > product.price %}
+
+      {% assign found_one_in_stock = false %}
+      {% for variant in product.variants %}
+      {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
+      {% assign found_one_in_stock = true %}
+      {% assign found_variant_id = variant.id %}
+      {% break %}
+      {% endif %}
+      {% endfor %}
+
+      {% if found_one_in_stock == false %}
+      {% for variant in product.variants %}
+      {% if variant.available and found_one_in_stock == false %}
+      {% assign found_one_in_stock = true %}
+      {% assign found_variant_id = variant.id %}
+      {% break %}
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      {% for variant in product.variants %}
+      {% if variant.id == found_variant_id %}
+      <option selected="selected" value="{{ variant.id }}">{{ variant.title | escape }}</option>
+      {% else %}
+      <option value="{{ variant.id }}">{{ variant.title | escape }}</option>
+      {% endif %}
+      {% endfor %}
+      {% else %}
+      {% assign found_one_in_stock = false %}
+      {% for variant in product.variants %}
+      {% if variant.available and found_one_in_stock == false %}
+      {% assign found_one_in_stock = true %}
+      <option selected="selected" value="{{ variant.id }}">{{ variant.title | escape }}</option>
+      {% else %}
+      <option value="{{ variant.id }}">{{ variant.title | escape }}</option>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </select>
+  </div>  
+  {% endif %}
+  <div class="status-cart">
+    {% if product.available %}
+    {% if product.variants.size == 1 %}
+    <button class="button btn-cart" type="submit" name="add" {% if showTooltip %}data-toggle="tooltip" data-data-original-title-trans="products.product.add_to_cart" data-data-original-title-default="{{ 'products.product.add_to_cart' | t }}" data-original-title="{{ 'products.product.add_to_cart' | t }}" data-placement="{% if tooltip_pos != blank %}{{ tooltip_pos }}{% else %}top{% endif %}"{% endif %} aria-label="Button">
+      <span>
+        {% include 'icon-cart-style4' %}
+        <span class="cart_title">
+          <span class="brackets skeleton-loading" data-trans-key="products.product.add_to_cart">{{ 'products.product.add_to_cart' | t }}</span>
+        </span>
+      </span>
+    </button>
+    {% else %}
+    <button class="button btn-cart select-option" type="button" data-url="{{ product.url }}" {% if showTooltip %} data-toggle="tooltip" data-data-original-title-trans="products.product.add_to_cart" data-data-original-title-default="{{ 'products.product.add_to_cart' | t }}" data-original-title="{{ 'products.product.add_to_cart' | t }}" data-placement="{% if tooltip_pos != blank %}{{ tooltip_pos }}{% else %}top{% endif %}"{% endif %} aria-label="Button"><span>{% include 'icon-select-option' %}<span class="cart_title"><span class="brackets skeleton-loading" data-trans-key="products.product.add_to_cart">{{ 'products.product.add_to_cart' | t }}</span></span></span></button>
+    {% endif %}
+    {% else %}
+    <button class="button btn-cart disabled" disabled="disabled" type="button" name="add" {% if showTooltip %} data-toggle="tooltip" data-data-original-title-trans="products.product.add_to_cart" data-data-original-title-default="{{ 'products.product.add_to_cart' | t }}" data-original-title="{{ 'products.product.add_to_cart' | t }}" data-placement="{% if tooltip_pos != blank %}{{ tooltip_pos }}{% else %}top{% endif %}"{% endif %} aria-label="Button"><span>{% include 'icon-cart-style4' %}<span class="cart_title"><span class="brackets skeleton-loading" data-trans-key="products.product.add_to_cart">{{ 'products.product.add_to_cart' | t }}</span></span></span></button>
+    {% endif %}
+  </div>
+</form>
+{% endif %}

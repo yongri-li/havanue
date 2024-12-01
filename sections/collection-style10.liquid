@@ -1,0 +1,253 @@
+{%- assign limit = section.settings.limit | divided_by : 1 -%}
+{%- assign image_size = section.settings.image_size -%}
+{% capture wrapId %}collection_{{ section.id }}{% endcapture %}
+<div id="{{ wrapId }}" class="collection-style10 collection-widget" data-section-id="{{ section.id }}" data-section-type="collection-style10">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+    <div class="row">
+      <div class="section-inner col-xs-12">
+        <div class="block-content">
+          {% for i in (1..2) %}
+          {% assign titleIndex = 'title_' | append : i %}
+          {% assign titleTransIndex = 'title_' | append : i | append: '_trans' %}
+          {% assign descIndex = 'desc_' | append : i %}
+          {% assign descTransIndex = 'desc_' | append : i | append: '_trans' %}
+          {% assign collectionIndex = 'collection_' | append : i %}
+          {% assign imageIndex = 'image_' | append : i %}
+          <div class="part-block part-block-{{ i }}">
+            <div class="row">
+              <div class="col-xs-6 col-block">
+                {% if section.settings[titleIndex] != blank %}
+                <span class="part-title{% if section.settings[titleTransIndex] != blank %} skeleton-loading" data-content-trans="#{{ wrapId }}_{{ titleTransIndex }}{% endif %}">{{ section.settings[titleIndex] | raw }}</span>
+                {% endif %}
+                {% if section.settings[titleTransIndex] != blank %}
+                <span id="{{ wrapId }}_{{ titleTransIndex }}" class="hide">{{ section.settings[titleTransIndex] | raw }}</span>
+                {% endif %}
+
+                {% if section.settings[descIndex] != blank %}
+                <div class="part-desc{% if section.settings[descTransIndex] != blank %} skeleton-loading" data-content-trans="#{{ wrapId }}_{{ descTransIndex }}{% endif %}">{{ section.settings[descIndex] | raw }}</div>
+                {% endif %}
+                {% if section.settings[descTransIndex] != blank %}
+                <span id="{{ wrapId }}_{{ descTransIndex }}" class="hide">{{ section.settings[descTransIndex] | raw }}</span>
+                {% endif %}
+
+                {%- assign collection = collections[section.settings[collectionIndex]] -%}
+                {% if collection and collection.products.size > 0 %}
+                <div class="product-list-wrapper">
+                  <div class="product-list use-slider-custom owl-carousel" data-slider-ele="#{{ wrapId }}_{{ i }}_slider_data">
+                    {% for product in collection.products limit: limit %}
+                    <div class="product-item item{% if forloop.index > 2 %} hide-os-desktop hide-os-mobile{% endif %}">
+                      <div class="product-item-wrapper">
+                        <div class="product-item-top">
+                          <div class="product-item-media">
+                            {% include 'product-wishlist' with tooltip_pos: 'right' %}
+                            <a href="{{ product.url }}" class="product-image" title="{{ product.title }}">
+                              <img {% if section.settings.use_effect_appear %}class="lozad owl-lazy" data-{% endif %}src="{{ product.featured_image | product_img_url: image_size , crop: 'bottom' }}" alt="{{ product.featured_image.alt | escape }}" />
+                            </a>
+                          </div>
+                          <div class="product-item-hover product-qs-wrapper">
+                            {% include 'product-qs-btn' %}  
+                          </div>
+                          {% include 'product-labels' %}
+                        </div>
+                        <div class="product-item-bottom">
+                          <div class="product-details">
+                            <div class="product-name">
+                              <a href="{{ product.url }}" title="{{ product.title }}">{{ product.title }}</a>
+                            </div>
+                            <div class="list-mode-description {% if template == 'index' %}hide{% endif %}">
+                              {{ product.description | strip_html | truncatewords: 150 }}
+                            </div>
+                            {% include 'product-review' %}
+                            {% include 'product-price' %}  
+                          </div>
+                          <div class="actions product-item-hover{% if section.settings.show_compare_btn == false or settings.enable_compare == false %} no-compare{% endif %}">
+                            {% include 'product-cart-btn' %}
+                            {% include 'product-compare-btn' %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}  
+                  </div>
+                </div>
+                <span id="{{ wrapId }}_{{ i }}_slider_data" class="hide">
+                  {
+                    "nav": false,
+                    "dots": true,
+                    "responsive": {
+                      "0": { "items": 2}
+                    } 
+                  }
+                </span>
+                {% else %}
+                <p class="alert alert-info"><span class="brackets skeleton-loading" data-trans-key="collections.general.no_matches">{{ 'collections.general.no_matches' | t }}</span></p>
+                {% endif %}
+              </div>
+              <div class="col-xs-6 col-banner{% if section.settings.use_effect_appear %} wow fadeIn{% endif %}">
+                {% if section.settings[imageIndex] %}
+                <div class="banner{% if section.settings.use_effect_appear %} wait-animated{% endif %}">
+                  <img {% if section.settings.use_effect_appear %}class="lozad" data-{% endif %}src="{{ section.settings[imageIndex] | img_url: 'master' }}"/>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>  
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Block product style 10",
+  "class": "collection-style10-section section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Block Name",
+      "default": "Block product Style 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show Wishlist",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_btn",
+      "label": "Show Add to cart button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qs_btn",
+      "label": "Show Quick Shop button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_btn",
+      "label": "Show Compare button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_share",
+      "label": "Show Social Sharing",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "use_effect_appear",
+      "label": "Use lazy loading image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "limit",
+      "label": "Limit",
+      "default": "10"
+    },
+    {
+      "type": "text",
+      "id": "image_size",
+      "label": "Image Size",
+      "default": "250x"
+    }, 
+    {
+      "type": "header",
+      "content": "Part 1"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "title_1_trans",
+      "label": "Translate Title"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_1",
+      "label": "Description"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_1_trans",
+      "label": "Translate Description"
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Banner"
+    },
+    {
+      "type": "header",
+      "content": "Part 2"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "title_2_trans",
+      "label": "Translate Title"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_2",
+      "label": "Description"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_2_trans",
+      "label": "Translate Description"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Banner"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Block product style 10",
+      "category": "Collection",
+      "settings": {
+        "show_wishlist": false,
+        "show_cart_btn": false,
+        "show_qs_btn": false,
+        "show_compare_btn": false,
+        "show_social_share": false,
+        "full_width": false,
+        "limit": "10",
+        "use_effect_appear": true,
+        "image_size": "250x"
+      }
+    }
+  ]
+}
+{% endschema %}

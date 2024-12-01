@@ -1,0 +1,13 @@
+<form action="{{ settings.mail_chimp_url }}" class="contact-form" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+  <div class="block-content">
+    <div class="form-subscribe-header">
+      <label for="newsletter"><span class="brackets skeleton-loading" data-trans-key="general.newsletter_form.email_placeholder">{{ 'general.newsletter_form.email_placeholder' | t }}</span>:</label>
+    </div>
+    <div class="input-box">
+      <input type="email" name="EMAIL" id="newsletter_popup" title="{{ 'general.newsletter_form.email_placeholder' | t }}" data-title-trans="general.newsletter_form.email_placeholder" data-title-default="{{ 'general.newsletter_form.email_placeholder' | t }}" class="input-text required-entry validate-email" data-placeholder-trans="general.newsletter_form.email_placeholder" data-placeholder-default="{{ 'general.newsletter_form.email_placeholder' | t }}"{%- if settings.enable_translate == false -%} placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"{%- endif -%} value="{% if customer %}{{ customer.email }}{% endif %}">
+    </div>
+    <div class="actions">
+      <button type="submit" title="{{ 'general.newsletter_form.submit'|t }}" data-title-trans="general.newsletter_form.submit" data-title-default="{{ 'general.newsletter_form.submit' | t }}" class="button"><span><span><span class="brackets skeleton-loading" data-trans-key="general.newsletter_form.submit">{{ 'general.newsletter_form.submit' | t }}</span></span></span></button>
+    </div>
+  </div>
+</form>

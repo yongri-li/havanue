@@ -1,0 +1,103 @@
+{%- if section.settings.gm_key != blank and section.settings.map_address != blank -%}
+{%- assign has_map = true -%}
+{%- else -%}
+{%- assign has_map = false -%}
+{%- endif -%}
+<div class="contacts-index-index" data-section-type="contacts" id="section_{{ section.id }}">
+  <div class="{% if has_map %}col-sm-6 {% endif %}col-xs-12">
+    {% form 'contact' %}
+    {% if form.posted_successfully? %}
+    <p class="note form-success">
+      <span class="brackets skeleton-loading" data-trans-key="contact.form.post_success">{{ 'contact.form.post_success' | t }}</span>
+    </p>
+    {% endif %}
+
+    {{ form.errors | default_errors }}
+
+    <div class="fieldset">
+      <h2 class="legend"><span class="brackets skeleton-loading" data-trans-key="contact.form.title">{{ 'contact.form.title' | t }}</span></h2>
+      <ul class="form-list">
+        <li class="fields">
+          <div class="field label-effect">
+            <label for="ContactFormName" class="required"><span class="brackets skeleton-loading" data-trans-key="contact.form.name">{{ 'contact.form.name' | t }}</span></label>
+            <div class="input-box">
+              <input type="text" id="ContactFormName" name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}" class="input-text required-entry">
+            </div>
+          </div>
+          <div class="field label-effect">
+            <label for="ContactFormEmail" class="required{% if form.errors contains 'email' %} label--error{% endif %}"><span class="brackets skeleton-loading" data-trans-key="contact.form.email">{{ 'contact.form.email' | t }}</span></label>
+            <div class="input-box">
+              <input type="email" id="ContactFormEmail" name="contact[email]" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" class="input-text required-entry{% if form.errors contains 'email' %} input--error{% endif %}">
+            </div>
+          </div>
+        </li>
+        <li class="fields">
+          <div class="field label-effect">
+            <label for="ContactFormPhone"><span class="brackets skeleton-loading" data-trans-key="contact.form.phone">{{ 'contact.form.phone' | t }}</span></label>
+            <div class="input-box">
+              <input type="tel" id="ContactFormPhone" name="contact[phone]" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}" class="input-text">
+            </div>
+          </div>
+        </li>
+        <li class="wide active">
+          <label for="ContactFormMessage" class="required"><span class="brackets skeleton-loading" data-trans-key="contact.form.message">{{ 'contact.form.message' | t }}</span></label>
+          <div class="input-box">
+            <textarea id="ContactFormMessage" name="contact[body]" class="required-entry input-text" cols="5" rows="3">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="buttons-set">
+      {% comment %}<p class="required">* <span class="brackets skeleton-loading" data-trans-key="contact.form.required">{{ 'contact.form.required' | t }}</span></p>{% endcomment %}
+      <button type="submit" title="Submit" class="button"><span><span><span class="brackets skeleton-loading" data-trans-key="contact.form.submit">{{ 'contact.form.submit' | t }}</span></span></span></button>
+    </div>
+    {% endform %}
+  </div>
+  {%- if has_map -%}
+  <div class="col-sm-6 col-xs-12">
+    <div class="cdz-google-map" style="width: 100%; height: 300px" data-key="{{ section.settings.gm_key | escape }}" data-address-setting="{{ section.settings.map_address | escape }}"></div>
+    <div class="contact-adress">
+      <p><strong><span class="brackets skeleton-loading" data-trans-key="contact.form.address">{{ 'contact.form.address' | t }}</span>:</strong> {{ section.settings.map_address }}</p>
+      {%- if section.settings.telephone != blank -%}
+      <p><strong><span class="brackets skeleton-loading" data-trans-key="contact.form.telephone">{{ 'contact.form.telephone' | t }}</span>:</strong> {{ section.settings.telephone }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+  <script>
+  theme.mapKey = '{{ section.settings.gm_key | escape }}';
+  </script>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Contacts Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "gm_key",
+      "label": "Google Maps key",
+      "default": "AIzaSyByF5Th99QzkJtIhod9awRaDK2CGSNB43o"
+    },
+    {
+      "id": "map_address",
+      "type": "text",
+      "label": "Map address",
+      "info": "Google maps will find the exact location",
+      "default": "80 Spadina Ave, Toronto"
+    },
+    {
+      "type": "text",
+      "id": "telephone",
+      "label": "Telephone",
+      "default": "(514) 955-9337"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

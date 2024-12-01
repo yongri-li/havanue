@@ -1,0 +1,56 @@
+<div class="customer-account-activate">
+  <div class="main-container col1-layout">
+    <div class="main">
+      <div class="content-breadcrums">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              {% include 'breadcrumbs' %}
+            </div>
+          </div>
+        </div>    
+      </div>
+
+      <div class="container col-main-containter">
+        <div class="row">
+          <div class="col-main col-sm-12">
+            <div class="col-wrapper-main">
+              <div class="account-activate">
+                <div class="page-title">
+                  <h1 class="skeleton-loading"><span class="brackets skeleton-loading" data-trans-key="customer.activate_account.title">{{ 'customer.activate_account.title' | t }}</span></h1>
+                  <div class="field note"><span class="brackets skeleton-loading" data-trans-key="customer.activate_account.subtext">{{ 'customer.activate_account.subtext' | t }}</span></div>
+                </div>
+              </div>
+              {% form 'activate_customer_password' %}
+              {{ form.errors | default_errors }}
+              <div class="fieldset">
+                <ul class="form-list">
+                  <li class="fields">
+                    <div class="field label-effect">
+                      <label for="CustomerPassword" class="label--hidden"><span class="brackets skeleton-loading" data-trans-key="customer.activate_account.password">{{ 'customer.activate_account.password' | t }}</span></label>
+                      <div class="input-box">
+                        <input type="password" value="" name="customer[password]" id="CustomerPassword" data-placeholder-trans="customer.activate_account.password" data-placeholder-default="{{ 'customer.activate_account.password' | t }}"{%- if settings.enable_translate == false -%} placeholder="{{ 'customer.activate_account.password' | t }}"{%- endif -%}>    
+                      </div>
+                    </div>
+
+                    <div class="field label-effect">
+                      <label for="CustomerPasswordConfirmation" class="label--hidden"><span class="brackets skeleton-loading" data-trans-key="customer.activate_account.password_confirm">{{ 'customer.activate_account.password_confirm' | t }}</span></label>
+                      <div class="input-box">
+                        <input type="password" value="" name="customer[password_confirmation]" id="CustomerPasswordConfirmation" data-placeholder-trans="customer.activate_account.password_confirm" data-placeholder-default="{{ 'customer.activate_account.password_confirm' | t }}"{%- if settings.enable_translate == false -%} placeholder="{{ 'customer.activate_account.password_confirm' | t }}"{%- endif -%}>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="buttons-set">
+                <button type="submit" title="{{ 'customer.activate_account.submit'|t }}" data-title-trans="customer.activate_account.submit" data-title-default="{{ 'customer.activate_account.submit' | t }}" class="button btn"><span><span><span class="brackets skeleton-loading" data-trans-key="customer.activate_account.submit">{{ 'customer.activate_account.submit' | t }}</span></span></span></button>
+                <button type="submit" title="{{ 'customer.activate_account.cancel'|t }}" data-title-trans="customer.activate_account.cancel" data-title-default="{{ 'customer.activate_account.cancel' | t }}" class="button" name="decline"><span><span><span class="brackets skeleton-loading" data-trans-key="customer.activate_account.cancel">{{ 'customer.activate_account.cancel' | t }}</span></span></span></button>
+              </div>
+              {% endform %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

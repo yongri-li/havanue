@@ -1,0 +1,292 @@
+/*----------Variables----------*/
+$font_general: {{ settings.base_font | remove: 'Google_' | replace: '+', ' ' }};
+
+$font_weight_bold: 600;
+$font_weight_normal: 500;
+$font_weight_thin: 300;
+
+$color_text_title: {{settings.color_text_title}};
+$color_text_banner: {{settings.color_text_banner}};
+$border_general: {{settings.border_general}};
+$border_title: {{settings.border_title}};
+$transition-base: ease all 0.5s;
+
+/*Mixin*/
+@mixin prefix($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      -webkit-#{$property}: $value;
+    } 
+    @else if $prefix == moz {
+      -moz-#{$property}: $value;
+    } 
+    @else if $prefix == ms {
+      -ms-#{$property}: $value;
+    } 
+    @else if $prefix == o {
+      -o-#{$property}: $value;
+    } 
+    @else if $prefix == spec {
+      #{$property}: $value;
+    } 
+    @else  {
+      @warn 'Unrecognized prefix: #{$prefix}';
+    }
+  }
+}
+@mixin inline-block(){
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+}
+@mixin border-radius($border-radius) {
+  @include prefix(border-radius, $border-radius, ms webkit spec); 
+}
+@mixin transition($transition) {
+  @include prefix(transition, $transition, ms webkit spec);
+}
+@mixin transform($transform) {
+  @include prefix(transform, $transform, ms webkit spec);
+}
+@mixin opacity($var1, $var2) {
+  opacity: $var1;
+  filter: alpha(opacity=$var2);
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=$var2)";
+}
+/*align-items: stretch|center|flex-start|flex-end|baseline|initial|inherit;*/
+@mixin align-items($value: stretch) {
+  $alt-value: $value;
+
+  @if $value == 'flex-start' {
+    $alt-value: start;
+  } @else if $value == 'flex-end' {
+    $alt-value: end;
+  }
+
+  /* sass-lint:disable no-misspelled-properties*/
+  -ms-flex-align: $alt-value;
+  @include prefix(align-items, $value, webkit moz ms o spec);
+}
+
+/*Header*/
+.nav-header {
+	border-bottom: 0;
+}
+/*Slideshow*/
+.cdz-slideshow {
+	.owl-nav>div .icon-cdz {
+		&.icon-cdz-prev,
+		&.icon-cdz-next {
+			margin: 0 auto;
+			line-height: 60px;
+		}
+	}
+}
+/*Block title product*/
+.block-title{
+	>span {
+		display: block;
+		.title_text {
+			font-size: 36px;
+			border-bottom: 0;
+			@media(max-width: 767px) {
+				font-size: 20px;
+			}
+		}
+		.title_icon {
+			display: none;
+		}
+	}
+	.sub-title {
+		font-size: 14px;
+		color: #ccc;
+		text-transform: uppercase;
+		font-style: normal;
+		font-family: $font_general;
+		font-weight: $font_weight_thin;
+		position: relative;
+		@include inline-block();
+		margin-top: 15px;
+		&:after, 
+		&:before {
+			content: '';
+			position: absolute;
+			width: 30px;
+			height: 1px;
+			background: $color_text_title;
+			top: 50%;
+		}
+		&:after {
+			left: -50px;
+		}
+		&:before {
+			right: -50px;
+		}
+	}
+}
+.collection-style2 {
+	.block-title {
+		margin-bottom: 15px;
+	}
+	.product-list-wrapper .product-list .product-item .product-item-wrapper .product-item-inner .product-item-hover {
+		.product-name a {
+			font-size: 16px;
+			font-weight: $font_weight_thin;
+		}
+		.product-price__price {
+			font-size: 16px;
+			font-weight: $font_weight_thin;
+		}
+	}
+}
+/*Group banner*/
+.groupbanner-text .groupinfo {
+	position: static;
+	background: #fff;
+	.groupinfo-inner .groupinfo-desc {
+		color: $color_text_banner;
+		font-size: 12px;
+		.grifo-title {
+			font-size: 14px;
+			color: #999;
+			font-weight: $font_weight_thin;
+			text-transform: initial;
+		}
+	}
+}
+.banner-border{
+	&:before,
+	&:after  {
+		display: none;
+	}
+}
+/*Collection list*/
+.collection-style2 {
+	.nav-tabs .nav-tab-item {
+		margin: 0 5px;
+		border: 2px solid $border_general;
+		padding: 1px 10px;
+		@include border-radius(0);
+		@media(max-width: 767px) {
+			border: none;
+		}
+		>a {
+			font-size: 11px;
+		}
+		&.active,
+		&:hover {
+			border: 2px solid $border_title;
+		}
+	}
+}
+.collection-list {
+	.collection-item {
+		border-right: 1px solid $border_general;
+		&.style-6 {
+			border-right: 0;
+		}
+		.collection-item-wrapper {
+			text-align: center;
+			.collection-image {
+				display: block;
+				text-align: center;
+				@include transition($transition-base);
+				&:hover {
+					@include transform(translateY(-15px));
+				}
+			}
+		}
+	}
+}
+a {
+	font-size: 13px;
+	font-weight: $font_weight_thin;
+}
+.collection-style5 .block-content .col-block3 {
+	width: 100%;
+	.product-list-wrapper .product-list .product-item {
+		margin-top: 0;
+		margin-bottom: 20px;
+		.product-item-wrapper {
+			border-bottom: 0;
+			.product-item-bottom {
+				width: 75%;
+				.actions.product-item-hover {
+					@include transform(scale(1,1));
+					@include opacity(1,1);
+				}
+			}
+			.product-item-top {
+				width: 25%;
+			}
+		}
+		&:nth-last-child(-n+3) .product-item-wrapper {
+			border-bottom: 0;
+		}
+	}
+}
+.collection-style11 {
+	.product-list-wrapper .product-list .product-item .product-item-wrapper .product-item-bottom .list-mode-description.full-desc {
+		display: block;
+	}
+}
+.collection-style1 .block-content {
+	margin-top: 0;
+}
+.collection-style5 .block-content .col-block3 .product-list-wrapper .product-list .product-item .product-item-wrapper .product-item-top {
+	@media(max-width: 767px) {
+		@include align-items(flex-start);
+	}
+}
+/*Category*/
+.collection-banner .collection-panner img {
+	width: auto;
+	margin: 0 auto;
+}
+
+/*Blog*/
+.featured-blog-posts .block-title {
+	margin-bottom: 35px;
+}
+.featured-blog-posts .block-content .post-items {
+	.owl-nav {
+		position: static;
+		margin: 0;
+		>div {
+			position: absolute;
+		}
+	}
+	.cdz-post .cdz-blog-bottom {
+		padding: 20px;
+		background: #fff;
+		.blog-title {
+			margin-top: 0;
+			a {
+				font-size: 14px;
+				font-weight: $font_weight_thin;
+			}
+		}
+		.blog-desc {
+			font-size: 12px;
+		}
+	}
+}
+/*Instagram*/
+.instagram-slider-section .instaram-wrapper .owl-nav>div {
+	margin-top: -20px;
+}
+.instagram-slider-section .instaram-wrapper .instagram-slider .image-list .item .instagram-media .action a {
+	color: #fff;
+	.icon-cdz {
+		color: #fff;
+	}
+}
+/*Footer*/
+.footer-wrapper .footer-top .newsletter-wrapper .news-form .contact-form .input-box {
+	@media(max-width: 1199px) {
+		width: calc(100% - 228px);
+	}
+	@media(max-width: 767px) {
+		width: calc(100% - 120px);
+	}
+}

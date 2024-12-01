@@ -1,0 +1,85 @@
+{% if section.settings.title != blank %}
+	<div class="title">{{ section.settings.title }}</div>
+{% endif %}
+{% if section.settings.subtitle != blank %}
+	<div class="subtitle">{{ section.settings.subtitle }}</div>
+{% endif %}
+{% if section.blocks.size > 0 %}
+	<div class="block_contents">
+	{% for block in section.blocks %}
+      {% assign bs = block.settings %}
+      {% if bs.type_name != blank and bs.item_image != blank %}
+      	<div class="block_item">
+          <div class="item_title">{{ bs.type_name }}</div>
+          <div class="item_image">
+          	<img src="{{ bs.item_image | img_url: '500x' }}" alt="Image" />
+          </div>
+          <div class="text_info">
+            {% if bs.item_price != blank %}<div class="item_price">{{ bs.item_price }}</div>{% endif %}
+            {% if bs.description %}<div class="item_description">{{ bs.description }}</div>{% endif %}
+            {% if section.settings.button_text != blank and bs.button_url != blank %}	          
+            <a href="{{ bs.button_url }}" class="btn btn-primary">{{ section.settings.button_text }}</a>
+            {% endif %}
+          </div>
+      	</div>
+      {% endif %}
+    {% endfor %}
+	</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Product Design",
+	"class": "product_design",
+    "settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title",
+			"default": "Prefer our Quilted Design?"
+		},
+		{
+			"type": "richtext",
+			"id": "subtitle",
+			"label": "Subtitle"
+		},
+		{
+			"type": "text",
+			"id": "button_text",
+			"label": "Button Text"
+		}
+	],
+	"blocks": [
+		{
+			"type": "Item",
+            "name": "Product Item",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "type_name",
+                    "label": "Type Name"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "item_image",
+                    "label": "Item Image"
+                },
+				{
+					"type": "text",
+					"id": "item_price",
+					"label": "Item Price"
+				},
+                {
+                    "type": "richtext",
+                    "id": "description",
+                    "label": "Description"
+                },
+                {
+                    "type": "url",
+                    "id": "button_url",
+                    "label": "Button Url"
+                }
+            ]
+		}
+	]
+  }
+{% endschema %}

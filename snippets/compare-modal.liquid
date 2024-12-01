@@ -1,0 +1,135 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="compareBox">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close">{% include 'icon-close' %}</button>
+        <h4 class="modal-title"><span class="brackets" v-html="getTextTransByKey('products.product.comparing_box')"></span><span v-if="compareItems.length > 0">({{ '{{ compareItems.length'}}}})</span></h4>
+      </div>
+      <div class="modal-body">
+        <div class="message alert" :class="[compareMsgType == 'success' ? 'alert-success' : 'alert-warning']" v-if="compareMsg != ''">
+          {{ '{{ compareMsg' }}}}
+        </div>
+        <template v-if="compareItems.length > 0">
+          <table>
+            <tbody>
+              <tr>
+                <td><span class="brackets" v-html="getTextTransByKey('products.product.features')"></span></td>
+                <td v-for="(item, index) in compareItems" v-bind:class="'compare-item-' + index">
+                  <div class="product-image">
+                    <img v-bind:src="resizeImage(item.featured_image, '100x')" />
+                    <a href="javascript:void(0);" v-on:click="removeItemCompare(index, false);"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  </div>
+                  <span class="product-title">{{ '{{ item.title' }}}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="brackets" v-html="getTextTransByKey('products.product.availability')"></span></td>
+                <td v-for="(item, index) in compareItems">
+                  <div class="product-shop-stock-avai">
+                    <p class="availability in-stock">
+                      <span v-if="item.availableVariant == true">
+                        <span class="brackets" data-trans-key="products.product.in_stock">
+                          {{ "{{ getTextTransByKey('products.product.in_stock') " }}}}
+                        </span>
+                      </span>
+                      <span v-else>
+                        <span class="brackets">
+                          {{ "{{ getTextTransByKey('products.product.out_of_stock') " }}}}
+                        </span>
+                      </span>
+                    </p>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="brackets" v-html="getTextTransByKey('cart.label.price')"></span></td>
+                <td v-for="(item, index) in compareItems">
+                  <div class="product-shop-stock-price">
+                    <div class="price-box">
+                      <p class="product-single__price product-single__price-compare">
+                        <template v-if="item.currentVariant.compare_at_price > item.currentVariant.price">
+                          <span class="product-price__price product-price__price-compare product-price__sale product-price__sale--single">
+                            <span class="ProductPrice-compare">
+                              <money :price="item.currentVariant.price | displayPrice(currentCurrency)"></money>
+                            </span>
+                          </span>
+                          <s class="ComparePrice-compare"><money :price="item.currentVariant.compare_at_price | displayPrice(currentCurrency)"></money></s>
+                        </template>
+                        <template v-else>
+                          <s class="ComparePrice-compare hide"><money :price="item.currentVariant.compare_at_price | displayPrice(currentCurrency)"></money></s>
+                          <span class="product-price__price product-price__price-compare">
+                            <span class="ProductPrice-compare">
+                              <money :price="item.currentVariant.price | displayPrice(currentCurrency)"></money>
+                            </span>
+                          </span>
+                        </template>
+                      </p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="brackets" v-html="getTextTransByKey('products.product.options')"></span></td>
+                <td v-for="(item, indexItem) in compareItems" :class="'compare-option-item-' + indexItem">
+                  <form action="/cart/add" method="post" enctype="multipart/form-data" :id="'compare-form' + indexItem">
+                    <template v-if="item.title != 'Default Title'">
+                      <div v-for="(option, index) in item.options" class="selector-wrapper js product-form__item">
+                        <template v-if="option.name != 'Title'">
+                          <label v-bind:class="[option.name == 'default' ? 'label--hidden' : '']" v-bind:for="'CompareSingleOptionSelector-' + index">
+                            {{ "{{ defaultTrans(getTextTransByKey('collections.filters.' + lowercase(option.name)), option.name) " }}}}
+                          </label>
+                          <select @change="changeOptionCompare" class="single-option-selector single-option-selector-compare product-form__input" :id="'CompareSingleOptionSelector-' + index" :data-index="'option' + (index + 1) " :data-item-index="indexItem">
+                            <option v-for="value in option.values" :value="value">
+                              {{ "{{ defaultTrans(getTextTransByKey('collections.filters.' + lowercase(value)), value) " }}}}
+                            </option>
+                          </select>
+                        </template>
+                      </div>
+                    </template>
+                    <input type="hidden" name="id" :value="item.currentVariant.id">
+                    <input type="hidden" name="quantity" v-model="item.qtyInPut">
+                    <button class="button btn-cart hide" type="button">Add cart hidden</button>
+                  </form>
+                  {% comment %}{{ "{{ 'compareQty' + indexItem" }}}}{% endcomment %}
+                </td>
+              </tr>
+              {% if settings.show_vendor %}
+              <tr>
+                <td><span class="brackets" v-html="getTextTransByKey('products.product.vendor')"></span></td>
+                <td v-for="item in compareItems">
+                  {{ '{{ item.vendor' }}}}
+                </td>
+              </tr>
+              {% endif %}
+              <tr>
+                <td><span class="brackets" v-html="getTextTransByKey('general.field.actions')"></span></td>
+                <td v-for="(item, indexItem) in compareItems">
+                  {% if settings.co_show_qty %}
+                  <div class="qty_cart">
+                    <div class="qty-ctl">
+                      <button :title="getTextTransByKey('products.product.qty_decrease')" :data-input="'#Quantity-compare' + indexItem" class="decrease change-qty not-bind" v-on:click="item.qtyInPut = (item.qtyInPut < 2) ? 1 : item.qtyInPut - 1"></button>
+                    </div>
+                    <input type="number" :id="'Quantity-compare' + indexItem" name="quantity" value="1" min="1" class="input-text qty" pattern="[0-9]*" v-model="item.qtyInPut">
+                    <div class="qty-ctl">
+                      <button :title="getTextTransByKey('products.product.qty_increase')" :data-input="'#Quantity-compare' + indexItem" class="increase change-qty not-bind" v-on:click="item.qtyInPut += 1"></button>
+                    </div>
+                  </div>
+                  {% endif %}
+                  <a v-show="item.availableVariant == true" class="add-cart-compare" href="javascript:void(0);" v-on:click="addCartInCompare('#compare-form' + indexItem, indexItem);">
+                    {{ "{{ getTextTransByKey('products.product.add_to_cart') " }}}}
+                  </a>
+                  <span v-show="item.availableVariant == false">
+                    {{ "{{ getTextTransByKey('products.product.sold_out') " }}}}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </template> 
+        <template v-else>
+          <p class="alert alert-warning"><span class="brackets" v-html="getTextTransByKey('products.product.compare_no_items')"></span></p>
+        </template> 
+      </div>
+    </div>
+  </div>
+</div>

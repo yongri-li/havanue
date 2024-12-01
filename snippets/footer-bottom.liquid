@@ -1,0 +1,22 @@
+<div class="footer-bottom">
+	<div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+		<div class="row">
+			<div class="col-sm-6">
+				<address>{{ section.settings.copyright }}</address>
+			</div>
+			{% if section.settings.show_payment_icons %}
+			<div class="col-sm-6">
+				<div class="cdz-footer-bottom-payment">
+					<ul class="payment-icons list--inline site-footer__icon-list">
+						{% for type in shop.enabled_payment_types %}
+							<li class="payment-icon">
+								{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

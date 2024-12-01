@@ -1,0 +1,27 @@
+
+{% comment %}
+The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% endcomment %}
+
+<div class="main-container col1-layout collection-page">
+  <div class="main">
+    <div class="content-breadcrums">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            {% include 'breadcrumbs' %}
+          </div>
+        </div>
+      </div>		
+    </div>
+
+    {% comment %} TODO : print page title {% endcomment %}
+    <div class="container col-main-containter">
+      <div class="row">
+        {% comment %} TODO : print global message {% endcomment %}
+        {%- assign collection_layout = 'col1-layout' %}
+        {% section 'collection-template' %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="menu-load-wrap menu-second"{% if dataMenu %} data-override-megamenu='{{ dataMenu }}'{% endif %}>
+	{%- if settings.load_menu_ajax == false -%}
+	{% include 'menu-render-inner-second' %}
+	{%- endif -%}
+</div>

@@ -1,0 +1,53 @@
+{% if section.settings.title != blank %}
+	<div class="title">{{ section.settings.title }}</div>
+{% endif %}
+{% if section.settings.main_image != blank and section.blocks.size > 0 %}
+	<div class="main_content">
+      <div class="main_img"><img src="{{ section.settings.main_image | img_url: '1000x' }}" alt="{{ section.settings.main_image.alt }}" /></div>
+      <div class="img_blocks">
+      	{% for block in section.blocks %}
+            {% if block.settings.item_image != blank %}
+                <div class="img_item"><img src="{{ block.settings.item_image | img_url: '500x' }}" alt="{{ block.settings.item_image.alt }}" /></div>
+            {% endif %}
+        {% endfor %}
+      </div>
+	</div>	
+{% endif %}
+{% schema %}
+  {
+    "name": "Image List",
+	"class": "image-list",
+    "settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		},
+		{
+          "type": "image_picker",
+          "id": "main_image",
+          "label": "Main Image"
+        }
+	],
+	"blocks": [
+		{
+			"type": "image",
+            "name": "Image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "item_image",
+                    "label": "Item Image"
+                }
+            ]
+		}
+	],
+	"presets": [
+		{
+			"category": "Images",
+			"name": "Image List"
+		}
+	]
+  }
+{% endschema %}
+

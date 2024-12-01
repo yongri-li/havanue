@@ -1,0 +1,10 @@
+{%- layout none -%}
+{%- assign image_size = '300x' -%}
+{%- assign more_view_size = '30x40' -%}
+{%- assign terms = search.terms | escape | split: ',' -%}
+{%- for handle in terms -%}
+	{%- assign product = all_products[handle] -%}
+	{%- if handle != '' and product != blank -%}
+		{%- include 'product-item-crosssell' with lazy: true -%}
+	{%- endif -%}
+{%- endfor -%}

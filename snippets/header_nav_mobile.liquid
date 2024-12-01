@@ -1,0 +1,43 @@
+<div class="mobile-header visible-sm visible-xs">
+  <div class="cdz-mobile-header-menu">
+    <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+      <div class="row">
+        <div class="navbar navbar-default cdz-navbar">
+          <div class="cdz-mobile-logo">
+            {% if section.settings.logo_mobile %}
+            <a href="/" class="site-header__logo-image" title="{{ shop.name | escape }}">              
+              <img src="{{ section.settings.logo_mobile | img_url: section.settings.logo_size_mobile }}" alt="{{ section.settings.logo.alt | default: shop.name }}">
+            </a>
+            {% else %}
+            <a class="site-header__logo-link" href="/" title="{{ shop.name | escape }}">{{ shop.name }}</a>
+            {% endif %}
+          </div>
+          {% if section.settings.nav_sticky %}
+          <a class="icon-search-sticky" href="javascript:void(0);" title="">
+            {% include 'icon-search' %}
+          </a>
+          {% endif %}
+          {% include 'header_cart' with header_cart_id: 'header_cart_mobile' %}
+          <button type="button" class="cdz-navbar-toggle navbar-toggle cdz-menu-responsive main-navbar-btn" aria-label="Button">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="cdz-mobile-search">
+            <div class="cdz-dropdown-content" id="cdz-mobile-search-form">
+              {% include 'search-form', align_suggestion_class: 'sug-left' %}
+            </div>
+          </div>
+          {% if showSecondMenu %}
+          <div class="vertical-menu">
+            <button class="ver-menu-bar" type="button" data-target=".dropdown-ver-style-7" ><i class="fa fa-bars" aria-hidden="true"></i> <span class="skeleton-loading" data-trans-key="layout.navigation.all_categories">{{ 'layout.navigation.all_categories' | t }}</span></button>
+            <div class="dropdown-ver-menu dropdown-ver-style-7" style="display: none;">
+              {% include 'menu-render-second' %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+{%- assign clowTagD = t | downcase -%}
+{%- assign clowTag = t | strip | downcase -%}
+{%- assign ctagU = t | strip | upcase -%}
+{%- assign ctagUF = clowTag | strip | capitalize -%}
+{%- assign ctagCa = clowTag | strip | camelcase -%}
+{%- assign color_img = clowTag | append: '.png' | asset_url -%}
+{%- assign style = 'background-color: ' | append: tag | downcase | append: '; background-image: url(' | append: color_img | append: ');' -%}
+{%- capture titleTag -%}
+{{ 'collections.filters.' | append: clowTagD | t }}
+{%- endcapture -%}
+{%- if current_tags contains tag or current_tags contains clowTagD or current_tags contains clowTag or current_tags contains clowTagU or current_tags contains clowTagUF  -%}
+<li class="active swatch-tag {% if tag == 'White' or tag == 'white' %} white-color{% endif %}"><span style="{{ style }}" class="btooltip" data-toggle="tooltip" data-placement="top" title="{% if titleTag contains 'translation missing' %}{{ tag }}{% else %}{{ titleTag }}{% endif %}">{{ ' ' | link_to_remove_tag: tag }}</span></li>
+{%- else -%}
+<li class="swatch-tag {% if tag == 'White' or tag == 'white' %} white-color{% endif %}"><span style="{{ style }}" class="btooltip" data-toggle="tooltip" data-placement="top" title="{% if titleTag contains 'translation missing' %}{{ tag }}{% else %}{{ titleTag }}{% endif %}">{{ ' ' | link_to_add_tag: tag }}</span></li>
+{%- endif -%}

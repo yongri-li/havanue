@@ -1,0 +1,15 @@
+<form action="{{ settings.mail_chimp_url }}" class="contact-form" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+	<div class="input-box">
+		<input type="email"
+			name="EMAIL"
+			id="Email"
+			class="input-group__field newsletter__input"
+			value="{% if customer %}{{ customer.email }}{% endif %}"
+			data-placeholder-trans="general.newsletter_form.email_placeholder" data-placeholder-default="{{ 'general.newsletter_form.email_placeholder' | t }}"{%- if settings.enable_translate == false -%} placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"{%- endif -%}
+			autocorrect="off"
+			autocapitalize="off" aria-label="form"/>
+	</div>
+	<div class="actions">
+		<input type="submit" data-value-trans="general.newsletter_form.submit" data-value-default="{{ 'general.newsletter_form.submit' | t }}" class="button"{% if settings.enable_translate == false %} value="{{ 'general.newsletter_form.submit' | t }}"{% endif %} />
+	</div>
+</form>

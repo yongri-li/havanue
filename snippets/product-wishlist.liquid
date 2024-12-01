@@ -1,0 +1,17 @@
+{%- if section.settings.show_wishlist or force_display -%}
+{%- assign is_show_wishlist = true -%}
+{%- else -%}
+{%- assign is_show_wishlist = false -%}
+{%- endif -%}
+{%- if is_show_wishlist and product.available and settings.enable_wishlist -%}
+<div class="cdz-product-wishlist">
+  <div class="actions-secondary" >
+    <a title="{{ 'collections.product_item.wishlist' | t | escape }}" data-toggle="tooltip" data-data-original-title-trans="collections.product_item.wishlist" data-data-original-title-default="{{ 'collections.product_item.wishlist' | t }}" data-original-title="{{ 'collections.product_item.wishlist' | t }}" {% if tooltip_pos != blank %} data-placement="{{ tooltip_pos }}"{% else %} data-placement="top"{% endif %} class="action link-wishlist" href="#" data-product-handle="{{ product.handle }}" data-product-title="{{ product.title | escape }}">
+      {% include 'icon-heart-hover' %}  
+      {% include 'icon-heart' %}
+      <span class="icon-header-hover">{% include 'icon-heart-hover' %}</span>
+      <span><span class="brackets skeleton-loading" data-trans-key="collections.product_item.wishlist">{{ 'collections.product_item.wishlist' | t }}</span></span>
+    </a>
+  </div>
+</div>
+{%- endif -%}

@@ -1,0 +1,35 @@
+{% if settings.upsell_active and settings.upsell %}
+{%- assign upsell_products = collections[settings.upsell] -%}
+{%- assign image_size = settings.upsell_image_size -%}
+{% if upsell_products and upsell_products.products.size > 0 %}
+{%- assign upsell_limit = settings.limit | divided_by : 1 -%}
+<div style="display: none;" class="upsell_wrap non-section{% if settings.upsell_hidden_mobile %} hidden-xs{% endif %}" data-limit="{{ upsell_limit | escape }}" data-minute-from="{{ settings.upsell_minute_from | escape }}" data-minute-to="{{ settings.upsell_minute_to | escape }}" data-interval="{{ settings.upsell_interval | escape }}" data-closing-interval="{{ settings.upsell_closing_interval | escape }}">
+	<div class="close-btn-wrap"><a href="javascript:void(0);" class="close-btn" title="close">{% include 'icon-close' %}</a></div>
+	{% for product in upsell_products.products limit: upsell_limit %}
+	<div class="product-item upsell-item" style="display: none;" data-index="{{ forloop.index0 }}">
+		<div class="product-item-wrapper">
+			<div class="product-item-inner">
+				<div class="product-item-media">
+					<a href="{{ product.url }}" class="product-image" title="{{ product.title }}">
+						<img data-src="{{ product.featured_image | product_img_url: image_size , crop: 'top' }}" alt="{{ product.featured_image.alt | escape }}" width="70" height="70" class="lozad"/>
+					</a>
+				</div>
+				<div class="product-item-right">
+					<div class="product-details">
+						<div class="recommend-text">
+							<span data-trans-key="products.upsell.recommend_text">{{ 'products.upsell.recommend_text' | t }}</span></div>
+						<div class="product-name">
+							<a href="{{ product.url | within: collection }}" title="{{ product.title }}">Someone just bought {{ product.title }}</a>
+						</div>
+						<div class="minutes-ago">
+							<span class="minute-number"></span> <span data-trans-key="products.upsell.minute_ago">{{ 'products.upsell.minute_ago' | t }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endif %}
+{% endif %}

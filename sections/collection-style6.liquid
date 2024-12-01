@@ -1,0 +1,304 @@
+{%- assign limit1 = section.settings.limit1 | divided_by : 1 -%}
+{%- assign limit2 = section.settings.limit2 | divided_by : 1 -%}
+{%- assign image_size_1 = section.settings.image_size_1 -%}
+{%- assign image_size_2 = section.settings.image_size_2 -%}
+{% capture wrapId %}collection_{{ section.id }}{% endcapture %}
+<div id="{{ wrapId }}" class="collection-style6 collection-widget" data-section-id="{{ section.id }}" data-section-type="collection-style6">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+    <div class="row">
+      <div class="section-inner col-xs-12">
+        {% if section.settings.title != blank %}
+        <div class="block-title">
+          <span><span class="title_icon">{% include 'icon-diamond' %}</span><span class="title_text{% if section.settings.title_trans != blank %} skeleton-loading" data-content-trans="#{{ wrapId }}_title_trans{% endif %}">{{ section.settings.title | raw }}</span></span>
+        </div>
+        {% if section.settings.title_trans != blank %}
+        <span id="{{ wrapId }}_title_trans" class="hide">
+          {{ section.settings.title_trans | raw }}
+        </span>
+        {% endif %}
+        {% endif %}
+        <div class="block-content">
+          <div class="row">
+            {%- assign collection = collections[section.settings.collection_one] -%}
+            {% if collection and collection.products.size > 0 %}
+            <div class="col-xs-4 col-block1">
+              <div class="product-list-wrapper">
+                <div class="product-list">
+                  {% for product in collection.products limit: limit1 %}
+                  <div class="product-item">
+                    <div class="product-item-wrapper">
+                      <div class="product-item-left">
+                        <div class="product-item-media">
+                          {% include 'product-wishlist' %}
+                          {% include 'product-compare-btn' %}
+                          <a href="{{ product.url }}" class="product-image" title="{{ product.title }}">
+                            <img {% if section.settings.use_effect_appear %}class="lozad" data-{% endif %}src="{{ product.featured_image | product_img_url: image_size_1 , crop: 'top' }}" alt="{{ product.featured_image.alt | escape }}" />
+                          </a>
+                        </div>
+                        <div class="product-item-hover product-qs-wrapper">
+                          {% include 'product-qs-btn' %}  
+                        </div>
+                        {% include 'product-labels' %}
+                      </div>
+                      <div class="product-item-right">
+                        <div class="product-details">
+                          <div class="product-name">
+                            <a href="{{ product.url }}" title="{{ product.title }}">{{ product.title }}</a>
+                          </div>
+                          {% include 'product-review' %}  
+                          {% include 'product-price' %}  
+                        </div>
+                        <div class="actions product-item-hover">
+                          {% include 'product-cart-btn' %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>  
+            </div>
+            {% else %}
+            <p class="alert alert-info"><span class="brackets skeleton-loading" data-trans-key="collections.general.no_matches">{{ 'collections.general.no_matches' | t }}</span></p>
+            {% endif %}
+
+            {%- assign collection = collections[section.settings.collection_two] -%}
+            {% if collection and collection.products.size > 0 %}
+            <div class="col-xs-4 col-block2">
+              <div class="product-list-wrapper">
+                {% if section.settings.column_title %}
+                <span class="column_title{% if section.settings.column_title_trans != blank %} skeleton-loading" data-content-trans="#{{ wrapId }}_column_title_trans{% endif %}">{{ section.settings.column_title }}</span>
+                {% if section.settings.column_title_trans != blank %}
+                <span id="{{ wrapId }}_column_title_trans" class="hide">
+                  {{ section.settings.column_title_trans | raw }}
+                </span>
+                {% endif %}
+                {% endif %}
+                <div class="product-list use-slider owl-carousel" data-slider-ele="#collection_{{ section.id }}_slider_data">
+                  {% for product in collection.products limit: limit2 %}
+                  {% assign tmp1 = forloop.index0 | modulo: 3 %}
+                  {% if tmp1 == 0 %}
+                  <div class="item">
+                    {% endif %}
+                    <div class="product-item">
+                      <div class="product-item-wrapper">
+                        <div class="product-item-left">
+                          <div class="product-item-media">
+                            {% include 'product-wishlist' %}
+                            {% include 'product-compare-btn' %}
+                            <a href="{{ product.url }}" class="product-image" title="{{ product.title }}">
+                              <img {% if section.settings.use_effect_appear %}class="lozad" data-{% endif %}src="{{ product.featured_image | product_img_url: image_size_2 , crop: 'top' }}" alt="{{ product.featured_image.alt | escape }}" />
+                              {% if product.images.size > 1 %}
+                              <img {% if section.settings.use_effect_appear %}data-{% endif %}src="{{ product.images[1] | product_img_url: image_size_2 , crop: 'top' }}" class="alternative-img img-responsive" alt="{{ product.images[1].alt | escape }}" />
+                              {% endif %}
+                            </a>
+                          </div>
+                          <div class="product-item-hover product-qs-wrapper">
+                            {% include 'product-qs-btn' %}  
+                          </div>
+                          {% include 'product-labels' %}
+                        </div>
+                        <div class="product-item-right">
+                          <div class="product-details">
+                            <div class="product-name">
+                              <a href="{{ product.url }}" title="{{ product.title }}">{{ product.title }}</a>
+                            </div>
+                            {% include 'product-review' %}
+                            {% include 'product-price' %}  
+                          </div>
+                          <div class="actions product-item-hover">
+                            {% include 'product-cart-btn' %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% if tmp1 == 2 or forloop.last %}
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                <span id="collection_{{ section.id }}_slider_data" class="hide">
+                  {
+                    "nav": true,
+                    "dots": false,
+                    "responsive": {
+                      "0": { "items": 1}
+                    } 
+                  }
+                </span>
+              </div>  
+            </div>
+            {% else %}
+            <p class="alert alert-info"><span class="brackets skeleton-loading" data-trans-key="collections.general.no_matches">{{ 'collections.general.no_matches' | t }}</span></p>
+            {% endif %}
+
+            {% if section.blocks.size > 0 %}
+            <div class="col-xs-4 col-block3">
+              <ul class="links">
+                {% for block in section.blocks %}
+                {% if block.settings.text_link %}
+                <li>
+                  <a href="{{ block.settings.url_link }}"><span>{{ block.settings.text_link }}</span></a>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        </div> 
+      </div>   
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Block product style 6",
+  "class": "collection-style6-section section",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Block product Style 6"
+    },
+    {
+      "type": "textarea",
+      "id": "title_trans",
+      "label": "Translate Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label",
+      "label": "Show label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show Wishlist",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_btn",
+      "label": "Show Add to cart button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qs_btn",
+      "label": "Show Quick Shop button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_btn",
+      "label": "Show Compare button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "use_effect_appear",
+      "label": "Use lazy loading image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "collection",
+      "id": "collection_one",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "limit1",
+      "label": "Limit",
+      "default": "4"
+    },
+    {
+      "type": "text",
+      "id": "image_size_1",
+      "label": "Image Size",
+      "default": "50x50"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "column_title",
+      "label": "Column Title",
+      "default": "Featured"
+    },
+    {
+      "type": "textarea",
+      "id": "column_title_trans",
+      "label": "Translate Column Title"
+    },
+    {
+      "type": "collection",
+      "id": "collection_two",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "limit2",
+      "label": "Limit",
+      "default": "3"
+    },
+    {
+      "type": "text",
+      "id": "image_size_2",
+      "label": "Image Size",
+      "default": "80x80"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Link",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text_link",
+          "label": "Text Link"
+        },
+        {
+          "type": "url",
+          "id": "url_link",
+          "label": "Url Link"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Block product style 6",
+    "category": "Collection",
+    "settings": {
+      "limit1": "4",
+      "limit2": "3",
+      "show_label": true,
+      "show_wishlist": false,
+      "show_cart_btn": false,
+      "show_qs_btn": false,
+      "show_compare_btn": false,
+      "full_width": false,
+      "column_title": "Featured",
+      "use_effect_appear": true,
+      "image_size_1": "50x50",
+      "image_size_2": "80x80"
+    }
+  }]
+}
+{% endschema %}

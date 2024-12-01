@@ -1,0 +1,23 @@
+{% if google_structure %}
+	{% if template == 'index' %}
+	<h1 class="site-header__logo-image">
+    {% endif %}
+	{% if section.settings.logo %}
+	<a href="/" itemprop="url"{% if template != 'index' %} class="site-header__logo-image"{% endif %}>              
+		<img src="{{ section.settings.logo | img_url: section.settings.logo_size }}" alt="{{ section.settings.logo.alt | default: shop.name }}" itemprop="logo">
+	</a>
+	{% else %}
+	<a class="site-header__logo-link site-header__logo-image" href="/" itemprop="url">{{ shop.name }}</a>
+	{% endif %}
+	{% if template == 'index' %}
+	</h1>
+    {% endif %}
+{% else %}
+	{% if section.settings.logo %}
+	<a href="/" class="site-header__logo-image">              
+		<img src="{{ section.settings.logo | img_url: section.settings.logo_size }}" alt="{{ section.settings.logo.alt | default: shop.name }}">
+	</a>
+	{% else %}
+	<a class="site-header__logo-link site-header__logo-image" href="/">{{ shop.name }}</a>
+	{% endif %}
+{% endif %}

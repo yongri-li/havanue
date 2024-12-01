@@ -1,0 +1,159 @@
+<div class="footer-top">
+	<div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+		<div class="row">
+			<div class="footer-top-wrapper">
+				{% include 'footer-newsletter' %}
+				<div class="footer-social col-sm-6">
+					<p class="h5 visible-xs{% if section.settings.social_title_trans != blank %} skeleton-loading" data-content-trans="#footer_{{ section.id }}_social_title_trans{% endif %}">{{ section.settings.social_title }}</p>
+					{% if section.settings.social_title_trans != blank %}
+					<span id="footer_{{ section.id }}_social_title_trans" class="hide">
+						{{ section.settings.social_title_trans | raw }}
+					</span>
+					{% endif %}
+
+					<p class="social">
+						{% if section.settings.facebook_link != blank %}
+						<a href="{{ section.settings.facebook_link }}" title="facebook"><span class="fa fa-facebook">&nbsp;</span></a>
+						{% endif %}
+
+						{% if section.settings.twitter_link != blank %}
+						<a href="{{ section.settings.twitter_link }}" title="twitter"><span class="fa fa-twitter">&nbsp;</span></a>
+						{% endif %}
+
+						{% if section.settings.pinterest_link != blank %}
+						<a href="{{ section.settings.pinterest_link }}" title="pinterest"><span class="fa fa-pinterest-p">&nbsp;</span></a>
+						{% endif %}
+
+						{% if section.settings.google_link != blank %}
+						<a href="{{ section.settings.google_link }}" title="google"><span class="fa fa-google-plus">&nbsp;</span></a>
+						{% endif %}
+
+						{% if section.settings.tumblr_link != blank %}
+						<a href="{{ section.settings.tumblr_link }}" title="tumblr"><span class="fa fa-tumblr">&nbsp;</span></a>
+						{% endif %}
+
+						{% if section.settings.vimeo_link != blank %}
+						<a href="{{ section.settings.vimeo_link }}" title="vimeo"><span class="fa fa-vimeo">&nbsp;</span></a>
+						{% endif %}
+
+						{% if section.settings.instagram_link != blank %}
+						<a href="{{ section.settings.instagram_link }}" title="instagram"><span class="fa fa-instagram">&nbsp;</span></a>
+						{% endif %}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% assign column_total = 0 %}
+{% for i in (1..4) %}
+{% assign enable_col_var = 'enable_column' | append: i %}
+{% if section.settings[enable_col_var] %}
+	{% assign column_total = column_total | plus: 1 %}
+{% endif %}
+{% endfor %}
+{% if column_total > 0 %}
+{% assign col_class_number = 12 | divided_by: column_total %}
+<div class="footer-middle">
+	<div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+		<div class="row">
+			<div class="footer-middle-wrapper">
+				{% if section.settings.enable_column1 %}
+				<div class="col-xs-12 col-sm-{{ col_class_number }}">
+					<div class="footer-box">
+						<p class="h5 cdz-toggle-title{% if section.settings.column1_title_trans != blank %} skeleton-loading" data-content-trans="#footer_{{ section.id }}_column1_title_trans{% endif %}" data-cdz-toggle="#footer-content-1" data-group="footer-links-style1">{{ section.settings.column1_title }}</p>
+						{% if section.settings.column1_title_trans != blank %}
+						<span id="footer_{{ section.id }}_column1_title_trans" class="hide">
+							{{ section.settings.column1_title_trans | raw }}
+						</span>
+						{% endif %}
+
+						{% assign footer_link = section.settings.footer_linklist_column1 %}
+						{% if linklists[footer_link].links.size > 0 %}
+						<ul id="footer-content-1" class="footer-link">
+							{% for l in linklists[footer_link].links %}
+							<li>
+								<a href="{{ l.url }}" title="{{ l.title | escape }}">{{ l.title }}</a>
+							</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+					</div>
+				</div>
+				{% endif %}
+
+				{% if section.settings.enable_column2 %}
+				<div class="col-xs-12 col-sm-{{ col_class_number }}">
+					<div class="footer-box">
+						<p class="h5 cdz-toggle-title{% if section.settings.column2_title_trans != blank %} skeleton-loading" data-content-trans="#footer_{{ section.id }}_column2_title_trans{% endif %}" data-cdz-toggle="#footer-content-2" data-group="footer-links-style1">{{ section.settings.column2_title }}</p>
+						{% if section.settings.column2_title_trans != blank %}
+						<span id="footer_{{ section.id }}_column2_title_trans" class="hide">
+							{{ section.settings.column2_title_trans | raw }}
+						</span>
+						{% endif %}
+
+						{% assign footer_link = section.settings.footer_linklist_column2 %}
+						{% if linklists[footer_link].links.size > 0 %}
+						<ul id="footer-content-2" class="footer-link">
+							{% for l in linklists[footer_link].links %}
+							<li>
+								<a href="{{ l.url }}" title="{{ l.title | escape }}">{{ l.title }}</a>
+							</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+					</div>
+				</div>
+				{% endif %}
+
+				{% if section.settings.enable_column3 %}
+				<div class="col-xs-12 col-sm-{{ col_class_number }}">
+					<div class="footer-box">
+						<p class="h5 cdz-toggle-title{% if section.settings.column3_title_trans != blank %} skeleton-loading" data-content-trans="#footer_{{ section.id }}_column3_title_trans{% endif %}" data-cdz-toggle="#footer-content-3" data-group="footer-links-style1">{{ section.settings.column3_title }}</p>
+						{% if section.settings.column3_title_trans != blank %}
+						<span id="footer_{{ section.id }}_column3_title_trans" class="hide">
+							{{ section.settings.column3_title_trans | raw }}
+						</span>
+						{% endif %}
+
+						{% assign footer_link = section.settings.footer_linklist_column3 %}
+						{% if linklists[footer_link].links.size > 0%}
+						<ul id="footer-content-3" class="footer-link">
+							{% for l in linklists[footer_link].links %}
+							<li>
+								<a href="{{ l.url }}" title="{{ l.title | escape }}">{{ l.title }}</a>
+							</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+					</div>
+				</div>
+				{% endif %}
+
+				{% if section.settings.enable_column4 %}
+				<div class="col-xs-12 col-sm-{{ col_class_number }}">
+					<div class="footer-box">
+						<p class="h5 cdz-toggle-title{% if section.settings.column4_title_trans != blank %} skeleton-loading" data-content-trans="#footer_{{ section.id }}_column4_title_trans{% endif %}" data-cdz-toggle="#footer-content-4" data-group="footer-links-style1">{{ section.settings.column4_title }}</p>
+						{% if section.settings.column4_title_trans != blank %}
+						<span id="footer_{{ section.id }}_column4_title_trans" class="hide">
+							{{ section.settings.column4_title_trans | raw }}
+						</span>
+						{% endif %}
+
+						<ul id="footer-content-4" class="store_details">
+							{%- if section.settings.address != blank -%}<li class="address">{% include 'icon-add' %}<span>{{ section.settings.address | raw }}</span></li>{%- endif -%}
+							{%- if section.settings.telephone != blank -%}<li class="phone">{% include 'icon-phone' %}<span class="brackets skeleton-loading" data-trans-key="customer.addresses.phone">{{ 'customer.addresses.phone' | t }}</span>:<span>{{ section.settings.telephone }}</span></li>{%- endif -%}
+							{%- if section.settings.email != blank -%}<li class="email">{% include 'icon-email' %}<span class="brackets skeleton-loading" data-trans-key="contact.form.email">{{ 'contact.form.email' | t }}</span>:<span>{{ section.settings.email }}</span></li>{%- endif -%}
+							{%- if section.settings.working_hour != blank -%}<li class="working_hour">{% include 'icon-time' %}<span>{{ section.settings.working_hour }}</span></li>{%- endif -%}
+						</ul>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+{% include 'footer-bottom' %}

@@ -1,0 +1,320 @@
+<div class="footer-wrapper footerApp {{ section.settings.footer_style }}" id="footer_{{ section.id }}_section" data-section-id="{{ section.id }}" data-section-type="footer" v-cloak>
+  {% include section.settings.footer_style %}
+  {% include 'footer-cart' %}
+  {% include 'modals' %}
+  
+  {% if settings.general_gototop %}
+  <div id="back-top" style="display: none;"><a data-title-trans="general.field.top_btn" data-title-default="{{ 'general.field.top_btn' | t }}" title="{{ 'general.field.top_btn' | t }}" href="#top">{% include 'icon-arrow-up' %}</a></div>
+  {% endif %}
+</div>
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "select",
+        "id": "footer_style",
+        "label": "Choose footer style",
+        "options": [
+          {
+            "value": "footer-style1",
+            "label": "Footer Style 1"
+          },
+          {
+            "value": "footer-style2",
+            "label": "Footer Style 2"
+          },
+          {
+            "value": "footer-style3",
+            "label": "Footer Style 3"
+          },
+          {
+            "value": "footer-style4",
+            "label": "Footer Style 4"
+          }
+        ],
+        "default": "footer-style1",
+        "info": "Enter mailchimp url in Newsletter Popup tab"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Show footer full width",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Contact Information"
+      },
+      {
+        "type": "paragraph",
+        "content": "Only contact information in column 1 of style 4 or column 4 of style 2, 3."
+      },
+      {
+        "type": "textarea",
+        "id": "address",
+        "label": "Address"
+      },
+      {
+        "type": "text",
+        "id": "telephone",
+        "label": "Telephone"
+      },
+      {
+        "type": "text",
+        "id": "email",
+        "label": "Email"
+      },
+      {
+        "type": "header",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_newsletter_enable",
+        "label": "Show newsletter signup",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Subscribe to our newsletter"
+      },
+      {
+        "type": "textarea",
+        "id": "title_trans",
+        "label": "Translate Heading"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtext",
+        "default": "A short sentence describing what someone will receive by subscribing"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle_trans",
+        "label": "Translate Subtext"
+      },
+      {
+        "type": "header",
+        "content": "Social Icon"
+      },
+      {
+        "type": "text",
+        "id": "social_title",
+        "label": "Social Title"
+      },
+      {
+        "type": "textarea",
+        "id": "social_title_trans",
+        "label": "Translate Social Title"
+      },
+      {
+        "type": "text",
+        "id": "twitter_link",
+        "label": "Twitter",
+        "info": "https:\/\/twitter.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "facebook_link",
+        "label": "Facebook",
+        "info": "https:\/\/www.facebook.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "google_link",
+        "label": "Google+",
+        "info": "https:\/\/plus.google.com\/+shopify"
+      },
+      {
+        "type": "text",
+        "id": "vimeo_link",
+        "label": "Vimeo",
+        "info": "https:\/\/vimeo.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "pinterest_link",
+        "label": "Pinterest",
+        "info": "https:\/\/www.pinterest.com\/shopify\/"
+      },
+      {
+        "type": "text",
+        "id": "tumblr_link",
+        "label": "Tumblr",
+        "info": "http:\/\/shopify.tumblr.com\/"
+      },
+      {
+        "type": "text",
+        "id": "atom_link",
+        "label": "Blog feed",
+        "info": "\/blogs\/news.atom"
+      },
+      {
+        "type": "text",
+        "id": "instagram_link",
+        "label": "Instagram",
+        "info": "https:\/\/www.instagram.com\/shopify\/"
+      },
+      {
+        "type": "header",
+        "content": "Footer Column 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_column1",
+        "label": "Enable Column 1",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "column1_title",
+        "label": "Column Title"
+      },
+      {
+        "type": "textarea",
+        "id": "column1_title_trans",
+        "label": "Translate Column Title"
+      },
+      {
+        "type": "textarea",
+        "id": "column1_text",
+        "label": "Sample text"
+      },
+      {
+        "type": "textarea",
+        "id": "column1_text_trans",
+        "label": "Translate Sample Text"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_column1",
+        "label": "Link List Column 1",
+        "default": "footer"
+      },
+      {
+        "type": "header",
+        "content": "Footer Column 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_column2",
+        "label": "Enable Column 2",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "column2_title",
+        "label": "Column Title"
+      },
+      {
+        "type": "textarea",
+        "id": "column2_title_trans",
+        "label": "Translate Column Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_column2",
+        "label": "Link List Column 2",
+        "default": "footer"
+      },
+      {
+      "type": "header",
+      "content": "Footer Column 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_column3",
+        "label": "Enable Column 3",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "column3_title",
+        "label": "Column Title"
+      },
+      {
+        "type": "textarea",
+        "id": "column3_title_trans",
+        "label": "Translate Column Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_column3",
+        "label": "Link List Column 3",
+        "default": "main-menu"
+      },
+      {
+        "type": "blog",
+        "id": "footer_blog",
+        "label": "Recent Blog Post"
+      },
+      {
+        "type": "header",
+        "content": "Footer Column 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_column4",
+        "label": "Enable Column 4",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "column4_title",
+        "label": "Column Title"
+      },
+      {
+        "type": "textarea",
+        "id": "column4_title_trans",
+        "label": "Translate Column Title"
+      },
+      {
+        "type": "text",
+        "id": "working_hour",
+        "label": "Working Hour",
+        "default": "9.00AM - 6.00PM"
+      },
+      {
+        "type": "text",
+        "id": "footer_tags_limit",
+        "label": "Tag Limit",
+        "default": "15",
+        "info": "Just use this config when display footer style 1"
+      },
+      {
+        "type": "header",
+        "content": "Footer Bottom"
+      },
+      {
+        "type": "text",
+        "id": "copyright",
+        "label": "Copyright"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "payment_image",
+        "label": "Payment image"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Footer",
+        "settings": {
+          "footer_linklist_column1": "footer",
+          "footer_linklist_column2": "footer-link-list2",
+          "footer_linklist_column3": "footer-link-list2"
+        }
+      }
+    ]
+  }
+{% endschema %}

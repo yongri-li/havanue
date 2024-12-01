@@ -1,0 +1,27 @@
+{% comment %}
+The contents of the cart.liquid template can be found in /sections/cart-template.liquid
+{% endcomment %}
+
+<div class="main-container col1-layout">
+  <div class="main">
+    <div class="content-breadcrums">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            {% include 'breadcrumbs' %}
+          </div>
+        </div>
+      </div>    
+    </div>
+    <div class="container col-main-containter">
+      <div class="row">
+        <div class="col-main col-xs-12">
+          <div class="col-wrapper-main">
+            {% section 'cart-template' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

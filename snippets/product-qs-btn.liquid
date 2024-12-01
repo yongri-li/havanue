@@ -1,0 +1,5 @@
+{% if section.settings.show_qs_btn or force_display %}
+<a href="{{ product.url }}" class="visible-lg qs-button button{% if product.metafields.spr.reviews %} has-review{% endif %}" {% if showTooltip %} data-toggle="tooltip" data-data-original-title-trans="collections.product_item.quick_shop" data-data-original-title-default="{{ 'collections.product_item.quick_shop' | t }}" data-original-title="{{ 'collections.product_item.quick_shop' | t }}"{% endif %}>
+	{% include 'icon-qs' %}<span class="qs-title"><span class="brackets skeleton-loading" data-trans-key="collections.product_item.quick_shop">{{ 'collections.product_item.quick_shop' | t }}</span></span>
+</a>
+{% endif %}

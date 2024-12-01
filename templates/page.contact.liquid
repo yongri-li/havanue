@@ -1,0 +1,34 @@
+<div class="main-container col1-layout contact-page">
+  <div class="main">
+    <div class="content-breadcrums">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            {% include 'breadcrumbs' %}
+          </div>
+        </div>
+      </div>    
+    </div>
+    <div class="container col-main-containter">
+      <div class="row">
+        <div class="col-main col-xs-12">
+          <div class="col-wrapper-main">
+            <div class="page-title">
+              <h1>{{ page.title }}</h1>
+            </div>
+            <div class="row">
+              {% if page.content.size > 0 %}
+              <div class="col-xs-12">
+                <div class="rte">
+                  {{ page.content }}
+                </div>
+              </div>
+              {% endif %}
+              {% section 'contacts' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

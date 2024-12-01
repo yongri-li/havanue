@@ -1,0 +1,55 @@
+{% if section.settings.title != blank %}<div class="title">{{ section.settings.title }}</div>{% endif %}
+{% if section.blocks.size > 0 %}
+	<div class="recommention_contents">
+	{% for block in section.blocks %}
+      	{% if block.settings.product_item != blank %}
+      		{% assign _product = all_products[block.settings.product_item] %}
+      		{% assign _img = block.settings.item_image | default: _product.featured_image %}
+            <div class="recommention_item">
+              <div class="img_wrapper">
+                <a href="{{ _product.url }}">
+					<img src="{{ _img | img_url: '500x' }}" alt="{{ _img.alt }}" />
+                </a>
+               </div>
+              <div class="text_wrapper">
+                <span class="item_price">{{ _product.selected_or_first_available_variant.price | money }}</span>
+                <a data-add-to-cart class="btn btn-primary" data-variant_id="{{ _product.selected_or_first_available_variant.id }}">{{ 'products.product.add_to_cart' | t }}</a>
+              </div>
+            </div>
+      	{% endif %}
+      	
+	{% endfor %}
+	</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Products",
+	"class": "recommention",
+    "settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		}
+	],
+	"blocks": [
+		{
+			"type": "product",
+            "name": "Products List",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product_item",
+                    "label": "Product"
+                },
+				{
+					"type": "image_picker",
+					"id": "item_image",
+					"label": "Product Image"
+				}
+            ]
+		}
+	]
+  }
+{% endschema %}
+

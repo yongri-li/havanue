@@ -1,0 +1,97 @@
+<div class="group-header group-header-style3 group-header-style6{% if section.settings.nav_sticky %} sticky-menu{% endif %}">
+  <section class="top-header">
+    <div class="top-header-wrapper">
+      <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+        <div class="row">
+          <div class="top-header-inner-group">
+            <div class="top-header-inner col-sm-12">
+              <div class="left-area">
+                {% include 'language-picker' %}
+                {% if settings.show_multiple_currencies %}
+                <div class="is-mobile-currency currency_group">
+                  <div class="currencies-switcher"> 
+                    {% include 'currencies-switcher' with settings.currency_style %}
+                  </div>
+                </div>
+                {% endif %} 
+              </div>
+              <div class="right-area">
+                {% include 'header_links' %}
+              </div>          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="main-header hidden-xs hidden-sm">
+    <div class="main-header-wrapper">
+      <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+        <div class="row">
+          <div class="main-header-inner">
+            <div data-section-id="{{ section.id }}" data-section-type="header-section">  
+              <div class="top_header_wrapper">
+                <div class="top_header">
+                  <div class="left-area col-xs-4">       
+                    {% include 'header_logo' %}
+                  </div>
+                  <div class="middle-are col-xs-4">
+                    <div class="search_form">
+                      <div class="site-header__search">
+                        {% include 'search-form', align_suggestion_class: 'sug-left' %}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="right-area col-xs-4">
+                    {% include 'header_cart' %}  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="bottom-header hidden-xs hidden-sm">
+    <div class="main-header-wrapper">
+      <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+        <div class="row">
+          <div class="bottom-header-group">
+            <div class="left-header-collection col-xs-3">
+              <button class="ver-menu-bar open" type="button" data-target=".dropdown-ver-style-7" data-duration="300">{% include 'icon-hamburger' %} <span data-trans-key="layout.navigation.all_categories" class="skeleton-loading">{{ 'layout.navigation.all_categories' | t }}</span></button>
+              <div class="dropdown-ver-menu dropdown-ver-style-7">
+                {% include 'menu-render-second' %}
+              </div>
+            </div>
+            <div class="nav-header col-xs-7 hidden-xs">
+              <div class="nav-header-wrapper">
+                <div class="nav-header-inner">
+                  <div class="nave-header-group">
+                    <nav class="site-nav small--hide" id="AccessibleNav" role="navigation">
+                      {% include 'site-nav' with dataMenu: '{"fixedLeftParent": ".row"}' %}
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="right-header-social col-xs-2">
+              <div class="icon_wrapper">
+                <div class="icon_inner">
+                  <a href="#">{% include 'icon-facebook' %}</a>
+                  <a href="#">{% include 'icon-twitter' %}</a>
+                  <a href="#">{% include 'icon-google' %}</a>
+                  <a href="#">{% include 'icon-pinterest' %}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'header_nav_mobile' with showSecondMenu: true %}
+</div>
+{% include 'header_menu_mobile' %}

@@ -1,0 +1,56 @@
+{% if section.settings.title != blank %}
+	<div class="title hide--mobile">{{ section.settings.title }}</div>
+{% endif %}
+{% if section.blocks.size > 0 %}
+	<div class="logo-list">
+		{% for block in section.blocks %}
+      		{% if block.settings.item_icon != blank or block.settings.item_img != blank %}
+              <div class="logo-item">
+                {% if block.settings.item_img != blank %}
+					<img src="{{ block.settings.item_img | img_url: '160x' }}" alt="{{ block.settings.item_img.alt }}" />
+                {% else %}
+                	{{ block.settings.item_icon }}
+                {% endif %}
+              </div>
+      		{% endif %}
+      	{% endfor %}
+	</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Logo List",
+	"class": "logos-list",
+	"settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title",
+			"default": "As Seen In"
+		}
+	],
+    "blocks": [
+		{
+			"type": "icon",
+			"name": "Logo Item",
+			"settings": [
+				{
+					"type": "html",
+					"id": "item_icon",
+					"label": "Item Icon"
+				},
+				{
+					"type": "image_picker",
+					"id": "item_img",
+					"label": "Item Image"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Logo List",
+        	"category": "Icon"
+		}
+	]
+  }
+{% endschema %}

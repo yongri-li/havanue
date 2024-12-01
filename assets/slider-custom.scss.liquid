@@ -1,0 +1,149 @@
+@mixin prefix($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      -webkit-#{$property}: $value;
+    } 
+    @else if $prefix == moz {
+      -moz-#{$property}: $value;
+    } 
+    @else if $prefix == ms {
+      -ms-#{$property}: $value;
+    } 
+    @else if $prefix == o {
+      -o-#{$property}: $value;
+    } 
+    @else if $prefix == spec {
+      #{$property}: $value;
+    } 
+    @else  {
+      @warn 'Unrecognized prefix: #{$prefix}';
+    }
+  }
+}
+@mixin display-flexbox() {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-flow: row wrap;
+}
+@mixin align-items($value: stretch) {
+  $alt-value: $value;
+
+  @if $value == 'flex-start' {
+    $alt-value: start;
+  } @else if $value == 'flex-end' {
+    $alt-value: end;
+  }
+
+  /* sass-lint:disable no-misspelled-properties*/
+  -ms-flex-align: $alt-value;
+  @include prefix(align-items, $value, webkit moz ms o spec);
+}
+@mixin flex-direction($value) {
+  @include prefix(flex-direction, $value, webkit moz ms webkit);
+}
+@mixin overflow-scrolling($var) {
+  @include prefix(overflow-scrolling, $var, webkit moz ms webkit);
+}
+@mixin slider-preload($minwidth) {
+  @media(min-width: 1025px) {
+    @include display-flexbox();
+  }
+  overflow: hidden;
+  .item {
+    min-width: $minwidth;
+  }
+}
+
+$row_padding: 10px;
+
+@mixin slider-horizontal() {
+  overflow-x: auto;
+  overflow-y: hidden;
+  @include display-flexbox();
+  flex-flow: row nowrap!important;
+  white-space: nowrap;
+  @include overflow-scrolling(touch);
+  &::-webkit-scrollbar { 
+      display: none;
+  }
+  .item {
+    @include display-flexbox();
+    .product-item-wrapper {
+      width: 100%;
+      height: auto !important;
+      @include display-flexbox();
+      @include flex-direction(column);
+      @include align-items(center);
+      .product-details {
+        white-space: normal;
+      }
+    }
+  }
+}
+
+.use-slider-custom {
+  @media(max-width: 1024px) {
+    @include slider-horizontal();     
+  }
+  &:not(.owl-loaded) {
+    @media(min-width: 1025px) {
+      @include slider-preload(200px);
+    }
+  }
+}
+
+.use-switch-slider-grid {
+  @media(max-width: 767px) {
+    @include slider-horizontal();
+  }
+}
+
+.brands-slider-section {
+  .brands-list-wrap {
+    .brands-list {
+      .item>a {
+        img {
+          display: block;
+          padding: 2px;
+        }
+      }
+    }
+  }
+}
+.block-related {
+  .block-content {
+    .use-slider-custom {
+      @media(max-width: 767px) {
+        margin-left: -10px;
+        margin-right: -10px;
+      }
+    }
+  }
+}
+.use-slider-custom {
+  [class*=item--size] {
+    @media(max-width: 767px) {
+      width: 45% !important;
+      min-width: 45% !important;
+    }
+  }
+  @media(max-width: 1024px) and (min-width: 768px) {
+    .item--size-very-large {
+      width: 31% !important;
+      min-width: 31% !important;    
+    }
+    .item--size-large {
+      width: 27% !important;
+      min-width: 27% !important;
+    }
+    .item--size-medium {
+      width: 23% !important;
+      min-width: 23% !important;
+    }
+    .item--size-small {
+      width: 18% !important;
+      min-width: 18% !important;
+    }
+  }
+}

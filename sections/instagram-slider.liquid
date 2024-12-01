@@ -1,0 +1,91 @@
+{% if section.settings.token %}
+<div id="instaram_{{ section.id }}" class="section" data-section-id="{{ section.id }}" data-section-type="instagram-slider">
+  <div class="container">
+    <div class="row">
+      <div class="instaram-wrapper col-xs-12">
+        <div class="block-title">
+          <span>
+            <span class="title_text{% if section.settings.title_trans != blank %} skeleton-loading" data-content-trans="#instaram_{{ section.id }}_title_trans{% endif %}">
+            {{ section.settings.title }}
+            </span>
+          </span>
+          {% if section.settings.title_trans != blank %}
+          <span class="hide" id="instaram_{{ section.id }}_title_trans">
+            {{ section.settings.title_trans | raw }}
+          </span>
+          {% endif %}
+
+          <div class="sub-title{% if section.settings.block_sub_title_trans != blank %} skeleton-loading" data-content-trans="#instaram_{{ section.id }}_sub_title_trans{% endif %}">{{ section.settings.block_sub_title }}</div>
+          {% if section.settings.block_sub_title_trans != blank %}
+          <div class="hide" id="instaram_{{ section.id }}_sub_title_trans">{{ section.settings.block_sub_title_trans | raw }}</div>
+          {% endif %}
+        </div>
+        <div class="block-content">
+          <div class="instagram-slider" data-token="{{ section.settings.token }}" data-num-photos="{{ section.settings.limit }}" data-section-id="instaram_{{ section.id }}"></div>
+          <span id="instaram_{{ section.id }}_slider_data" class="hide">
+            {
+              "nav": "true",
+              "dots": "false",
+              "responsive": {
+                "0": { "items": 5}
+              } 
+            }
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+{
+  "name": "Instagram Slider",
+  "class": "instagram-slider-section section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "My Style Shop on Instagram"
+    },
+    {
+      "type": "textarea",
+      "id": "title_trans",
+      "label": "Translate Heading"
+    },
+    {
+      "type": "text",
+      "id": "block_sub_title",
+      "label": "Block Sub Title",
+      "default": "Follow us on Instagram"
+    },
+    {
+      "type": "textarea",
+      "id": "block_sub_title_trans",
+      "label": "Translate Block Sub Title"
+    },
+    {
+      "type": "text",
+      "id": "token",
+      "label": "Token"
+    },
+    {
+      "type": "text",
+      "id": "limit",
+      "label": "Photos Limit",
+      "default": "10"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Slider",
+      "category": "Image",
+      "settings": {
+        "title": "My Style Shop on Instagram",
+        "block_sub_title": "Follow us on Instagram",
+        "limit": "10"
+      }
+    }
+  ]
+}
+{% endschema %}

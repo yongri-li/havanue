@@ -1,0 +1,80 @@
+{% if section.blocks.size > 0 %}
+  {% for block in section.blocks %}
+    {% if block.settings.product_item != blank %}
+    {% assign _product = all_products[block.settings.product_item] %}
+    {% assign _img = block.settings.item_img | default: _product.featured_image %}
+    {% assign _title = block.settings.item_title | default: _product.title %}
+    {% assign _text = block.settings.item_text | default: _product.description %}
+    {% assign _url = block.settings.button_url | default: _product.url %}
+    <div class="product_list-item">
+      <div class="image_wrapper">
+        <img src="{{ _img | img_url: '1000x' }}" alt="{{ _img.alt }}" />
+      </div>
+      <div class="text_wrapper" {% if block.settings.text_first %}style="order: -1"{% endif %}>
+        <div class="title">{{ _title }}</div>
+        <div class="item_price">{{ _product.selected_or_first_available_variant.price | money }}</div>
+        <div class="item_text">{{ _text }}</div>
+        {% if block.settings.button_text != blank %}
+        <a class="btn btn-primary" href="{{ _url }}">{{ block.settings.button_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% schema %}
+  {
+    "name": "Product List",
+	"class": "product-lists",
+	"blocks": [
+		{
+			"type": "product",
+			"name": "List Item",
+			"settings": [
+				{
+					"type": "checkbox",
+					"id": "text_first",
+					"label": "Text First?",
+					"default": true
+				},
+				{
+					"type": "product",
+					"id": "product_item",
+					"label": "Product Item"
+				},
+				{
+					"type": "image_picker",
+					"id": "item_img",
+					"label": "Item Image"
+				},
+				{
+					"type": "text",
+					"id": "item_title",
+					"label": "Item Title"
+				},
+				{
+					"type": "richtext",
+					"id": "item_text",
+					"label": "Item Text"
+				},
+                {
+                    "type": "text",
+                    "id": "button_text",
+                    "label": "Button Text"
+                },
+                {
+                    "type": "url",
+                    "id": "button_url",
+                    "label": "Button Url"
+                }
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Product List",
+        	"category": "Image With Text"
+		}
+	]
+  }
+{% endschema %}

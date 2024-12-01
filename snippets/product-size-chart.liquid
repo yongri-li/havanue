@@ -1,0 +1,14 @@
+{% if section.settings.enable_size_chart %}
+{% if product.metafields.cdz.sizechart %}
+{% assign sizechart = product.metafields.cdz.sizechart %}
+{% elsif settings.use_size_chart_all %}
+{% assign sizechart = 'size_chart_all.png' | asset_url %}  
+{% endif %}
+{% if sizechart %}
+<div class="col-sm-3 align-right pull-right">
+  <div class="widget widget-static-block">
+    <button type="button" class="size-chart-btn" data-toggle="modal" data-value="{{ sizechart }}"><span class="brackets skeleton-loading" data-trans-key="products.product.size_chart">{{ 'products.product.size_chart' | t }}</span></button>
+  </div>
+</div>
+{% endif %}
+{% endif %}

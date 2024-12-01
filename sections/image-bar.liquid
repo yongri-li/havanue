@@ -1,0 +1,107 @@
+<div class="cdz-three-banner{% if section.settings.hidden_xs %} hidden-xs{% endif %}">
+  <div class="container{% if section.settings.full_width == true %}-fluid{% endif %}">
+    <div class="row">
+      {% if section.blocks.size > 0 %}
+      {% assign col_class = 12 | divided_by: section.blocks.size %}
+      {% assign image_size = section.settings.image_size %}
+      {% for block in section.blocks %}
+      <div class="col-xs-12 col-sm-{{ col_class }}">
+        <div class="groupbanner-text banner-border">
+          <a href="{{ block.settings.url | default: '#' }}">
+            <img data-src="{{ block.settings.image | img_url: image_size }}" class="lozad"/>
+          </a>
+          <div class="groupinfo">
+            <div class="groupinfo-inner">
+              <div class="groupinfo-desc text-uppercase text-center">
+                <a href="{{ block.settings.url | default: '#' }}">
+                  {%- if block.settings.sub_title != blank -%}<span class="text-small">{{ block.settings.sub_title }}</span>{%- endif -%}
+                  {%- if block.settings.block_title != blank -%}<p class="grifo-title h2">{{ block.settings.block_title }}</p>{%- endif -%}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+        {% include 'no-blocks' %}
+      {% endif %}
+    </div>  
+  </div>  
+</div>
+
+{% schema %}
+  {
+    "name": "Gallery (Three banners)",
+    "class": "gallery-three-banners-section section",
+    "max_blocks": 4,
+    "settings" : [
+      {
+        "type": "checkbox",
+        "id": "hidden_xs",
+        "label": "Hide on mobile",
+        "default" : true
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full Width",
+        "default" : true
+      },
+      {
+        "type": "text",
+        "id": "image_size",
+        "label": "Image size",
+        "default" : "master"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Url"
+          },
+          {
+            "type": "text",
+            "id": "block_title",
+            "label": "Title"
+          },
+        {
+            "type": "text",
+            "id": "sub_title",
+            "label": "Sub Title"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Gallery (Three banners)",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ],
+      "settings": {
+        "hidden_xs": true
+      }
+      }
+    ]
+  }
+{% endschema %}
